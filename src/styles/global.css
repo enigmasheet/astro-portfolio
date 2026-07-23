@@ -27,6 +27,11 @@ html {
 
 html[data-theme="dark"] {
   color-scheme: dark;
+  --color-bg: var(--color-dark-bg);
+  --color-surface: var(--color-dark-surface);
+  --color-text: var(--color-dark-text);
+  --color-text-secondary: var(--color-dark-text-secondary);
+  --color-border: var(--color-dark-border);
 }
 
 body {

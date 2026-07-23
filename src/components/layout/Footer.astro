@@ -14,6 +14,12 @@ const iconMap = {
   resume: ResumeIcon,
   roadmap: RoadmapIcon,
 };
+function getIcon(name: string): typeof iconMap[keyof typeof iconMap] | undefined {
+  if (name in iconMap) {
+    return iconMap[name as keyof typeof iconMap];
+  }
+  return undefined;
+}
 const year = new Date().getFullYear();
 ---
 
@@ -26,7 +32,7 @@ const year = new Date().getFullYear();
       <div class="flex items-center gap-4">
         {
           SOCIAL_LINKS.map((link) => {
-            const Icon = iconMap[link.icon as keyof typeof iconMap];
+            const Icon = getIcon(link.icon);
             return (
               <a
                 href={link.href}

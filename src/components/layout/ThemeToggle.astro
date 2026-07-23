@@ -51,7 +51,7 @@
       btn.addEventListener('click', function () {
         updateIcons(toggleTheme());
         const icon = btn.querySelector<HTMLSpanElement>(
-          '.theme-icon:not([style*="display: none"])'
+          '.theme-icon:not([style*="display: none"])',
         );
         // Use optional chaining to safely handle possible null
         icon?.classList.add('theme-spin');

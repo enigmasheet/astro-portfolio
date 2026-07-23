@@ -14,7 +14,7 @@ const iconMap = {
   resume: ResumeIcon,
   roadmap: RoadmapIcon,
 };
-function getIcon(name: string): typeof iconMap[keyof typeof iconMap] | undefined {
+function getIcon(name: string): (typeof iconMap)[keyof typeof iconMap] | undefined {
   if (name in iconMap) {
     return iconMap[name as keyof typeof iconMap];
   }

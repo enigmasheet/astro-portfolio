@@ -63,9 +63,10 @@
   }
 
   initToggles();
-  if (!(window as any).__themeToggleMO) {
-    (window as any).__themeToggleMO = new MutationObserver(initToggles);
-    (window as any).__themeToggleMO.observe(document.body, {
+  const w = window as Window & { __themeToggleMO?: MutationObserver };
+  if (!w.__themeToggleMO) {
+    w.__themeToggleMO = new MutationObserver(initToggles);
+    w.__themeToggleMO.observe(document.body, {
       childList: true,
       subtree: true,
     });

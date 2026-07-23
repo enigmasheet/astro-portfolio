@@ -6,10 +6,10 @@
 <script is:inline>
   (function () {
     var theme = localStorage.getItem('theme') || 'dark';
-    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
+    document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach(function (btn) {
       if (btn.dataset.toggleReady) return;
-      var darkIcon = btn.querySelector('.dark-icon');
-      var lightIcon = btn.querySelector('.light-icon');
+      var darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
+      var lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
       if (theme === 'dark') { if (lightIcon) lightIcon.style.display = 'none'; }
       else { if (darkIcon) darkIcon.style.display = 'none'; }
     });
@@ -20,13 +20,13 @@
   import { toggleTheme, getStoredTheme } from '../../styles/theme-toggle';
 
   function initToggles() {
-    var btns = document.querySelectorAll('.theme-toggle');
+    var btns = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
     btns.forEach(function (btn) {
       if (btn.dataset.toggleInit) return;
       btn.dataset.toggleInit = 'true';
-      function updateIcons(theme) {
-        var darkIcon = btn.querySelector('.dark-icon');
-        var lightIcon = btn.querySelector('.light-icon');
+      function updateIcons(theme: string) {
+        var darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
+        var lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
         if (!darkIcon || !lightIcon) return;
         if (theme === 'dark') {
           darkIcon.style.display = '';

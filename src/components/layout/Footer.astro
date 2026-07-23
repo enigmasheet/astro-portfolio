@@ -8,28 +8,28 @@ import EmailIcon from '../ui/icons/EmailIcon.astro';
 import ResumeIcon from '../ui/icons/ResumeIcon.astro';
 import RoadmapIcon from '../ui/icons/RoadmapIcon.astro';
 
-const iconMap: Record<string, AstroComponent> = {
+const iconMap = {
   github: GitHubIcon,
   linkedin: LinkedInIcon,
   email: EmailIcon,
   resume: ResumeIcon,
   roadmap: RoadmapIcon,
-};
+} as const;
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-(--color-border) bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+<footer class="border-t border-border bg-surface transition-colors duration-300" data-theme-aware>
   <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-4">
         {SOCIAL_LINKS.map((link) => {
-          const Icon = iconMap[link.icon];
+          const Icon = iconMap[link.icon as keyof typeof iconMap];
           return (
             <a
               href={link.href}
               target={link.href.startsWith('http') ? '_blank' : undefined}
               rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              class="text-(--color-text-secondary) hover:text-(--color-primary) transition-colors"
+              class="text-text-secondary hover:text-primary transition-colors"
               aria-label={link.label}
             >
               {Icon && <Icon />}
@@ -37,10 +37,10 @@ const year = new Date().getFullYear();
           );
         })}
       </div>
-      <div class="text-sm text-(--color-text-secondary) text-center">
+      <div class="text-sm text-text-secondary text-center">
         {`© ${year} ${SITE.fullName}.`}
         <br class="sm:hidden" />
-        <a href={`mailto:${EMAIL}`} class="hover:text-(--color-primary) transition-colors">{EMAIL}</a>
+        <a href={`mailto:${EMAIL}`} class="hover:text-primary transition-colors">{EMAIL}</a>
       </div>
     </div>
   </div>

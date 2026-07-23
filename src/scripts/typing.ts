@@ -1,4 +1,5 @@
 function initTyping() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const el = document.querySelector<HTMLElement>('[data-typing]:not(.typing-active)');
   if (!el) return;
   const typingEl = el;

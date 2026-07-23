@@ -15,7 +15,11 @@ chips.forEach(function (chip) {
     items.forEach(function (item) {
       var tags = ((item as HTMLElement).dataset.tags || '').toLowerCase();
       var match = filter === 'all' || tags.includes(filter.toLowerCase());
-      (item as HTMLElement).style.display = match ? '' : 'none';
+      if (match) {
+        (item as HTMLElement).classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        (item as HTMLElement).classList.add('opacity-0', 'pointer-events-none');
+      }
       if (match) visible++;
     });
     if (noResults) noResults.classList.toggle('hidden', visible > 0);

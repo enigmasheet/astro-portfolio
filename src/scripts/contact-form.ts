@@ -3,18 +3,49 @@ import { FORMSPREE_URL } from '../data/social';
 var form = document.getElementById('contact-form') as HTMLFormElement | null;
 var submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
 var successDiv = document.getElementById('form-success');
+var textarea = document.getElementById('message') as HTMLTextAreaElement | null;
+var charCount = document.getElementById('char-count');
+
+if (textarea && charCount) {
+  textarea.addEventListener('input', function () {
+    var len = textarea.value.length;
+    charCount.textContent = len + '/5000';
+    charCount.style.color = len > 4500 ? 'var(--color-error)' : '';
+  });
+}
 
 function showError(field: string) {
   var err = document.querySelector('[data-error="' + field + '"]');
   if (err) err.classList.remove('hidden');
+  var input = form?.querySelector('[name="' + field + '"]');
+  if (input) {
+    input.setAttribute('aria-invalid', 'true');
+    input.setAttribute('aria-describedby', 'error-' + field);
+  }
 }
 
 function clearErrors() {
   document.querySelectorAll('[data-error]').forEach(function (e) { e.classList.add('hidden'); });
+  form?.querySelectorAll('[aria-invalid]').forEach(function (e) { e.removeAttribute('aria-invalid'); e.removeAttribute('aria-describedby'); });
 }
 
 function validateEmail(e: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+}
+
+function showToast(msg: string) {
+  var existing = document.getElementById('form-toast');
+  if (existing) existing.remove();
+  var toast = document.createElement('div');
+  toast.id = 'form-toast';
+  toast.className = 'fixed top-24 right-4 z-[100] bg-(--color-error) text-white px-5 py-3 rounded-lg shadow-lg text-sm font-medium max-w-sm animate-slide-in';
+  toast.textContent = msg;
+  toast.setAttribute('role', 'alert');
+  document.body.appendChild(toast);
+  setTimeout(function () {
+    toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+    setTimeout(function () { toast.remove(); }, 300);
+  }, 4000);
 }
 
 if (form) {
@@ -48,10 +79,10 @@ if (form) {
         form.classList.add('hidden');
         if (successDiv) successDiv.classList.remove('hidden');
       } else {
-        alert('Something went wrong. Please try again or email me directly.');
+        showToast('Something went wrong. Please try again or email me directly.');
       }
     } catch {
-      alert('Network error. Please try again or email me directly.');
+      showToast('Network error. Please try again or email me directly.');
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;

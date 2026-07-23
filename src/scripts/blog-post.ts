@@ -14,8 +14,9 @@ if (copyBtn && copyLabel) {
   copyBtn.addEventListener('click', async function () {
     try {
       await navigator.clipboard.writeText(shareUrl);
-      copyLabel.textContent = 'Link copied!';
-      setTimeout(function () { copyLabel.textContent = 'Copy link'; }, 2000);
+      copyLabel.innerHTML = 'Link copied! &#10003;';
+      copyBtn.classList.add('scale-pulse');
+      setTimeout(function () { copyLabel.innerHTML = 'Copy link'; copyBtn.classList.remove('scale-pulse'); }, 2000);
     } catch { console.warn('Clipboard write failed'); }
   });
 }

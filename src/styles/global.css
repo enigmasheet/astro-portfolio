@@ -104,7 +104,12 @@ body {
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .skill-bar-fill { transition: none; }
+  [style*="animation: heroOrb"] { animation: none !important; }
+  .typing-cursor { animation: none; display: none; }
+  [style*="animation: heroFadeIn"] { animation: none !important; opacity: 1 !important; }
 }
+
+section[id] { scroll-margin-top: 5rem; }
 
 @media (max-width: 768px) {
   .page-section { padding: 48px 0; }
@@ -112,6 +117,55 @@ body {
 
 @media (max-width: 480px) {
   .page-section { padding: 32px 0; }
+}
+
+input[aria-invalid="true"], textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+  --tw-ring-color: var(--color-error);
+}
+
+button:active, a:active {
+  transform: scale(0.97);
+}
+
+.animate-slide-in {
+  animation: slideInRight 0.3s ease forwards;
+}
+
+@keyframes scalePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.scale-pulse {
+  animation: scalePulse 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-zoom-in {
+  animation: zoomIn 0.2s ease forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.theme-icon {
+  transition: transform 0.3s ease;
+}
+
+.theme-spin {
+  transform: rotate(180deg);
+}
+
+.project-item, .blog-item {
+  transition: opacity 0.2s;
 }
 
 @keyframes blink {

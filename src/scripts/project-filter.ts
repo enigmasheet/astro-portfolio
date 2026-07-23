@@ -1,3 +1,11 @@
+function debounce<T extends (...args: any[]) => void>(fn: T, ms: number) {
+  var timer: ReturnType<typeof setTimeout>;
+  return function (...args: any[]) {
+    clearTimeout(timer);
+    timer = setTimeout(function () { fn(...args); }, ms);
+  } as T;
+}
+
 var searchInput = document.getElementById('project-search') as HTMLInputElement | null;
 var chips = document.querySelectorAll('.filter-chip');
 var items = document.querySelectorAll('.project-item');
@@ -15,7 +23,11 @@ function filterProjects() {
     var matchesFilter = activeFilter === 'all' || techs.includes(activeFilter.toLowerCase()) || tags.includes(activeFilter.toLowerCase());
     var matchesSearch = !query || all.includes(query);
     var show = matchesFilter && matchesSearch;
-    (item as HTMLElement).style.display = show ? '' : 'none';
+    if (show) {
+      (item as HTMLElement).classList.remove('opacity-0', 'pointer-events-none');
+    } else {
+      (item as HTMLElement).classList.add('opacity-0', 'pointer-events-none');
+    }
     if (show) visible++;
   });
 
@@ -36,7 +48,7 @@ chips.forEach(function (chip) {
 });
 
 if (searchInput) {
-  searchInput.addEventListener('input', filterProjects);
+  searchInput.addEventListener('input', debounce(filterProjects, 200));
 }
 
 var allChip = document.querySelector('.filter-chip[data-filter="all"]');

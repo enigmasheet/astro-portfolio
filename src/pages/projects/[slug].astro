@@ -42,7 +42,7 @@ const breadcrumbItems = [
       </a>
       {hasImage && (
         <div class="aspect-video rounded-xl overflow-hidden mb-8 bg-(--color-bg)" data-reveal>
-          <img src={base + project.imageUrls[0]} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
+          <img src={base + project.imageUrls[0]} alt={project.title} class="w-full h-full object-cover cursor-pointer" loading="lazy" data-lightbox />
         </div>
       )}
       <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4" data-reveal>{project.title}</h1>
@@ -94,4 +94,8 @@ const breadcrumbItems = [
       </div>
     </div>
   </section>
+
+  <script>
+    import '../../scripts/lightbox';
+  </script>
 </PageLayout>

@@ -12,6 +12,7 @@ export interface Props {
 }
 
 const { title, description, ogImage, ogType, canonical } = Astro.props;
+const base = import.meta.env.BASE_URL;
 const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.fullName} — ${SITE.shortTitle}`;
 const metaDesc = description || SITE.shortTitle;
 const ogImg = ogImage || `${SITE_URL}${OG_IMAGE_PATH}`;
@@ -40,8 +41,8 @@ const canonicalUrl = canonical || SITE_URL;
     <meta name="twitter:description" content={metaDesc} />
     <meta name="twitter:image" content={ogImg} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="icon" type="image/png" href="/favicon/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href={base + 'favicon/favicon.svg'} />
+    <link rel="icon" type="image/png" href={base + 'favicon/favicon.png'} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" as="style" />

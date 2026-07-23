@@ -1,6 +1,7 @@
 ---
 import { HERO, SITE } from '../../data/site';
 import SocialLinks from '../ui/SocialLinks.astro';
+const base = import.meta.env.BASE_URL;
 const phrases = 'Backend Software Developer|Product-Oriented Technologist|Full-Stack Web Developer|Problem Solver';
 const firstPhrase = 'Backend Software Developer';
 ---
@@ -34,13 +35,13 @@ const firstPhrase = 'Backend Software Developer';
       </p>
       <div class="flex flex-wrap gap-4" style="animation: heroFadeIn 0.6s ease 0.5s forwards; opacity:0;">
         <a
-          href="/projects"
+          href={base + 'projects'}
           class="inline-flex items-center px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors no-underline"
         >
           {HERO.primaryCta}
         </a>
         <a
-          href="/contact"
+          href={base + 'contact'}
           class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-(--color-primary) text-(--color-primary) font-medium hover:bg-(--color-primary)/5 transition-colors no-underline"
         >
           {HERO.secondaryCta}

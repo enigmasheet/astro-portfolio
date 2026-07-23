@@ -1,11 +1,12 @@
 ---
 import { NAV_LINKS } from '../../data/navigation';
 import ThemeToggle from './ThemeToggle.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-(--color-bg)/85 backdrop-blur-(12px) border-b border-(--color-border) transition-colors duration-300" data-theme-aware>
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold tracking-tight no-underline text-(--color-text)">
+    <a href={base} class="text-xl font-bold tracking-tight no-underline text-(--color-text)">
       &lt;Abhay /&gt;
     </a>
     <div class="hidden md:flex items-center gap-1">

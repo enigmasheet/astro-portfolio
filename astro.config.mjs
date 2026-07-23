@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://abhaymandal.com.np',
+  site: 'https://enigmasheet.github.io',
+  base: '/astro-portfolio',
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

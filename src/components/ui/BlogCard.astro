@@ -4,12 +4,13 @@ export interface Props {
   post: BlogPostMeta;
 }
 const { post } = Astro.props;
+const base = import.meta.env.BASE_URL;
 const postDate = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const readingTime = Math.ceil(post.summary.split(' ').length / 200) || 1;
 ---
 
 <article class="blog-card bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300 relative before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-(--color-primary) before:opacity-0 before:transition-opacity hover:before:opacity-100" data-reveal data-theme-aware>
-  <a href={`/blog/${post.slug}`} class="block p-6 no-underline">
+  <a href={base + 'blog/' + post.slug} class="block p-6 no-underline">
     <div class="flex items-center gap-3 text-xs text-(--color-text-secondary) mb-3">
       <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-(--color-primary)/10 text-(--color-primary) font-medium">
         {readingTime} min read

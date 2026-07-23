@@ -4,8 +4,9 @@ export interface Props {
   project: Project;
 }
 const { project } = Astro.props;
+const base = import.meta.env.BASE_URL;
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
-const imgSrc = hasImage ? `/${project.imageUrls[0]}` : '';
+const imgSrc = hasImage ? base + project.imageUrls[0] : '';
 ---
 
 <article class="project-card group bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300" data-reveal data-theme-aware>
@@ -37,7 +38,7 @@ const imgSrc = hasImage ? `/${project.imageUrls[0]}` : '';
       )}
     </div>
     <div class="flex items-center gap-3">
-      <a href={`/projects/${project.slug}`}
+      <a href={base + 'projects/' + project.slug}
         class="text-sm font-medium text-(--color-primary) hover:underline">
         Details →
       </a>

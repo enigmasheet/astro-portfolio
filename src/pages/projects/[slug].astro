@@ -3,6 +3,8 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import { PROJECTS } from '../../data/projects';
 import { SITE_URL } from '../../data/social';
 
+const base = import.meta.env.BASE_URL;
+
 export async function getStaticPaths() {
   return PROJECTS.map((p) => ({
     params: { slug: p.slug },
@@ -11,7 +13,7 @@ export async function getStaticPaths() {
 }
 const { project } = Astro.props;
 if (!project) {
-  return Astro.redirect('/404');
+  return Astro.redirect(base + '404');
 }
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const breadcrumbItems = [
@@ -34,12 +36,12 @@ const breadcrumbItems = [
   })}></script>
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
-      <a href="/projects" class="inline-flex items-center text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors mb-8 no-underline">
+      <a href={base + 'projects'} class="inline-flex items-center text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors mb-8 no-underline">
         ← Back to Projects
       </a>
       {hasImage && (
         <div class="aspect-video rounded-xl overflow-hidden mb-8 bg-(--color-bg)" data-reveal>
-          <img src={`/${project.imageUrls[0]}`} alt={project.title} class="w-full h-full object-cover" />
+          <img src={base + project.imageUrls[0]} alt={project.title} class="w-full h-full object-cover" />
         </div>
       )}
       <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4" data-reveal>{project.title}</h1>

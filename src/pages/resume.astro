@@ -20,11 +20,11 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
         </div>
         <div class="flex gap-3">
           <a href={RESUME_PATH} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-(hover:bg-primary-darkn-colors no-underline">
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark hover:text-white  no-underline">
             Download PDF
           </a>
           <button onclick="window.print()"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-medium hover:bg-(--color-primary)/5 transition-colors cursor-pointer">
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-medium hover:bg-primary/5 transition-colors cursor-pointer">
             Print
           </button>
         </div>
@@ -37,7 +37,7 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
           </div>
           <div data-reveal>
             <SectionHeading title="Education" />
-            <div class="bg-(--color-surface) border border-border rounded-xl p-6" data-theme-aware>
+            <div class="bg-surface border border-border rounded-xl p-6" data-theme-aware>
               {RESUME.education.map((edu) => (
                 <div>
                   <h3 class="text-base font-semibold text-(--color-text)">{edu.degree}</h3>

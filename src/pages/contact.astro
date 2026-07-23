@@ -3,7 +3,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import SocialLinks from '../components/ui/SocialLinks.astro';
 import { SECTIONS, CONTACT_INTRO } from '../data/site';
-import { EMAIL, FORMSPREE_URL } from '../data/social';
+import { FORMSPREE_URL } from '../data/social';
 ---
 
 <PageLayout title="Contact" description={SECTIONS.contact.description}>
@@ -18,8 +18,8 @@ import { EMAIL, FORMSPREE_URL } from '../data/social';
       </div>
 
       <div id="contact-form-wrapper" data-reveal>
-        <form id="contact-form" class="space-y-4">
-          <input type="text" name="_gotcha" class="visually-hidden" aria-hidden="true" tabindex="-1" autocomplete="off" />
+        <form id="contact-form" action={FORMSPREE_URL} method="POST" class="space-y-4">
+          <input type="text" name="_gotcha" class="sr-only" aria-hidden="true" tabindex="-1" autocomplete="off" />
           <input type="hidden" name="_subject" value="Portfolio Contact" />
 
           <div>

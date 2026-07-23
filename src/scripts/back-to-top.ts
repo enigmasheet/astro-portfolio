@@ -1,5 +1,8 @@
 var backToTop = document.getElementById('back-to-top');
 if (backToTop) {
+  backToTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
   document.addEventListener('scroll', function () {
     if (window.scrollY > 300) {
       backToTop.classList.remove('opacity-0', 'translate-y-5', 'pointer-events-none');

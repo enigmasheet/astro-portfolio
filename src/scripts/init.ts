@@ -12,7 +12,7 @@ function initAll() {
 
 var pageContent = document.getElementById('page-content');
 if (pageContent) {
-  var timer: string | number | NodeJS.Timeout | undefined;
+  var timer: ReturnType<typeof setTimeout> | undefined;
   var mo = new MutationObserver(function () {
     clearTimeout(timer);
     timer = setTimeout(initAll, 50);

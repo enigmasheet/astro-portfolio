@@ -16,6 +16,6 @@ if (copyBtn && copyLabel) {
       await navigator.clipboard.writeText(shareUrl);
       copyLabel.textContent = 'Link copied!';
       setTimeout(function () { copyLabel.textContent = 'Copy link'; }, 2000);
-    } catch { }
+    } catch { console.warn('Clipboard write failed'); }
   });
 }

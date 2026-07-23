@@ -3,12 +3,13 @@
   <span class="material-symbols-outlined text-2xl light-icon">dark_mode</span>
 </button>
 
-<script>
+<script is:inline>
   (function () {
     var theme = localStorage.getItem('theme') || 'dark';
     document.querySelectorAll('.theme-toggle').forEach(function (btn) {
-      var darkIcon = btn.querySelector('.dark-icon') as HTMLElement | null;
-      var lightIcon = btn.querySelector('.light-icon') as HTMLElement | null;
+      if (btn.dataset.toggleReady) return;
+      var darkIcon = btn.querySelector('.dark-icon');
+      var lightIcon = btn.querySelector('.light-icon');
       if (theme === 'dark') { if (lightIcon) lightIcon.style.display = 'none'; }
       else { if (darkIcon) darkIcon.style.display = 'none'; }
     });
@@ -18,23 +19,31 @@
 <script>
   import { toggleTheme, getStoredTheme } from '../../styles/theme-toggle';
 
-  var btns = document.querySelectorAll('.theme-toggle');
-  btns.forEach(function (btn) {
-    function updateIcons(theme: string) {
-      var darkIcon = btn.querySelector('.dark-icon') as HTMLElement | null;
-      var lightIcon = btn.querySelector('.light-icon') as HTMLElement | null;
-      if (!darkIcon || !lightIcon) return;
-      if (theme === 'dark') {
-        darkIcon.style.display = '';
-        lightIcon.style.display = 'none';
-      } else {
-        darkIcon.style.display = 'none';
-        lightIcon.style.display = '';
+  function initToggles() {
+    var btns = document.querySelectorAll('.theme-toggle');
+    btns.forEach(function (btn) {
+      if (btn.dataset.toggleInit) return;
+      btn.dataset.toggleInit = 'true';
+      function updateIcons(theme) {
+        var darkIcon = btn.querySelector('.dark-icon');
+        var lightIcon = btn.querySelector('.light-icon');
+        if (!darkIcon || !lightIcon) return;
+        if (theme === 'dark') {
+          darkIcon.style.display = '';
+          lightIcon.style.display = 'none';
+        } else {
+          darkIcon.style.display = 'none';
+          lightIcon.style.display = '';
+        }
       }
-    }
-    updateIcons(getStoredTheme());
-    btn.addEventListener('click', function () {
-      updateIcons(toggleTheme());
+      updateIcons(getStoredTheme());
+      btn.addEventListener('click', function () {
+        updateIcons(toggleTheme());
+      });
     });
-  });
+  }
+
+  initToggles();
+  var mo = new MutationObserver(initToggles);
+  mo.observe(document.body, { childList: true, subtree: true });
 </script>

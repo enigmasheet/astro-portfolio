@@ -19,9 +19,14 @@ import { SKILLS } from '../../data/skills';
             class="skill-bar-fill h-full rounded-full bg-(--color-primary)"
             style="width: 0%"
             data-target={cat.level}
+            role="progressbar"
+            aria-valuenow={cat.level}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-label={`${cat.category} proficiency: ${cat.level}%`}
           ></div>
         </div>
-        <span class="text-xs text-(--color-text-secondary) mt-1 block text-right">{cat.level}%</span>
+        <span class="text-xs text-(--color-text-secondary) mt-1 block text-right" aria-hidden="true">{cat.level}%</span>
       </div>
     ))
   }

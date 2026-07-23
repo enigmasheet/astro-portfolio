@@ -51,13 +51,23 @@ function showToast(msg: string) {
 }
 
 if (form) {
-  form.addEventListener('submit', async function (e) {
+  const formEl = form;
+  formEl.addEventListener('submit', async function (e) {
     e.preventDefault();
     clearErrors();
 
-    var name = (form.querySelector('[name="name"]') as HTMLInputElement).value.trim();
-    var email = (form.querySelector('[name="email"]') as HTMLInputElement).value.trim();
-    var message = (form.querySelector('[name="message"]') as HTMLTextAreaElement).value.trim();
+    var nameInput = formEl.querySelector<HTMLInputElement>('[name="name"]');
+    var emailInput = formEl.querySelector<HTMLInputElement>('[name="email"]');
+    var messageInput = formEl.querySelector<HTMLTextAreaElement>('[name="message"]');
+
+    if (!nameInput || !emailInput || !messageInput) {
+      showToast('Please complete the contact form and try again.');
+      return;
+    }
+
+    var name = nameInput.value.trim();
+    var email = emailInput.value.trim();
+    var message = messageInput.value.trim();
     var valid = true;
 
     if (!name) { showError('name'); valid = false; }
@@ -74,11 +84,11 @@ if (form) {
     try {
       var res = await fetch(FORMSPREE_URL, {
         method: 'POST',
-        body: new FormData(form),
+        body: new FormData(formEl),
         headers: { 'Accept': 'application/json' },
       });
       if (res.ok) {
-        form.classList.add('hidden');
+        formEl.classList.add('hidden');
         if (successDiv) successDiv.classList.remove('hidden');
       } else {
         showToast('Something went wrong. Please try again or email me directly.');

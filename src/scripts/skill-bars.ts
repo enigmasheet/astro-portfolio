@@ -6,7 +6,8 @@ function initSkillBars() {
       if (entry.isIntersecting) {
         var bar = entry.target as HTMLElement;
         bar.classList.add('animated');
-        bar.style.width = bar.dataset.target + '%';
+        var targetValue = bar.dataset.target || '0';
+        bar.style.width = targetValue + '%';
         observer.unobserve(bar);
       }
     });

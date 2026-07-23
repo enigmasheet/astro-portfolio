@@ -10,9 +10,6 @@ function formatDate(d: string): string {
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 }
 
-function isPresent(endDate: string | null): boolean {
-  return !endDate;
-}
 ---
 
 <div class="relative" data-reveal>
@@ -29,7 +26,7 @@ function isPresent(endDate: string | null): boolean {
                 <p class="text-sm font-medium text-(--color-primary)">{item.company}</p>
               </div>
               <span class="text-xs text-(--color-text-secondary) whitespace-nowrap px-3 py-1 rounded-full bg-(--color-bg)">
-                {formatDate(item.date)} – {isPresent(item.endDate) ? 'Present' : formatDate(item.endDate!)}
+                {formatDate(item.date)} – {item.endDate ? formatDate(item.endDate) : 'Present'}
               </span>
             </div>
             <p class="text-sm text-(--color-text-secondary) leading-relaxed">{item.description}</p>

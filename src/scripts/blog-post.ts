@@ -1,10 +1,14 @@
 var progressBar = document.querySelector('#progress-bar > div') as HTMLElement | null;
 if (progressBar) {
-  document.addEventListener('scroll', function () {
+  const progressBarElement = progressBar;
+  function updateProgress() {
     var scrollTop = window.scrollY;
     var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    progressBar.style.width = Math.min((scrollTop / docHeight) * 100, 100) + '%';
-  }, { passive: true });
+    var progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+    progressBarElement.style.width = progress + '%';
+  }
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
 }
 
 var copyBtn = document.getElementById('copy-link');

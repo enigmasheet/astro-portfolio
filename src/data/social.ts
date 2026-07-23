@@ -3,8 +3,8 @@ import type { SocialLink } from '../types';
 const rawBase = typeof import.meta !== 'undefined' ? import.meta.env.BASE_URL : '/';
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
-export const SITE_URL = 'https://enigmasheet.github.io/astro-portfolio';
-export const DOMAIN = 'enigmasheet.github.io';
+export const SITE_URL = 'https://abhaymandal.com.np';
+export const DOMAIN = 'abhaymandal.com.np';
 export const EMAIL = 'info@abhaymandal.com.np';
 export const GITHUB_USERNAME = 'enigmasheet';
 export const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}`;

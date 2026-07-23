@@ -5,8 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
 
 export default defineConfig({
-  site: 'https://enigmasheet.github.io',
-  base: '/astro-portfolio',
+  site: 'https://abhaymandal.com.np',
   integrations: [mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkReadingTime],

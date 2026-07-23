@@ -1,7 +1,7 @@
 ---
+import ClientRouter from 'astro/components/ClientRouter.astro';
 import { SITE_URL, SOCIAL_LINKS, OG_IMAGE_PATH } from '../data/social';
 import { SITE } from '../data/site';
-import ClientRouter from 'astro/components/ClientRouter.astro';
 
 export interface Props {
   title: string;
@@ -47,11 +47,6 @@ const canonicalUrl = canonical || SITE_URL;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap"
-      as="style"
-    />
-    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
@@ -64,11 +59,14 @@ const canonicalUrl = canonical || SITE_URL;
       (function () {
         const e = localStorage.getItem('theme');
         document.documentElement.setAttribute('data-theme', e || 'dark');
+        document.addEventListener('astro:after-swap', function () {
+          const t = localStorage.getItem('theme');
+          document.documentElement.setAttribute('data-theme', t || 'dark');
+        });
       })();
     </script>
 
-    <ClientRouter fallback="swap" />
-    <meta name="astro-view-transitions-enabled" content="true" />
+    <ClientRouter fallback="animate" />
 
     <script
       is:inline
@@ -92,7 +90,9 @@ const canonicalUrl = canonical || SITE_URL;
   </head>
   <body>
     <a href="#main-content" class="skip-to-content">Skip to content</a>
-    <slot />
+    <div id="page-content">
+      <slot />
+    </div>
 
     <script>
       import '../scripts/init';

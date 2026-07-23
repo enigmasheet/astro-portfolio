@@ -144,11 +144,6 @@
   transform: translateX(0);
 }
 
-::view-transition-old(page-content),
-::view-transition-new(page-content) {
-  animation-duration: 0.4s;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

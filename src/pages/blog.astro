@@ -11,25 +11,40 @@ const allTags = [...new Set(BLOG_POSTS.flatMap((p) => p.tags))].sort();
 <PageLayout title="Blog" description={SECTIONS.blog.description}>
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
-      <SectionHeading label={SECTIONS.blog.label} title={SECTIONS.blog.title} description={SECTIONS.blog.description} centered />
+      <SectionHeading
+        label={SECTIONS.blog.label}
+        title={SECTIONS.blog.title}
+        description={SECTIONS.blog.description}
+        centered
+      />
 
       <div class="mb-8 flex flex-wrap justify-center gap-2" data-reveal id="filter-chips">
-        <button class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border transition-colors cursor-pointer" data-filter="all">
+        <button
+          class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border transition-colors cursor-pointer"
+          data-filter="all"
+        >
           All
         </button>
-        {allTags.map((tag) => (
-          <button class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-border text-text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer" data-filter={tag}>
-            #{tag}
-          </button>
-        ))}
+        {
+          allTags.map((tag) => (
+            <button
+              class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-border text-text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer"
+              data-filter={tag}
+            >
+              #{tag}
+            </button>
+          ))
+        }
       </div>
 
       <div id="blog-grid" class="grid md:grid-cols-2 gap-6">
-        {BLOG_POSTS.map((post) => (
-          <div class="blog-item" data-tags={post.tags.join(',')}>
-            <BlogCard post={post} />
-          </div>
-        ))}
+        {
+          BLOG_POSTS.map((post) => (
+            <div class="blog-item" data-tags={post.tags.join(',')}>
+              <BlogCard post={post} />
+            </div>
+          ))
+        }
       </div>
 
       <div id="no-results" class="text-center py-16 hidden">

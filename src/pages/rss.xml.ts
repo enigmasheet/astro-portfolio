@@ -2,9 +2,6 @@ import { SITE_URL } from '../data/social';
 import { SITE } from '../data/site';
 import { BLOG_POSTS } from '../data/blog';
 
-const rawBase = import.meta.env.BASE_URL;
-const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
-
 const posts = BLOG_POSTS.map((post) => ({
   title: post.title,
   description: post.summary,
@@ -29,7 +26,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
       <link>${p.link}</link>
       <guid isPermaLink="true">${p.link}</guid>
       <pubDate>${p.pubDate.toUTCString()}</pubDate>
-    </item>`
+    </item>`,
       )
       .join('\n')}
   </channel>

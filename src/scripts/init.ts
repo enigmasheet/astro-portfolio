@@ -1,7 +1,7 @@
-import { initCounters } from "./counters";
-import { initReveal } from "./reveal";
-import { initSkillBars } from "./skill-bars";
-import { initTyping } from "./typing";
+import { initCounters } from './counters';
+import { initReveal } from './reveal';
+import { initSkillBars } from './skill-bars';
+import { initTyping } from './typing';
 
 function initAll() {
   initReveal();
@@ -10,10 +10,10 @@ function initAll() {
   initSkillBars();
 }
 
-var pageContent = document.getElementById('page-content');
+const pageContent = document.getElementById('page-content');
 if (pageContent) {
-  var timer: ReturnType<typeof setTimeout> | undefined;
-  var mo = new MutationObserver(function () {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const mo = new MutationObserver(function () {
     clearTimeout(timer);
     timer = setTimeout(initAll, 50);
   });

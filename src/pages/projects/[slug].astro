@@ -25,72 +25,112 @@ const breadcrumbItems = [
 ---
 
 <PageLayout title={project.title} description={project.description}>
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbItems.map((item, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  })}></script>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    })}
+  />
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
-      <a href={base + 'projects'} class="inline-flex items-center text-sm text-text-secondary hover:text-primary transition-colors mb-8 no-underline">
+      <a
+        href={base + 'projects'}
+        class="inline-flex items-center text-sm text-text-secondary hover:text-primary transition-colors mb-8 no-underline"
+      >
         ← Back to Projects
       </a>
-      {hasImage && (
-        <div class="aspect-video rounded-xl overflow-hidden mb-8 bg-bg" data-reveal>
-          <img src={base + project.imageUrls[0]} alt={project.title} class="w-full h-full object-cover cursor-pointer" loading="lazy" data-lightbox />
-        </div>
-      )}
-      <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4" data-reveal>{project.title}</h1>
-      <p class="text-lg text-text-secondary mb-8 leading-relaxed" data-reveal>{project.description}</p>
+      {
+        hasImage && (
+          <div class="aspect-video rounded-xl overflow-hidden mb-8 bg-bg" data-reveal>
+            <img
+              src={base + project.imageUrls[0]}
+              alt={project.title}
+              class="w-full h-full object-cover cursor-pointer"
+              loading="lazy"
+              data-lightbox
+            />
+          </div>
+        )
+      }
+      <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4" data-reveal>
+        {project.title}
+      </h1>
+      <p class="text-lg text-text-secondary mb-8 leading-relaxed" data-reveal>
+        {project.description}
+      </p>
       <div class="grid md:grid-cols-2 gap-8" data-reveal>
-        {project.technologies.length > 0 && (
-          <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-3">Technologies</h2>
-            <div class="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <span class="px-3 py-1.5 text-sm font-medium rounded-lg bg-primary/10 text-primary">
-                  {tech}
-                </span>
-              ))}
+        {
+          project.technologies.length > 0 && (
+            <div>
+              <h2 class="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-3">
+                Technologies
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span class="px-3 py-1.5 text-sm font-medium rounded-lg bg-primary/10 text-primary">
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        {project.tags.length > 0 && (
-          <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-3">Tags</h2>
-            <div class="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span class="px-3 py-1.5 text-sm rounded-lg bg-border text-text-secondary">
-                  {tag}
-                </span>
-              ))}
+          )
+        }
+        {
+          project.tags.length > 0 && (
+            <div>
+              <h2 class="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-3">
+                Tags
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span class="px-3 py-1.5 text-sm rounded-lg bg-border text-text-secondary">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        }
       </div>
       <div class="flex flex-wrap gap-4 mt-8" data-reveal>
-        {project.githubLink && (
-          <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline">
-            View Source
-          </a>
-        )}
-        {project.liveDemoActive && project.liveDemo && (
-          <a href={project.liveDemo} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors no-underline">
-            Live Demo
-          </a>
-        )}
-        {!project.liveDemoActive && (
-          <span class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-border text-text-secondary opacity-50">
-            Offline
-          </span>
-        )}
+        {
+          project.githubLink && (
+            <a
+              href={project.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline"
+            >
+              View Source
+            </a>
+          )
+        }
+        {
+          project.liveDemoActive && project.liveDemo && (
+            <a
+              href={project.liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors no-underline"
+            >
+              Live Demo
+            </a>
+          )
+        }
+        {
+          !project.liveDemoActive && (
+            <span class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-border text-text-secondary opacity-50">
+              Offline
+            </span>
+          )
+        }
       </div>
     </div>
   </section>

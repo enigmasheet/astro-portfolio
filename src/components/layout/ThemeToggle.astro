@@ -1,11 +1,14 @@
-<button class="theme-toggle p-3 rounded-lg text-text-secondary hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer" aria-label="Toggle theme">
+<button
+  class="theme-toggle p-3 rounded-lg text-text-secondary hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer"
+  aria-label="Toggle theme"
+>
   <span class="material-symbols-outlined text-2xl dark-icon theme-icon">light_mode</span>
   <span class="material-symbols-outlined text-2xl light-icon theme-icon">dark_mode</span>
 </button>
 
 <script is:inline>
   (function () {
-    var theme = 'dark';
+    let theme = 'dark';
     try {
       theme = localStorage.getItem('theme') || 'dark';
     } catch {
@@ -13,10 +16,13 @@
     }
     document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach(function (btn) {
       if (btn.dataset.toggleReady) return;
-      var darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
-      var lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
-      if (theme === 'dark') { if (lightIcon) lightIcon.style.display = 'none'; }
-      else { if (darkIcon) darkIcon.style.display = 'none'; }
+      const darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
+      const lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
+      if (theme === 'dark') {
+        if (lightIcon) lightIcon.style.display = 'none';
+      } else {
+        if (darkIcon) darkIcon.style.display = 'none';
+      }
     });
   })();
 </script>
@@ -25,13 +31,13 @@
   import { toggleTheme, getStoredTheme } from '../../styles/theme-toggle';
 
   function initToggles() {
-    var btns = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
+    const btns = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
     btns.forEach(function (btn) {
       if (btn.dataset.toggleInit) return;
       btn.dataset.toggleInit = 'true';
       function updateIcons(theme: string) {
-        var darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
-        var lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
+        const darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
+        const lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
         if (!darkIcon || !lightIcon) return;
         if (theme === 'dark') {
           darkIcon.style.display = '';
@@ -44,15 +50,17 @@
       updateIcons(getStoredTheme());
       btn.addEventListener('click', function () {
         updateIcons(toggleTheme());
-        var icon = btn.querySelector<HTMLSpanElement>('.theme-icon:not([style*="display: none"])');
+        const icon = btn.querySelector<HTMLSpanElement>('.theme-icon:not([style*="display: none"])');
         // Use optional chaining to safely handle possible null
         icon?.classList.add('theme-spin');
-        setTimeout(function () { icon?.classList.remove('theme-spin'); }, 300);
+        setTimeout(function () {
+          icon?.classList.remove('theme-spin');
+        }, 300);
       });
     });
   }
 
   initToggles();
-  var mo = new MutationObserver(initToggles);
+  const mo = new MutationObserver(initToggles);
   mo.observe(document.body, { childList: true, subtree: true });
 </script>

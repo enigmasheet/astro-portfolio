@@ -1,28 +1,33 @@
-function debounce<T extends (...args: any[]) => void>(fn: T, ms: number) {
-  var timer: ReturnType<typeof setTimeout>;
-  return function (...args: any[]) {
+function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number) {
+  let timer: ReturnType<typeof setTimeout>;
+  return function (...args: unknown[]) {
     clearTimeout(timer);
-    timer = setTimeout(function () { fn(...args); }, ms);
+    timer = setTimeout(function () {
+      fn(...args);
+    }, ms);
   } as T;
 }
 
-var searchInput = document.getElementById('project-search') as HTMLInputElement | null;
-var chips = document.querySelectorAll('.filter-chip');
-var items = document.querySelectorAll('.project-item');
-var noResults = document.getElementById('no-results');
-var activeFilter = 'all';
+const searchInput = document.getElementById('project-search') as HTMLInputElement | null;
+const chips = document.querySelectorAll('.filter-chip');
+const items = document.querySelectorAll('.project-item');
+const noResults = document.getElementById('no-results');
+let activeFilter = 'all';
 
 function filterProjects() {
-  var query = (searchInput?.value || '').toLowerCase();
-  var visible = 0;
+  const query = (searchInput?.value || '').toLowerCase();
+  let visible = 0;
 
   items.forEach(function (item) {
-    var techs = ((item as HTMLElement).dataset.technologies || '').toLowerCase();
-    var tags = ((item as HTMLElement).dataset.tags || '').toLowerCase();
-    var all = techs + ' ' + tags;
-    var matchesFilter = activeFilter === 'all' || techs.includes(activeFilter.toLowerCase()) || tags.includes(activeFilter.toLowerCase());
-    var matchesSearch = !query || all.includes(query);
-    var show = matchesFilter && matchesSearch;
+    const techs = ((item as HTMLElement).dataset.technologies || '').toLowerCase();
+    const tags = ((item as HTMLElement).dataset.tags || '').toLowerCase();
+    const all = techs + ' ' + tags;
+    const matchesFilter =
+      activeFilter === 'all' ||
+      techs.includes(activeFilter.toLowerCase()) ||
+      tags.includes(activeFilter.toLowerCase());
+    const matchesSearch = !query || all.includes(query);
+    const show = matchesFilter && matchesSearch;
     if (show) {
       (item as HTMLElement).classList.remove('opacity-0', 'pointer-events-none');
     } else {
@@ -51,5 +56,7 @@ if (searchInput) {
   searchInput.addEventListener('input', debounce(filterProjects, 200));
 }
 
-var allChip = document.querySelector('.filter-chip[data-filter="all"]');
+const allChip = document.querySelector('.filter-chip[data-filter="all"]');
 if (allChip) (allChip as HTMLElement).click();
+
+export {};

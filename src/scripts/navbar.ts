@@ -1,6 +1,6 @@
-var toggle = document.getElementById('nav-toggle');
-var drawer = document.getElementById('mobile-drawer');
-var backdrop = document.getElementById('drawer-backdrop');
+const toggle = document.getElementById('nav-toggle');
+const drawer = document.getElementById('mobile-drawer');
+const backdrop = document.getElementById('drawer-backdrop');
 if (toggle && drawer && backdrop) {
   const drawerEl = drawer;
   const backdropEl = backdrop;
@@ -28,11 +28,11 @@ if (toggle && drawer && backdrop) {
   });
 }
 
-var navLinks = document.querySelectorAll('.nav-link');
-var currentPath = window.location.pathname;
+const navLinks = document.querySelectorAll('.nav-link');
+const currentPath = window.location.pathname;
 navLinks.forEach(function (link) {
-  var href = link.getAttribute('href');
-    if (href === currentPath || (href && href !== '/' && currentPath.startsWith(href))) {
+  const href = link.getAttribute('href');
+  if (href === currentPath || (href && href !== '/' && currentPath.startsWith(href))) {
     link.classList.add('text-primary', 'bg-(--color-primary)/5');
     link.classList.remove('text-text-secondary');
     link.setAttribute('aria-current', 'page');
@@ -41,10 +41,14 @@ navLinks.forEach(function (link) {
   }
 });
 
-var appbar = document.querySelector('nav');
+const appbar = document.querySelector('nav');
 if (appbar) {
   const appbarEl = appbar;
-  document.addEventListener('scroll', function () {
-    appbarEl.classList.toggle('shadow-sm', window.scrollY > 10);
-  }, { passive: true });
+  document.addEventListener(
+    'scroll',
+    function () {
+      appbarEl.classList.toggle('shadow-sm', window.scrollY > 10);
+    },
+    { passive: true },
+  );
 }

@@ -33,7 +33,11 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     </div>
   </section>
 
-  <section id="about" class="page-section bg-surface transition-colors duration-300" data-theme-aware>
+  <section
+    id="about"
+    class="page-section bg-surface transition-colors duration-300"
+    data-theme-aware
+  >
     <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.about.label}
@@ -44,58 +48,70 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
       <div class="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
         <div class="space-y-4" data-reveal>
-          {ABOUT.paragraphs.map((p) => (
-            <p class="text-text-secondary leading-relaxed">{p}</p>
-          ))}
+          {ABOUT.paragraphs.map((p) => <p class="text-text-secondary leading-relaxed">{p}</p>)}
         </div>
 
         <div class="space-y-8">
           <div data-reveal>
-            <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.skills}</h3>
+            <h3 class="text-base font-semibold text-(--color-text) mb-4">
+              {ABOUT.blockTitles.skills}
+            </h3>
             <Skills />
           </div>
 
-          {CERTIFICATIONS.length > 0 && (
-            <div data-reveal>
-              <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.certifications}</h3>
-              <div class="space-y-3">
-                {CERTIFICATIONS.map((cert) => (
-                  <a
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline"
-                  >
-                    <span class="material-symbols-outlined text-primary">verified</span>
-                    <div>
-                      <p class="text-sm font-medium text-(--color-text)">{cert.title}</p>
-                      <p class="text-xs text-text-secondary">{cert.issuer}</p>
-                    </div>
-                  </a>
-                ))}
+          {
+            CERTIFICATIONS.length > 0 && (
+              <div data-reveal>
+                <h3 class="text-base font-semibold text-(--color-text) mb-4">
+                  {ABOUT.blockTitles.certifications}
+                </h3>
+                <div class="space-y-3">
+                  {CERTIFICATIONS.map((cert) => (
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline"
+                    >
+                      <span class="material-symbols-outlined text-primary">verified</span>
+                      <div>
+                        <p class="text-sm font-medium text-(--color-text)">{cert.title}</p>
+                        <p class="text-xs text-text-secondary">{cert.issuer}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )
+          }
 
           <div data-reveal>
-            <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.achievements}</h3>
+            <h3 class="text-base font-semibold text-(--color-text) mb-4">
+              {ABOUT.blockTitles.achievements}
+            </h3>
             <div class="space-y-3">
-              {ABOUT.achievements.map((a) => (
-                <div class="flex gap-3 p-4 rounded-xl bg-bg border border-border">
-                  <span class="text-xs font-bold text-primary whitespace-nowrap mt-0.5">{a.year}</span>
-                  <div>
-                    <p class="text-sm font-medium text-(--color-text)">{a.title}</p>
-                    <p class="text-xs text-text-secondary">{a.description}</p>
+              {
+                ABOUT.achievements.map((a) => (
+                  <div class="flex gap-3 p-4 rounded-xl bg-bg border border-border">
+                    <span class="text-xs font-bold text-primary whitespace-nowrap mt-0.5">
+                      {a.year}
+                    </span>
+                    <div>
+                      <p class="text-sm font-medium text-(--color-text)">{a.title}</p>
+                      <p class="text-xs text-text-secondary">{a.description}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              }
             </div>
           </div>
         </div>
       </div>
 
       <div class="mt-16 text-center" data-reveal>
-        <blockquote class="text-xl md:text-2xl font-medium text-(--color-text) italic max-w-2xl mx-auto">
+        <blockquote
+          class="text-xl md:text-2xl font-medium text-(--color-text) italic max-w-2xl mx-auto"
+        >
           "{ABOUT.quote}"
         </blockquote>
       </div>
@@ -114,7 +130,11 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     </div>
   </section>
 
-  <section id="testimonials" class="page-section bg-surface transition-colors duration-300" data-theme-aware>
+  <section
+    id="testimonials"
+    class="page-section bg-surface transition-colors duration-300"
+    data-theme-aware
+  >
     <div class="max-w-4xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.testimonials.label}
@@ -135,9 +155,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         centered
       />
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PROJECTS.slice(0, 3).map((p) => (
-          <ProjectCard project={p} />
-        ))}
+        {PROJECTS.slice(0, 3).map((p) => <ProjectCard project={p} />)}
       </div>
       <div class="text-center mt-8" data-reveal>
         <a
@@ -150,7 +168,11 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     </div>
   </section>
 
-  <section id="blog" class="page-section bg-surface transition-colors duration-300" data-theme-aware>
+  <section
+    id="blog"
+    class="page-section bg-surface transition-colors duration-300"
+    data-theme-aware
+  >
     <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.blog.label}
@@ -159,9 +181,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         centered
       />
       <div class="grid md:grid-cols-2 gap-6">
-        {BLOG_POSTS.map((post) => (
-          <BlogCard post={post} />
-        ))}
+        {BLOG_POSTS.map((post) => <BlogCard post={post} />)}
       </div>
       <div class="text-center mt-8" data-reveal>
         <a
@@ -183,17 +203,14 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
         centered
       />
       <div class="max-w-xl mx-auto" data-reveal>
-        <form
-          action="https://formspree.io/f/xvgkrkwk"
-          method="POST"
-          class="space-y-4"
-        >
+        <form action="https://formspree.io/f/xvgkrkwk" method="POST" class="space-y-4">
           <div class="sr-only" aria-hidden="true">
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
           </div>
           <input type="hidden" name="_subject" value="Portfolio Contact" />
           <div>
-            <label for="name" class="block text-sm font-medium text-(--color-text) mb-1">Name</label>
+            <label for="name" class="block text-sm font-medium text-(--color-text) mb-1">Name</label
+            >
             <input
               type="text"
               id="name"
@@ -205,7 +222,9 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
             />
           </div>
           <div>
-            <label for="email" class="block text-sm font-medium text-(--color-text) mb-1">Email</label>
+            <label for="email" class="block text-sm font-medium text-(--color-text) mb-1"
+              >Email</label
+            >
             <input
               type="email"
               id="email"
@@ -216,7 +235,9 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
             />
           </div>
           <div>
-            <label for="message" class="block text-sm font-medium text-(--color-text) mb-1">Message</label>
+            <label for="message" class="block text-sm font-medium text-(--color-text) mb-1"
+              >Message</label
+            >
             <textarea
               id="message"
               name="message"
@@ -224,8 +245,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
               maxlength="5000"
               rows="5"
               class="w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-y"
-              data-theme-aware
-            ></textarea>
+              data-theme-aware></textarea>
           </div>
           <button
             type="submit"

@@ -1,10 +1,10 @@
-var progressBar = document.querySelector('#progress-bar > div') as HTMLElement | null;
+const progressBar = document.querySelector('#progress-bar > div') as HTMLElement | null;
 if (progressBar) {
   const progressBarElement = progressBar;
   function updateProgress() {
-    var scrollTop = window.scrollY;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
     progressBarElement.style.width = progress + '%';
   }
   document.addEventListener('scroll', updateProgress, { passive: true });
@@ -22,7 +22,12 @@ if (copyBtn && copyLabel) {
       await navigator.clipboard.writeText(shareUrl);
       copyLabelElement.innerHTML = 'Link copied! &#10003;';
       copyBtnElement.classList.add('scale-pulse');
-      setTimeout(function () { copyLabelElement.innerHTML = 'Copy link'; copyBtnElement.classList.remove('scale-pulse'); }, 2000);
-    } catch { console.warn('Clipboard write failed'); }
+      setTimeout(function () {
+        copyLabelElement.innerHTML = 'Copy link';
+        copyBtnElement.classList.remove('scale-pulse');
+      }, 2000);
+    } catch {
+      console.warn('Clipboard write failed');
+    }
   });
 }

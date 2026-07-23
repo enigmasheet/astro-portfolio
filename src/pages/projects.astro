@@ -11,11 +11,19 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
 <PageLayout title="Projects" description={SECTIONS.projects.description}>
   <section class="page-section">
     <div class="max-w-6xl mx-auto px-4">
-      <SectionHeading label={SECTIONS.projects.label} title={SECTIONS.projects.title} description={SECTIONS.projects.description} centered />
+      <SectionHeading
+        label={SECTIONS.projects.label}
+        title={SECTIONS.projects.title}
+        description={SECTIONS.projects.description}
+        centered
+      />
 
       <div class="mb-8 space-y-4" data-reveal>
         <div class="relative max-w-md mx-auto">
-          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl pointer-events-none">search</span>
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl pointer-events-none"
+            >search</span
+          >
           <input
             id="project-search"
             type="text"
@@ -24,23 +32,37 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
           />
         </div>
         <div class="flex flex-wrap justify-center gap-2" id="filter-chips">
-          <button class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border transition-colors cursor-pointer" data-filter="all">
+          <button
+            class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border transition-colors cursor-pointer"
+            data-filter="all"
+          >
             All
           </button>
-          {allTechnologies.map((tech) => (
-            <button class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-border text-text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer" data-filter={tech}>
-              {tech}
-            </button>
-          ))}
+          {
+            allTechnologies.map((tech) => (
+              <button
+                class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-border text-text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer"
+                data-filter={tech}
+              >
+                {tech}
+              </button>
+            ))
+          }
         </div>
       </div>
 
       <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PROJECTS.map((p) => (
-          <div class="project-item" data-technologies={p.technologies.join(',')} data-tags={p.tags.join(',')}>
-            <ProjectCard project={p} />
-          </div>
-        ))}
+        {
+          PROJECTS.map((p) => (
+            <div
+              class="project-item"
+              data-technologies={p.technologies.join(',')}
+              data-tags={p.tags.join(',')}
+            >
+              <ProjectCard project={p} />
+            </div>
+          ))
+        }
       </div>
 
       <div id="no-results" class="text-center py-16 hidden">

@@ -9,7 +9,6 @@ function formatDate(d: string): string {
   const date = new Date(d);
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 }
-
 ---
 
 <div class="relative" data-reveal>
@@ -18,8 +17,11 @@ function formatDate(d: string): string {
     {
       items.map((item) => (
         <div class="relative pl-12">
-          <div class="absolute left-2.5 top-1.5 w-2.25 h-2.25 rounded-full bg-primary ring-4 ring-bg"></div>
-          <div class="exp-card bg-surface border border-border rounded-xl p-6 transition-all hover:shadow-md duration-300 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100" data-theme-aware>
+          <div class="absolute left-2.5 top-1.5 w-2.25 h-2.25 rounded-full bg-primary ring-4 ring-bg" />
+          <div
+            class="exp-card bg-surface border border-border rounded-xl p-6 transition-all hover:shadow-md duration-300 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100"
+            data-theme-aware
+          >
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <div>
                 <h3 class="text-lg font-semibold text-(--color-text)">{item.title}</h3>

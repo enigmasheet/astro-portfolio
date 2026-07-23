@@ -104,8 +104,6 @@ export interface Testimonial {
   text: string;
 }
 
-export type AstroComponent = (props?: Record<string, unknown>) => any;
-
 export interface NavLink {
   label: string;
   href: string;

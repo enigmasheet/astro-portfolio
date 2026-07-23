@@ -10,54 +10,82 @@ const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const imgSrc = hasImage ? base + project.imageUrls[0] : '';
 ---
 
-<article class="project-card group bg-surface border border-border rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300" data-reveal data-theme-aware>
-  {imgSrc && (
-    <div class="relative aspect-video overflow-hidden bg-bg">
-      <img
-        src={imgSrc}
-        alt={project.title}
-        class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 blur-sm"
-        loading="lazy"
-        onload="this.classList.remove('blur-sm')"
-        onerror="this.style.display='none'"
-      />
-    </div>
-  )}
+<article
+  class="project-card group bg-surface border border-border rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
+  data-reveal
+  data-theme-aware
+>
+  {
+    imgSrc && (
+      <div class="relative aspect-video overflow-hidden bg-bg">
+        <img
+          src={imgSrc}
+          alt={project.title}
+          class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 blur-sm"
+          loading="lazy"
+          onload="this.classList.remove('blur-sm')"
+          onerror="this.style.display='none'"
+        />
+      </div>
+    )
+  }
   <div class="p-6">
     <h3 class="text-lg font-semibold text-(--color-text) mb-2">{project.title}</h3>
     <p class="text-sm text-text-secondary mb-4 line-clamp-2">{project.description}</p>
     <div class="flex flex-wrap gap-2 mb-4">
-      {project.technologies.slice(0, 4).map((tech) => (
-        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
-          {tech}
-        </span>
-      ))}
-      {project.technologies.length > 4 && (
-        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-border text-text-secondary">
-          +{project.technologies.length - 4}
-        </span>
-      )}
+      {
+        project.technologies
+          .slice(0, 4)
+          .map((tech) => (
+            <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
+              {tech}
+            </span>
+          ))
+      }
+      {
+        project.technologies.length > 4 && (
+          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-border text-text-secondary">
+            +{project.technologies.length - 4}
+          </span>
+        )
+      }
     </div>
     <div class="flex flex-wrap items-center gap-3">
-      <a href={base + 'projects/' + project.slug}
-        class="text-sm font-medium text-primary hover:underline py-2">
+      <a
+        href={base + 'projects/' + project.slug}
+        class="text-sm font-medium text-primary hover:underline py-2"
+      >
         Details →
       </a>
-      {project.githubLink && (
-        <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
-          class="text-sm text-text-secondary hover:text-primary transition-colors py-2">
-          Source
-        </a>
-      )}
-      {project.liveDemoActive && project.liveDemo && (
-        <a href={project.liveDemo} target="_blank" rel="noopener noreferrer"
-          class="text-sm text-text-secondary hover:text-primary transition-colors py-2">
-          Live Demo
-        </a>
-      )}
-      {!project.liveDemoActive && (
-        <span class="text-sm text-text-secondary opacity-50 py-2">Offline</span>
-      )}
+      {
+        project.githubLink && (
+          <a
+            href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-text-secondary hover:text-primary transition-colors py-2"
+          >
+            Source
+          </a>
+        )
+      }
+      {
+        project.liveDemoActive && project.liveDemo && (
+          <a
+            href={project.liveDemo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-text-secondary hover:text-primary transition-colors py-2"
+          >
+            Live Demo
+          </a>
+        )
+      }
+      {
+        !project.liveDemoActive && (
+          <span class="text-sm text-text-secondary opacity-50 py-2">Offline</span>
+        )
+      }
     </div>
   </div>
 </article>

@@ -4,7 +4,8 @@ export const PROJECTS: Project[] = [
   {
     slug: 'transport-expenditure-tracker',
     title: 'Transport Expenditure Tracker',
-    description: 'A web app to efficiently manage and track transport-related expenses with detailed reports and data visualization.',
+    description:
+      'A web app to efficiently manage and track transport-related expenses with detailed reports and data visualization.',
     imageUrls: ['images/transport.svg'],
     githubLink: 'https://github.com/enigmasheet/TransportExpenditureTracker',
     liveDemo: 'https://transportexpense.azurewebsites.net/',
@@ -15,7 +16,8 @@ export const PROJECTS: Project[] = [
   {
     slug: 'smart-greenhouse',
     title: 'Local Farm: Smart Greenhouse',
-    description: 'IoT-enabled system for real-time monitoring and automated control of greenhouse environments using Blazor and sensor data.',
+    description:
+      'IoT-enabled system for real-time monitoring and automated control of greenhouse environments using Blazor and sensor data.',
     imageUrls: ['images/greenhouse.svg'],
     githubLink: 'https://github.com/enigmasheet/LocalFarm',
     liveDemo: 'https://zealous-glacier-0fddea800.4.azurestaticapps.net/',
@@ -26,7 +28,8 @@ export const PROJECTS: Project[] = [
   {
     slug: 'personal-portfolio',
     title: 'Personal Portfolio',
-    description: 'My personal website showcasing projects, skills, experiences, and blog posts to highlight my professional journey.',
+    description:
+      'My personal website showcasing projects, skills, experiences, and blog posts to highlight my professional journey.',
     imageUrls: ['images/portfolio.svg'],
     githubLink: 'https://github.com/enigmasheet/PersonalPortfolio.v1',
     liveDemo: 'https://abhaymandal.com.np/',
@@ -37,7 +40,8 @@ export const PROJECTS: Project[] = [
   {
     slug: 'hotel-booking-api',
     title: 'Hotel Booking API',
-    description: 'RESTful API for hotel booking management with authentication, authorization, and data validation to support scalable booking systems.',
+    description:
+      'RESTful API for hotel booking management with authentication, authorization, and data validation to support scalable booking systems.',
     imageUrls: ['images/hotel_booking.svg'],
     githubLink: 'https://github.com/enigmasheet/HotelBookingAPI',
     liveDemo: '',
@@ -48,7 +52,8 @@ export const PROJECTS: Project[] = [
   {
     slug: 'laundry-management-system',
     title: 'Laundry Management System',
-    description: 'An application to streamline laundry service operations including order management, status tracking, and customer notifications.',
+    description:
+      'An application to streamline laundry service operations including order management, status tracking, and customer notifications.',
     imageUrls: ['images/laundry.svg'],
     githubLink: 'https://github.com/enigmasheet/Laundary-Management-System',
     liveDemo: '',
@@ -59,7 +64,8 @@ export const PROJECTS: Project[] = [
   {
     slug: 'hmc-nepal-portal',
     title: 'HMC Nepal Multi-App Portal',
-    description: 'A centralized multi-application portal for HMC Nepal, integrating multiple business services — including claims management, member services, and administrative tools — into a unified dashboard with role-based access and real-time analytics.',
+    description:
+      'A centralized multi-application portal for HMC Nepal, integrating multiple business services — including claims management, member services, and administrative tools — into a unified dashboard with role-based access and real-time analytics.',
     imageUrls: [],
     githubLink: '',
     liveDemo: 'https://hmcnpal.com.np',

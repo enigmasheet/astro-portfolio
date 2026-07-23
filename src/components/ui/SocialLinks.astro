@@ -1,5 +1,4 @@
 ---
-import type { AstroComponent } from '../../types';
 import { SOCIAL_LINKS } from '../../data/social';
 import GitHubIcon from './icons/GitHubIcon.astro';
 import LinkedInIcon from './icons/LinkedInIcon.astro';
@@ -7,7 +6,7 @@ import EmailIcon from './icons/EmailIcon.astro';
 import ResumeIcon from './icons/ResumeIcon.astro';
 import RoadmapIcon from './icons/RoadmapIcon.astro';
 
-const iconMap: Record<string, any> = {
+const iconMap = {
   github: GitHubIcon,
   linkedin: LinkedInIcon,
   email: EmailIcon,
@@ -17,18 +16,20 @@ const iconMap: Record<string, any> = {
 ---
 
 <div class="flex items-center gap-3">
-  {SOCIAL_LINKS.map((link) => {
-    const Icon = iconMap[link.icon];
-    return (
-      <a
-        href={link.href}
-        target={link.href.startsWith('http') ? '_blank' : undefined}
-        rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-        class="p-3 rounded-lg text-text-secondary hover:text-primary hover:bg-primary/5 transition-colors"
-        aria-label={link.label}
-      >
-        {Icon && <Icon />}
-      </a>
-    );
-  })}
+  {
+    SOCIAL_LINKS.map((link) => {
+      const Icon = iconMap[link.icon as keyof typeof iconMap];
+      return (
+        <a
+          href={link.href}
+          target={link.href.startsWith('http') ? '_blank' : undefined}
+          rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          class="p-3 rounded-lg text-text-secondary hover:text-primary hover:bg-primary/5 transition-colors"
+          aria-label={link.label}
+        >
+          {Icon && <Icon />}
+        </a>
+      );
+    })
+  }
 </div>

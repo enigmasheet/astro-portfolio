@@ -1,6 +1,6 @@
-var chips = document.querySelectorAll('#filter-chips .filter-chip');
-var items = document.querySelectorAll('.blog-item');
-var noResults = document.getElementById('no-results');
+const chips = document.querySelectorAll('#filter-chips .filter-chip');
+const items = document.querySelectorAll('.blog-item');
+const noResults = document.getElementById('no-results');
 
 chips.forEach(function (chip) {
   chip.addEventListener('click', function () {
@@ -10,11 +10,11 @@ chips.forEach(function (chip) {
     });
     chip.classList.add('active', 'bg-(--color-primary)', 'text-white', 'border-primary');
     chip.classList.remove('border-border', 'text-text-secondary');
-    var filter = (chip as HTMLElement).dataset.filter || 'all';
-    var visible = 0;
+    const filter = (chip as HTMLElement).dataset.filter || 'all';
+    let visible = 0;
     items.forEach(function (item) {
-      var tags = ((item as HTMLElement).dataset.tags || '').toLowerCase();
-      var match = filter === 'all' || tags.includes(filter.toLowerCase());
+      const tags = ((item as HTMLElement).dataset.tags || '').toLowerCase();
+      const match = filter === 'all' || tags.includes(filter.toLowerCase());
       if (match) {
         (item as HTMLElement).classList.remove('opacity-0', 'pointer-events-none');
       } else {
@@ -25,3 +25,5 @@ chips.forEach(function (chip) {
     if (noResults) noResults.classList.toggle('hidden', visible > 0);
   });
 });
+
+export {};

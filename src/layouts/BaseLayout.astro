@@ -1,6 +1,7 @@
 ---
 import { SITE_URL, DOMAIN, SOCIAL_LINKS, OG_IMAGE_PATH } from '../data/social';
 import { SITE } from '../data/site';
+import ViewTransitions from 'astro:transitions';
 
 export interface Props {
   title: string;
@@ -71,6 +72,8 @@ const canonicalUrl = canonical || SITE_URL;
     </script>
 
     <script>
+      var pageContent = document.getElementById('page-content');
+
       function initReveal() {
         var els = document.querySelectorAll('[data-reveal]:not(.revealed)');
         if (!els.length) return;
@@ -98,14 +101,13 @@ const canonicalUrl = canonical || SITE_URL;
       }
 
       function watchReveals() {
-        var app = document.getElementById('page-content');
-        if (!app) return;
+        if (!pageContent) return;
         var timer;
         var mo = new MutationObserver(function () {
           clearTimeout(timer);
           timer = setTimeout(initReveal, 50);
         });
-        mo.observe(app, { childList: true, subtree: true });
+        mo.observe(pageContent, { childList: true, subtree: true });
       }
 
       if (document.readyState === 'loading') {
@@ -152,14 +154,13 @@ const canonicalUrl = canonical || SITE_URL;
       }
 
       function watchCounters() {
-        var app = document.getElementById('page-content');
-        if (!app) return;
+        if (!pageContent) return;
         var timer;
         var mo = new MutationObserver(function () {
           clearTimeout(timer);
           timer = setTimeout(initCounters, 50);
         });
-        mo.observe(app, { childList: true, subtree: true });
+        mo.observe(pageContent, { childList: true, subtree: true });
       }
 
       if (document.readyState === 'loading') {
@@ -216,14 +217,13 @@ const canonicalUrl = canonical || SITE_URL;
       }
 
       function watchTyping() {
-        var app = document.getElementById('page-content');
-        if (!app) return;
+        if (!pageContent) return;
         var timer;
         var mo = new MutationObserver(function () {
           clearTimeout(timer);
           timer = setTimeout(initTyping, 50);
         });
-        mo.observe(app, { childList: true, subtree: true });
+        mo.observe(pageContent, { childList: true, subtree: true });
       }
 
       if (document.readyState === 'loading') {

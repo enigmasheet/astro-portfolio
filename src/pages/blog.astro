@@ -4,15 +4,63 @@ import SectionHeading from '../components/ui/SectionHeading.astro';
 import BlogCard from '../components/ui/BlogCard.astro';
 import { BLOG_POSTS } from '../data/blog';
 import { SECTIONS } from '../data/site';
+
+const allTags = [...new Set(BLOG_POSTS.flatMap((p) => p.tags))].sort();
 ---
 
 <PageLayout title="Blog" description={SECTIONS.blog.description}>
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
       <SectionHeading label={SECTIONS.blog.label} title={SECTIONS.blog.title} description={SECTIONS.blog.description} centered />
-      <div class="grid md:grid-cols-2 gap-6">
-        {BLOG_POSTS.map((post) => <BlogCard post={post} />)}
+
+      <div class="mb-8 flex flex-wrap justify-center gap-2" data-reveal id="filter-chips">
+        <button class="filter-chip active px-3 py-1.5 text-sm font-medium rounded-full border transition-colors cursor-pointer" data-filter="all">
+          All
+        </button>
+        {allTags.map((tag) => (
+          <button class="filter-chip px-3 py-1.5 text-sm font-medium rounded-full border border-(--color-border) text-(--color-text-secondary) hover:border-(--color-primary) hover:text-(--color-primary) transition-colors cursor-pointer" data-filter={tag}>
+            #{tag}
+          </button>
+        ))}
+      </div>
+
+      <div id="blog-grid" class="grid md:grid-cols-2 gap-6">
+        {BLOG_POSTS.map((post) => (
+          <div class="blog-item" data-tags={post.tags.join(',')}>
+            <BlogCard post={post} />
+          </div>
+        ))}
+      </div>
+
+      <div id="no-results" class="text-center py-16 hidden">
+        <p class="text-(--color-text-secondary) text-lg">No posts match your filter.</p>
       </div>
     </div>
   </section>
+
+  <script>
+    var chips = document.querySelectorAll('#filter-chips .filter-chip');
+    var items = document.querySelectorAll('.blog-item');
+    var noResults = document.getElementById('no-results');
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) {
+          c.classList.remove('active', 'bg-(--color-primary)', 'text-white', 'border-(--color-primary)');
+          c.classList.add('border-(--color-border)', 'text-(--color-text-secondary)');
+        });
+        chip.classList.add('active', 'bg-(--color-primary)', 'text-white', 'border-(--color-primary)');
+        chip.classList.remove('border-(--color-border)', 'text-(--color-text-secondary)');
+        var filter = chip.dataset.filter;
+        var visible = 0;
+        items.forEach(function (item) {
+          var tags = (item.dataset.tags || '').toLowerCase();
+          var match = filter === 'all' || tags.includes(filter.toLowerCase());
+          item.style.display = match ? '' : 'none';
+          if (match) visible++;
+        });
+        if (noResults) noResults.classList.toggle('hidden', visible > 0);
+      });
+    });
+  </script>
 </PageLayout>

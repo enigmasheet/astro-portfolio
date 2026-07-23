@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -9,6 +10,7 @@ export interface Props {
   ogType?: string;
   canonical?: string;
 }
+
 const props = Astro.props;
 ---
 
@@ -18,4 +20,28 @@ const props = Astro.props;
     <slot />
   </main>
   <Footer />
+
+  <button
+    id="back-to-top"
+    class="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-(--color-primary) text-white shadow-lg flex items-center justify-center opacity-0 translate-y-5 pointer-events-none transition-all duration-300 hover:bg-(--color-primary-dark) cursor-pointer"
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    aria-label="Back to top"
+  >
+    <span class="material-symbols-outlined text-2xl">arrow_upward</span>
+  </button>
+
+  <script>
+    var backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+      document.addEventListener('scroll', function () {
+        if (window.scrollY > 300) {
+          backToTop.classList.remove('opacity-0', 'translate-y-5', 'pointer-events-none');
+          backToTop.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        } else {
+          backToTop.classList.add('opacity-0', 'translate-y-5', 'pointer-events-none');
+          backToTop.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        }
+      }, { passive: true });
+    }
+  </script>
 </BaseLayout>

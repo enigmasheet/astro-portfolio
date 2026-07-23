@@ -1,0 +1,21 @@
+var progressBar = document.querySelector('#progress-bar > div') as HTMLElement | null;
+if (progressBar) {
+  document.addEventListener('scroll', function () {
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = Math.min((scrollTop / docHeight) * 100, 100) + '%';
+  }, { passive: true });
+}
+
+var copyBtn = document.getElementById('copy-link');
+var copyLabel = document.getElementById('copy-label');
+if (copyBtn && copyLabel) {
+  var shareUrl = copyBtn.dataset.url || '';
+  copyBtn.addEventListener('click', async function () {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      copyLabel.textContent = 'Link copied!';
+      setTimeout(function () { copyLabel.textContent = 'Copy link'; }, 2000);
+    } catch { }
+  });
+}

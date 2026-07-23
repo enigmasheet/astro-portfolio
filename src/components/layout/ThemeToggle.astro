@@ -4,6 +4,8 @@
 </button>
 
 <script>
+  import { toggleTheme, getStoredTheme } from '../../styles/theme-toggle';
+
   const btn = document.getElementById('theme-toggle');
   if (btn) {
     function updateIcons(theme) {
@@ -17,13 +19,9 @@
         lightIcon?.classList.remove('hidden');
       }
     }
-    updateIcons(document.documentElement.getAttribute('data-theme') || 'dark');
+    updateIcons(getStoredTheme());
     btn.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme') || 'dark';
-      var next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch {}
-      updateIcons(next);
+      updateIcons(toggleTheme());
     });
   }
 </script>

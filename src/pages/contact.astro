@@ -59,61 +59,6 @@ import { EMAIL, FORMSPREE_URL } from '../data/social';
   </section>
 
   <script>
-    var form = document.getElementById('contact-form');
-    var submitBtn = document.getElementById('submit-btn');
-    var successDiv = document.getElementById('form-success');
-
-    function showError(field) {
-      var err = document.querySelector('[data-error="' + field + '"]');
-      if (err) err.classList.remove('hidden');
-    }
-
-    function clearErrors() {
-      document.querySelectorAll('[data-error]').forEach(function (e) { e.classList.add('hidden'); });
-    }
-
-    function validateEmail(e) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-    }
-
-    if (form) {
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        clearErrors();
-
-        var name = form.querySelector('[name="name"]').value.trim();
-        var email = form.querySelector('[name="email"]').value.trim();
-        var message = form.querySelector('[name="message"]').value.trim();
-        var valid = true;
-
-        if (!name) { showError('name'); valid = false; }
-        if (!email || !validateEmail(email)) { showError('email'); valid = false; }
-        if (!message) { showError('message'); valid = false; }
-
-        if (!valid) return;
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-
-        try {
-          var res = await fetch('{FORMSPREE_URL}', {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' },
-          });
-          if (res.ok) {
-            form.classList.add('hidden');
-            successDiv.classList.remove('hidden');
-          } else {
-            alert('Something went wrong. Please try again or email me directly.');
-          }
-        } catch {
-          alert('Network error. Please try again or email me directly.');
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Message';
-        }
-      });
-    }
+    import '../scripts/contact-form';
   </script>
 </PageLayout>

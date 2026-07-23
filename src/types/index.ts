@@ -90,7 +90,6 @@ export interface BlogPostMeta {
   date: string;
   summary: string;
   tags: string[];
-  fileName: string;
 }
 
 export interface Certification {
@@ -104,6 +103,8 @@ export interface Testimonial {
   role: string;
   text: string;
 }
+
+export type AstroComponent = (props?: Record<string, unknown>) => any;
 
 export interface NavLink {
   label: string;

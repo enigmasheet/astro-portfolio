@@ -70,6 +70,7 @@ const canonicalUrl = canonical || SITE_URL;
     <ClientRouter fallback="swap" />
 
     <script
+      is:inline
       type="application/ld+json"
       set:html={JSON.stringify({
         '@context': 'https://schema.org',

@@ -5,11 +5,11 @@ var noResults = document.getElementById('no-results');
 chips.forEach(function (chip) {
   chip.addEventListener('click', function () {
     chips.forEach(function (c) {
-      c.classList.remove('active', 'bg-(--color-primary)', 'text-white', 'border-(--color-primary)');
-      c.classList.add('border-(--color-border)', 'text-(--color-text-secondary)');
+      c.classList.remove('active', 'bg-(--color-primary)', 'text-white', 'border-primary');
+      c.classList.add('border-border', 'text-text-secondary');
     });
-    chip.classList.add('active', 'bg-(--color-primary)', 'text-white', 'border-(--color-primary)');
-    chip.classList.remove('border-(--color-border)', 'text-(--color-text-secondary)');
+    chip.classList.add('active', 'bg-(--color-primary)', 'text-white', 'border-primary');
+    chip.classList.remove('border-border', 'text-text-secondary');
     var filter = (chip as HTMLElement).dataset.filter || 'all';
     var visible = 0;
     items.forEach(function (item) {

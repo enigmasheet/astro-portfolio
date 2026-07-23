@@ -13,23 +13,23 @@ function formatDate(d: string): string {
 ---
 
 <div class="relative" data-reveal>
-  <div class="absolute left-[19px] top-2 bottom-2 w-0.5 bg-(--color-border)"></div>
+  <div class="absolute left-4.75 top-2 bottom-2 w-0.5 bg-border"></div>
   <div class="space-y-8">
     {
       items.map((item) => (
         <div class="relative pl-12">
-          <div class="absolute left-2.5 top-1.5 w-[9px] h-[9px] rounded-full bg-(--color-primary) ring-4 ring-(--color-bg)"></div>
-          <div class="exp-card bg-(--color-surface) border border-(--color-border) rounded-xl p-6 transition-all hover:shadow-md duration-300 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[3px] before:bg-(--color-primary) before:opacity-0 before:transition-opacity hover:before:opacity-100" data-theme-aware>
+          <div class="absolute left-2.5 top-1.5 w-2.25 h-2.25 rounded-full bg-primary ring-4 ring-bg"></div>
+          <div class="exp-card bg-surface border border-border rounded-xl p-6 transition-all hover:shadow-md duration-300 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100" data-theme-aware>
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <div>
                 <h3 class="text-lg font-semibold text-(--color-text)">{item.title}</h3>
-                <p class="text-sm font-medium text-(--color-primary)">{item.company}</p>
+                <p class="text-sm font-medium text-primary">{item.company}</p>
               </div>
-              <span class="text-xs text-(--color-text-secondary) whitespace-nowrap px-3 py-1 rounded-full bg-(--color-bg)">
+              <span class="text-xs text-text-secondary whitespace-nowrap px-3 py-1 rounded-full bg-bg">
                 {formatDate(item.date)} – {item.endDate ? formatDate(item.endDate) : 'Present'}
               </span>
             </div>
-            <p class="text-sm text-(--color-text-secondary) leading-relaxed">{item.description}</p>
+            <p class="text-sm text-text-secondary leading-relaxed">{item.description}</p>
           </div>
         </div>
       ))

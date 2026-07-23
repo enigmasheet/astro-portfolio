@@ -18,7 +18,7 @@ const allTags = [...new Set(BLOG_POSTS.flatMap((p) => p.tags))].sort();
           All
         </button>
         {allTags.map((tag) => (
-          <button class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-(--color-border) text-(--color-text-secondary) hover:border-(--color-primary) hover:text-(--color-primary) transition-colors cursor-pointer" data-filter={tag}>
+          <button class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-border text-text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer" data-filter={tag}>
             #{tag}
           </button>
         ))}
@@ -33,7 +33,7 @@ const allTags = [...new Set(BLOG_POSTS.flatMap((p) => p.tags))].sort();
       </div>
 
       <div id="no-results" class="text-center py-16 hidden">
-        <p class="text-(--color-text-secondary) text-lg">No posts match your filter.</p>
+        <p class="text-text-secondary text-lg">No posts match your filter.</p>
       </div>
     </div>
   </section>

@@ -10,19 +10,19 @@ const postDate = new Date(post.date).toLocaleDateString('en-US', { year: 'numeri
 const readingTime = Math.ceil(post.summary.split(' ').length / 200) || 1;
 ---
 
-<article class="blog-card bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300 relative before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-(--color-primary) before:opacity-0 before:transition-opacity hover:before:opacity-100" data-reveal data-theme-aware>
+<article class="blog-card bg-surface border border-border rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300 relative before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100" data-reveal data-theme-aware>
   <a href={base + 'blog/' + post.slug} class="block p-6 no-underline">
-    <div class="flex items-center gap-3 text-xs text-(--color-text-secondary) mb-3">
-      <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-(--color-primary)/10 text-(--color-primary) font-medium">
+    <div class="flex items-center gap-3 text-xs text-text-secondary mb-3">
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">
         {readingTime} min read
       </span>
       <span>{postDate}</span>
     </div>
     <h3 class="text-lg font-semibold text-(--color-text) mb-2">{post.title}</h3>
-    <p class="text-sm text-(--color-text-secondary) line-clamp-2">{post.summary}</p>
+    <p class="text-sm text-text-secondary line-clamp-2">{post.summary}</p>
     <div class="flex flex-wrap gap-2 mt-4">
       {post.tags.map((tag) => (
-        <span class="px-2 py-0.5 text-xs rounded-md bg-(--color-bg) text-(--color-text-secondary)" data-theme-aware>
+        <span class="px-2 py-0.5 text-xs rounded-md bg-bg text-text-secondary" data-theme-aware>
           #{tag}
         </span>
       ))}

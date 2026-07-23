@@ -11,16 +11,18 @@ if (progressBar) {
   updateProgress();
 }
 
-var copyBtn = document.getElementById('copy-link');
-var copyLabel = document.getElementById('copy-label');
+const copyBtn = document.getElementById('copy-link');
+const copyLabel = document.getElementById('copy-label');
 if (copyBtn && copyLabel) {
-  var shareUrl = copyBtn.dataset.url || '';
-  copyBtn.addEventListener('click', async function () {
+  const copyBtnElement = copyBtn;
+  const copyLabelElement = copyLabel;
+  const shareUrl = copyBtnElement.dataset.url || '';
+  copyBtnElement.addEventListener('click', async function () {
     try {
       await navigator.clipboard.writeText(shareUrl);
-      copyLabel.innerHTML = 'Link copied! &#10003;';
-      copyBtn.classList.add('scale-pulse');
-      setTimeout(function () { copyLabel.innerHTML = 'Copy link'; copyBtn.classList.remove('scale-pulse'); }, 2000);
+      copyLabelElement.innerHTML = 'Link copied! &#10003;';
+      copyBtnElement.classList.add('scale-pulse');
+      setTimeout(function () { copyLabelElement.innerHTML = 'Copy link'; copyBtnElement.classList.remove('scale-pulse'); }, 2000);
     } catch { console.warn('Clipboard write failed'); }
   });
 }

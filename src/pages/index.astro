@@ -33,7 +33,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     </div>
   </section>
 
-  <section id="about" class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+  <section id="about" class="page-section bg-surface transition-colors duration-300" data-theme-aware>
     <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.about.label}
@@ -45,7 +45,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       <div class="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
         <div class="space-y-4" data-reveal>
           {ABOUT.paragraphs.map((p) => (
-            <p class="text-(--color-text-secondary) leading-relaxed">{p}</p>
+            <p class="text-text-secondary leading-relaxed">{p}</p>
           ))}
         </div>
 
@@ -64,12 +64,12 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex items-center gap-3 p-4 rounded-xl bg-(--color-bg) border border-(--color-border) hover:border-(--color-primary) transition-colors no-underline"
+                    class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline"
                   >
-                    <span class="material-symbols-outlined text-(--color-primary)">verified</span>
+                    <span class="material-symbols-outlined text-primary">verified</span>
                     <div>
                       <p class="text-sm font-medium text-(--color-text)">{cert.title}</p>
-                      <p class="text-xs text-(--color-text-secondary)">{cert.issuer}</p>
+                      <p class="text-xs text-text-secondary">{cert.issuer}</p>
                     </div>
                   </a>
                 ))}
@@ -81,11 +81,11 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
             <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.achievements}</h3>
             <div class="space-y-3">
               {ABOUT.achievements.map((a) => (
-                <div class="flex gap-3 p-4 rounded-xl bg-(--color-bg) border border-(--color-border)">
-                  <span class="text-xs font-bold text-(--color-primary) whitespace-nowrap mt-0.5">{a.year}</span>
+                <div class="flex gap-3 p-4 rounded-xl bg-bg border border-border">
+                  <span class="text-xs font-bold text-primary whitespace-nowrap mt-0.5">{a.year}</span>
                   <div>
                     <p class="text-sm font-medium text-(--color-text)">{a.title}</p>
-                    <p class="text-xs text-(--color-text-secondary)">{a.description}</p>
+                    <p class="text-xs text-text-secondary">{a.description}</p>
                   </div>
                 </div>
               ))}
@@ -114,7 +114,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     </div>
   </section>
 
-  <section id="testimonials" class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+  <section id="testimonials" class="page-section bg-surface transition-colors duration-300" data-theme-aware>
     <div class="max-w-4xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.testimonials.label}
@@ -142,7 +142,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       <div class="text-center mt-8" data-reveal>
         <a
           href={base + 'projects'}
-          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-(--color-primary) text-(--color-primary) font-medium hover:bg-(--color-primary)/5 transition-colors no-underline"
+          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline"
         >
           View All Projects →
         </a>
@@ -150,7 +150,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
     </div>
   </section>
 
-  <section id="blog" class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+  <section id="blog" class="page-section bg-surface transition-colors duration-300" data-theme-aware>
     <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.blog.label}
@@ -166,7 +166,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       <div class="text-center mt-8" data-reveal>
         <a
           href={base + 'blog'}
-          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-(--color-primary) text-(--color-primary) font-medium hover:bg-(--color-primary)/5 transition-colors no-underline"
+          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline"
         >
           View All Posts →
         </a>
@@ -200,7 +200,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
               name="name"
               required
               maxlength="100"
-              class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all"
+              class="w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               data-theme-aware
             />
           </div>
@@ -211,7 +211,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
               id="email"
               name="email"
               required
-              class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all"
+              class="w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               data-theme-aware
             />
           </div>
@@ -223,13 +223,13 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
               required
               maxlength="5000"
               rows="5"
-              class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all resize-y"
+              class="w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-y"
               data-theme-aware
             ></textarea>
           </div>
           <button
             type="submit"
-            class="w-full px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors cursor-pointer"
+            class="w-full px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors cursor-pointer"
           >
             Send Message
           </button>

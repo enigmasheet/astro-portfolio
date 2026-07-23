@@ -33,8 +33,8 @@ var currentPath = window.location.pathname;
 navLinks.forEach(function (link) {
   var href = link.getAttribute('href');
     if (href === currentPath || (href && href !== '/' && currentPath.startsWith(href))) {
-    link.classList.add('text-(--color-primary)', 'bg-(--color-primary)/5');
-    link.classList.remove('text-(--color-text-secondary)');
+    link.classList.add('text-primary', 'bg-(--color-primary)/5');
+    link.classList.remove('text-text-secondary');
     link.setAttribute('aria-current', 'page');
   } else {
     link.removeAttribute('aria-current');

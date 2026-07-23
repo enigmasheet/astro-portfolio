@@ -12,10 +12,10 @@ function initReveal() {
   els.forEach(function (el) {
     var staggerParent = el.closest('[data-reveal-stagger]');
     if (staggerParent) {
-      var stagger = Number.parseInt(staggerParent.dataset.revealStagger) || 100;
+      var stagger = Number.parseInt((staggerParent as HTMLElement).dataset.revealStagger || '100') || 100;
       var children = staggerParent.querySelectorAll('[data-reveal]:not(.revealed)');
       children.forEach(function (child, i) {
-        child.style.transitionDelay = (i * stagger) + 'ms';
+        (child as HTMLElement).style.transitionDelay = (i * stagger) + 'ms';
         observer.observe(child);
       });
     } else {

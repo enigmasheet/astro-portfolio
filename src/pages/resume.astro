@@ -15,16 +15,16 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
       <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8" data-reveal>
         <div>
           <h1 class="text-3xl md:text-4xl font-bold text-(--color-text)">{SITE.fullName}</h1>
-          <p class="text-(--color-primary) font-medium">{SITE.title}</p>
-          <p class="text-sm text-(--color-text-secondary)">{RESUME.location}</p>
+          <p class="text-primary font-medium">{SITE.title}</p>
+          <p class="text-sm text-text-secondary">{RESUME.location}</p>
         </div>
         <div class="flex gap-3">
           <a href={RESUME_PATH} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--color-primary) text-white text-sm font-medium hover:bg-(--color-primary-dark) transition-colors no-underline">
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-(hover:bg-primary-darkn-colors no-underline">
             Download PDF
           </a>
           <button onclick="window.print()"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-(--color-primary) text-(--color-primary) text-sm font-medium hover:bg-(--color-primary)/5 transition-colors cursor-pointer">
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-medium hover:bg-(--color-primary)/5 transition-colors cursor-pointer">
             Print
           </button>
         </div>
@@ -37,12 +37,12 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
           </div>
           <div data-reveal>
             <SectionHeading title="Education" />
-            <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-6" data-theme-aware>
+            <div class="bg-(--color-surface) border border-border rounded-xl p-6" data-theme-aware>
               {RESUME.education.map((edu) => (
                 <div>
                   <h3 class="text-base font-semibold text-(--color-text)">{edu.degree}</h3>
-                  <p class="text-sm text-(--color-primary)">{edu.school}</p>
-                  <p class="text-xs text-(--color-text-secondary)">{edu.dates}</p>
+                  <p class="text-sm text-primary">{edu.school}</p>
+                  <p class="text-xs text-text-secondary">{edu.dates}</p>
                 </div>
               ))}
             </div>
@@ -52,9 +52,9 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
           <div data-reveal>
             <SectionHeading title="Contact" />
             <div class="space-y-3 text-sm">
-              <a href={`mailto:${EMAIL}`} class="flex items-center gap-2 text-(--color-text-secondary) hover:text-(--color-primary) no-underline">{EMAIL}</a>
-              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-(--color-text-secondary) hover:text-(--color-primary) no-underline">GitHub</a>
-              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-(--color-text-secondary) hover:text-(--color-primary) no-underline">LinkedIn</a>
+              <a href={`mailto:${EMAIL}`} class="flex items-center gap-2 text-text-secondary hover:text-primary no-underline">{EMAIL}</a>
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-text-secondary hover:text-primary no-underline">GitHub</a>
+              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-text-secondary hover:text-primary no-underline">LinkedIn</a>
             </div>
           </div>
           <div data-reveal>
@@ -66,7 +66,7 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
               <SectionHeading title="Certifications" />
               <div class="space-y-3">
                 {CERTIFICATIONS.map((cert) => (
-                  <a href={cert.link} target="_blank" rel="noopener noreferrer" class="block text-sm text-(--color-text-secondary) hover:text-(--color-primary) no-underline">{cert.title}</a>
+                  <a href={cert.link} target="_blank" rel="noopener noreferrer" class="block text-sm text-text-secondary hover:text-primary no-underline">{cert.title}</a>
                 ))}
               </div>
             </div>

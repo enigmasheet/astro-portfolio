@@ -15,12 +15,12 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
 
       <div class="mb-8 space-y-4" data-reveal>
         <div class="relative max-w-md mx-auto">
-          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-(--color-text-secondary) text-xl pointer-events-none">search</span>
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl pointer-events-none">search</span>
           <input
             id="project-search"
             type="text"
             placeholder="Search projects..."
-            class="w-full pl-10 pr-4 py-3 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all"
+            class="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
           />
         </div>
         <div class="flex flex-wrap justify-center gap-2" id="filter-chips">
@@ -28,7 +28,7 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
             All
           </button>
           {allTechnologies.map((tech) => (
-            <button class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-(--color-border) text-(--color-text-secondary) hover:border-(--color-primary) hover:text-(--color-primary) transition-colors cursor-pointer" data-filter={tech}>
+            <button class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-border text-text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer" data-filter={tech}>
               {tech}
             </button>
           ))}
@@ -44,7 +44,7 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
       </div>
 
       <div id="no-results" class="text-center py-16 hidden">
-        <p class="text-(--color-text-secondary) text-lg">No projects match your search.</p>
+        <p class="text-text-secondary text-lg">No projects match your search.</p>
       </div>
     </div>
   </section>

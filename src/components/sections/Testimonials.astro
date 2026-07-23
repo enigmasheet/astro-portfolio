@@ -5,14 +5,14 @@ import { TESTIMONIALS } from '../../data/testimonials';
 <div class="grid md:grid-cols-2 gap-6" data-reveal>
   {
     TESTIMONIALS.map((t) => (
-      <blockquote class="bg-(--color-surface) border border-(--color-border) rounded-xl p-6 relative" data-theme-aware>
-        <div class="text-4xl text-(--color-primary)/20 absolute top-4 left-4 leading-none select-none" aria-hidden="true">"</div>
-        <p class="text-sm text-(--color-text-secondary) leading-relaxed relative z-10 mb-4 italic">
+      <blockquote class="bg-surface border border-border rounded-xl p-6 relative" data-theme-aware>
+        <div class="text-4xl text-primary/20 absolute top-4 left-4 leading-none select-none" aria-hidden="true">"</div>
+        <p class="text-sm text-text-secondary leading-relaxed relative z-10 mb-4 italic">
           "{t.text}"
         </p>
         <footer>
           <p class="text-sm font-semibold text-(--color-text)">{t.name}</p>
-          <p class="text-xs text-(--color-text-secondary)">{t.role}</p>
+          <p class="text-xs text-text-secondary">{t.role}</p>
         </footer>
       </blockquote>
     ))

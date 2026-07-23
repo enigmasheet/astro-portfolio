@@ -13,15 +13,15 @@ import { SECTIONS, RESUME } from '../data/site';
       <Timeline items={EXPERIENCES} />
     </div>
   </section>
-  <section class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+  <section class="page-section bg-surface transition-colors duration-300" data-theme-aware>
     <div class="max-w-4xl mx-auto px-4">
       <SectionHeading label="Education" title="Education & Credentials" centered />
       <div class="max-w-xl mx-auto" data-reveal>
         {RESUME.education.map((edu) => (
-          <div class="bg-(--color-bg) border border-(--color-border) rounded-xl p-6 text-center">
+          <div class="bg-bg border border-border rounded-xl p-6 text-center">
             <h3 class="text-base font-semibold text-(--color-text) mb-1">{edu.degree}</h3>
-            <p class="text-sm text-(--color-primary) mb-1">{edu.school}</p>
-            <p class="text-xs text-(--color-text-secondary)">{edu.dates}</p>
+            <p class="text-sm text-primary mb-1">{edu.school}</p>
+            <p class="text-xs text-text-secondary">{edu.dates}</p>
           </div>
         ))}
       </div>

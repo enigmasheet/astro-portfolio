@@ -15,7 +15,7 @@ import { CERTIFICATIONS } from '../data/certifications';
       <div class="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
         <div class="space-y-4" data-reveal>
           {ABOUT.paragraphs.map((p) => (
-            <p class="text-(--color-text-secondary) leading-relaxed">{p}</p>
+            <p class="text-text-secondary leading-relaxed">{p}</p>
           ))}
         </div>
         <div class="space-y-8">
@@ -28,11 +28,11 @@ import { CERTIFICATIONS } from '../data/certifications';
               <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.certifications}</h3>
               <div class="space-y-3">
                 {CERTIFICATIONS.map((cert) => (
-                  <a href={cert.link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-(--color-bg) border border-(--color-border) hover:border-(--color-primary) transition-colors no-underline">
-                    <span class="material-symbols-outlined text-(--color-primary)">verified</span>
+                  <a href={cert.link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline">
+                    <span class="material-symbols-outlined text-primary">verified</span>
                     <div>
                       <p class="text-sm font-medium text-(--color-text)">{cert.title}</p>
-                      <p class="text-xs text-(--color-text-secondary)">{cert.issuer}</p>
+                      <p class="text-xs text-text-secondary">{cert.issuer}</p>
                     </div>
                   </a>
                 ))}
@@ -43,11 +43,11 @@ import { CERTIFICATIONS } from '../data/certifications';
             <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.achievements}</h3>
             <div class="space-y-3">
               {ABOUT.achievements.map((a) => (
-                <div class="flex gap-3 p-4 rounded-xl bg-(--color-bg) border border-(--color-border)">
-                  <span class="text-xs font-bold text-(--color-primary) whitespace-nowrap mt-0.5">{a.year}</span>
+                <div class="flex gap-3 p-4 rounded-xl bg-bg border border-border">
+                  <span class="text-xs font-bold text-primary whitespace-nowrap mt-0.5">{a.year}</span>
                   <div>
                     <p class="text-sm font-medium text-(--color-text)">{a.title}</p>
-                    <p class="text-xs text-(--color-text-secondary)">{a.description}</p>
+                    <p class="text-xs text-text-secondary">{a.description}</p>
                   </div>
                 </div>
               ))}
@@ -57,7 +57,7 @@ import { CERTIFICATIONS } from '../data/certifications';
       </div>
     </div>
   </section>
-  <section class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+  <section class="page-section bg-surface transition-colors duration-300" data-theme-aware>
     <div class="max-w-6xl mx-auto px-4">
       <Stats />
     </div>
@@ -68,7 +68,7 @@ import { CERTIFICATIONS } from '../data/certifications';
       <Testimonials />
     </div>
   </section>
-  <section class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+  <section class="page-section bg-surface transition-colors duration-300" data-theme-aware>
     <div class="max-w-3xl mx-auto px-4 text-center">
       <blockquote class="text-xl md:text-2xl font-medium text-(--color-text) italic" data-reveal>"{ABOUT.quote}"</blockquote>
     </div>

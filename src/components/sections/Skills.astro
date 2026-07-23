@@ -5,18 +5,18 @@ import { SKILLS } from '../../data/skills';
 <div class="grid md:grid-cols-2 gap-6" data-reveal>
   {
     SKILLS.map((cat) => (
-      <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-6" data-theme-aware>
+      <div class="bg-surface border border-border rounded-xl p-6" data-theme-aware>
         <h3 class="text-base font-semibold text-(--color-text) mb-2">{cat.category}</h3>
         <div class="flex flex-wrap gap-2 mb-4">
           {cat.skills.map((skill) => (
-            <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-(--color-primary)/10 text-(--color-primary)">
+            <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
               {skill}
             </span>
           ))}
         </div>
-        <div class="h-2 rounded-full bg-(--color-border) overflow-hidden">
+        <div class="h-2 rounded-full bg-border overflow-hidden">
           <div
-            class="skill-bar-fill h-full rounded-full bg-(--color-primary)"
+            class="skill-bar-fill h-full rounded-full bg-primary"
             style="width: 0%"
             data-target={cat.level}
             role="progressbar"
@@ -26,7 +26,7 @@ import { SKILLS } from '../../data/skills';
             aria-label={`${cat.category} proficiency: ${cat.level}%`}
           ></div>
         </div>
-        <span class="text-xs text-(--color-text-secondary) mt-1 block text-right" aria-hidden="true">{cat.level}%</span>
+        <span class="text-xs text-text-secondary mt-1 block text-right" aria-hidden="true">{cat.level}%</span>
       </div>
     ))
   }

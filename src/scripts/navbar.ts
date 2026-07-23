@@ -41,14 +41,16 @@ navLinks.forEach(function (link) {
   }
 });
 
-const appbar = document.querySelector('nav');
-if (appbar) {
-  const appbarEl = appbar;
-  document.addEventListener(
-    'scroll',
-    function () {
-      appbarEl.classList.toggle('shadow-sm', window.scrollY > 10);
-    },
-    { passive: true },
-  );
+if (!document.documentElement.dataset.scrollNav) {
+  document.documentElement.dataset.scrollNav = '';
+  const appbar = document.querySelector('nav');
+  if (appbar) {
+    document.addEventListener(
+      'scroll',
+      function () {
+        appbar.classList.toggle('shadow-sm', window.scrollY > 10);
+      },
+      { passive: true },
+    );
+  }
 }

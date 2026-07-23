@@ -63,6 +63,11 @@
   }
 
   initToggles();
-  const mo = new MutationObserver(initToggles);
-  mo.observe(document.body, { childList: true, subtree: true });
+  if (!(window as any).__themeToggleMO) {
+    (window as any).__themeToggleMO = new MutationObserver(initToggles);
+    (window as any).__themeToggleMO.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
 </script>

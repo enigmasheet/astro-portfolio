@@ -82,6 +82,8 @@ textarea[aria-invalid='true'] {
 
 .page-section {
   padding: 80px 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
 }
 
 html.astro-fallback-loading::before {

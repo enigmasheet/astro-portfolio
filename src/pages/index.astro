@@ -14,7 +14,8 @@ import { PROJECTS } from '../data/projects';
 import { BLOG_POSTS } from '../data/blog';
 import { CERTIFICATIONS } from '../data/certifications';
 
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 ---
 
 <PageLayout title={SITE.fullName} description={SITE.shortTitle}>

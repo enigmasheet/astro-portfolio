@@ -1,7 +1,8 @@
 ---
 import { HERO, SITE } from '../../data/site';
 import SocialLinks from '../ui/SocialLinks.astro';
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const phrases = 'Backend Software Developer|Product-Oriented Technologist|Full-Stack Web Developer|Problem Solver';
 const firstPhrase = 'Backend Software Developer';
 ---

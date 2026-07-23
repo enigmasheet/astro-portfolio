@@ -12,7 +12,8 @@ export interface Props {
 }
 
 const { title, description, ogImage, ogType, canonical } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.fullName} — ${SITE.shortTitle}`;
 const metaDesc = description || SITE.shortTitle;
 const ogImg = ogImage || `${SITE_URL}${OG_IMAGE_PATH}`;
@@ -133,6 +134,8 @@ const canonicalUrl = canonical || SITE_URL;
     </script>
 
     <script>
+      var pageContent = document.getElementById('page-content');
+
       function animateCounter(el) {
         var target = Number.parseInt(el.dataset.target) || 0;
         var suffix = el.dataset.suffix || '';
@@ -186,6 +189,8 @@ const canonicalUrl = canonical || SITE_URL;
     </script>
 
     <script>
+      var pageContent = document.getElementById('page-content');
+
       function initTyping() {
         var el = document.querySelector('[data-typing]:not(.typing-active)');
         if (!el) return;

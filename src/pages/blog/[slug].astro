@@ -3,7 +3,8 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { SITE_URL } from '../../data/social';
 
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');

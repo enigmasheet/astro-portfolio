@@ -1,6 +1,7 @@
 import type { NavLink } from '../types';
 
-const base = typeof import.meta !== 'undefined' ? import.meta.env.BASE_URL : '/';
+const rawBase = typeof import.meta !== 'undefined' ? import.meta.env.BASE_URL : '/';
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Home', href: base },

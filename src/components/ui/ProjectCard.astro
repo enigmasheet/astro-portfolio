@@ -4,7 +4,8 @@ export interface Props {
   project: Project;
 }
 const { project } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const imgSrc = hasImage ? base + project.imageUrls[0] : '';
 ---

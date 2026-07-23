@@ -1,6 +1,7 @@
 import type { SocialLink } from '../types';
 
-const base = typeof import.meta !== 'undefined' ? import.meta.env.BASE_URL : '/';
+const rawBase = typeof import.meta !== 'undefined' ? import.meta.env.BASE_URL : '/';
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
 export const SITE_URL = 'https://enigmasheet.github.io/astro-portfolio';
 export const DOMAIN = 'enigmasheet.github.io';
@@ -10,7 +11,7 @@ export const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}`;
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/abhaykumarmandal/';
 export const ROADMAP_URL = 'https://roadmap.sh/u/devabhay';
 export const RESUME_PATH = base + 'Abhay_Resume.pdf';
-export const OG_IMAGE_PATH = base + 'og-image.png';
+export const OG_IMAGE_PATH = '/og-image.png';
 export const FORMSPREE_URL = 'https://formspree.io/f/xvgkrkwk';
 
 export const SOCIAL_LINKS: SocialLink[] = [

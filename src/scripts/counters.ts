@@ -29,25 +29,4 @@ function initCounters() {
   counters.forEach(function (el) { observer.observe(el); });
 }
 
-function watchCounters() {
-  var pageContent = document.getElementById('page-content');
-  if (!pageContent) return;
-  var timer: ReturnType<typeof setTimeout>;
-  var mo = new MutationObserver(function () {
-    clearTimeout(timer);
-    timer = setTimeout(initCounters, 50);
-  });
-  mo.observe(pageContent, { childList: true, subtree: true });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function () {
-    initCounters();
-    watchCounters();
-  });
-} else {
-  initCounters();
-  watchCounters();
-}
-
-export { animateCounter, initCounters, watchCounters };
+export { animateCounter, initCounters };

@@ -14,25 +14,4 @@ function initSkillBars() {
   bars.forEach(function (bar) { observer.observe(bar); });
 }
 
-function watchSkillBars() {
-  var pageContent = document.getElementById('page-content');
-  if (!pageContent) return;
-  var timer: ReturnType<typeof setTimeout>;
-  var mo = new MutationObserver(function () {
-    clearTimeout(timer);
-    timer = setTimeout(initSkillBars, 50);
-  });
-  mo.observe(pageContent, { childList: true, subtree: true });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function () {
-    initSkillBars();
-    watchSkillBars();
-  });
-} else {
-  initSkillBars();
-  watchSkillBars();
-}
-
-export { initSkillBars, watchSkillBars };
+export { initSkillBars };

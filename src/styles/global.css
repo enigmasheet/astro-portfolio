@@ -103,8 +103,9 @@ html[data-theme="dark"] body {
 }
 
 .mobile-drawer-open {
-  max-height: 300px !important;
+  visibility: visible !important;
   opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 .gradient-text {

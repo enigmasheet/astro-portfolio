@@ -7,12 +7,12 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 <PageLayout title="404" description="Page not found">
   <section class="page-section min-h-[calc(100vh-16rem)] flex items-center">
     <div class="max-w-xl mx-auto px-4 text-center">
-      <div class="text-8xl font-bold text-(--color-primary)/20 mb-6">404</div>
+      <div class="text-8xl font-bold text-primary/20 mb-6">404</div>
       <h1 class="text-3xl font-bold text-(--color-text) mb-4">Page not found</h1>
-      <p class="text-(--color-text-secondary) mb-8 max-w-md mx-auto">
+      <p class="text-text-secondary mb-8 max-w-md mx-auto">
         The page you're looking for doesn't exist or has been moved.
       </p>
-      <a href={base} class="inline-flex items-center px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors no-underline">
+      <a href={base} class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors no-underline">
         Go Home
       </a>
     </div>

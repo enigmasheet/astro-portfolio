@@ -10,11 +10,7 @@ const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const imgSrc = hasImage ? base + project.imageUrls[0] : '';
 ---
 
-<article
-  class="project-card group bg-surface border border-border rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
-  data-reveal
-  data-theme-aware
->
+<article class="project-card group card-hover" data-reveal>
   {
     imgSrc && (
       <div class="relative aspect-video overflow-hidden bg-bg">

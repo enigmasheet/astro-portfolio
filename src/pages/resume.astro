@@ -43,7 +43,7 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
           </div>
           <div data-reveal>
             <SectionHeading title="Education" />
-            <div class="bg-surface border border-border rounded-xl p-6" data-theme-aware>
+            <div class="bg-surface border border-border rounded-xl p-6">
               {
                 RESUME.education.map((edu) => (
                   <div>
@@ -114,11 +114,30 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
   @media print {
     nav,
     footer,
-    #theme-toggle {
+    #back-to-top,
+    .skip-to-content,
+    .theme-toggle,
+    #nav-toggle,
+    #drawer-backdrop,
+    #mobile-drawer {
       display: none !important;
     }
     .page-section {
       padding: 0 !important;
+    }
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    .bg-surface,
+    [class*='bg-surface'] {
+      background: white !important;
+    }
+    a {
+      text-decoration: none !important;
+    }
+    .grid {
+      display: block !important;
     }
   }
 </style>

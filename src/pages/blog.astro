@@ -20,7 +20,7 @@ const allTags = [...new Set(BLOG_POSTS.flatMap((p) => p.tags))].sort();
 
       <div class="mb-8 flex flex-wrap justify-center gap-2" data-reveal id="filter-chips">
         <button
-          class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border transition-colors cursor-pointer"
+          class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border bg-primary text-white border-primary cursor-pointer"
           data-filter="all"
         >
           All

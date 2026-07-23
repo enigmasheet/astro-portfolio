@@ -68,6 +68,7 @@ const canonicalUrl = canonical || SITE_URL;
     </script>
 
     <ClientRouter fallback="swap" />
+    <meta name="astro-view-transitions-enabled" content="true" />
 
     <script
       is:inline
@@ -90,6 +91,7 @@ const canonicalUrl = canonical || SITE_URL;
     </style>
   </head>
   <body>
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
     <slot />
 
     <script>

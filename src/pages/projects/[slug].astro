@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 const { project } = Astro.props;
 if (!project) {
-  return Astro.redirect(base + '404');
+  Astro.redirect(base + '404');
 }
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const breadcrumbItems = [
@@ -41,6 +41,31 @@ const breadcrumbItems = [
   />
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
+      <nav aria-label="Breadcrumb" class="mb-4 hidden sm:block">
+        <ol class="flex items-center gap-2 text-sm text-text-secondary">
+          {
+            breadcrumbItems.map((item, i) => (
+              <li class="flex items-center gap-2">
+                {i > 0 && (
+                  <span class="text-border" aria-hidden="true">
+                    /
+                  </span>
+                )}
+                {i < breadcrumbItems.length - 1 ? (
+                  <a href={item.url} class="hover:text-primary transition-colors no-underline">
+                    {item.name}
+                  </a>
+                ) : (
+                  <span class="text-(--color-text) font-medium truncate max-w-50">
+                    {item.name}
+                  </span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
       <a
         href={base + 'projects'}
         class="inline-flex items-center text-sm text-text-secondary hover:text-primary transition-colors mb-8 no-underline"

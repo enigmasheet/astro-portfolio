@@ -57,6 +57,31 @@ const breadcrumbItems = [
 
   <section class="page-section">
     <div class="max-w-3xl mx-auto px-4">
+      <nav aria-label="Breadcrumb" class="mb-4 hidden sm:block">
+        <ol class="flex items-center gap-2 text-sm text-text-secondary">
+          {
+            breadcrumbItems.map((item, i) => (
+              <li class="flex items-center gap-2">
+                {i > 0 && (
+                  <span class="text-border" aria-hidden="true">
+                    /
+                  </span>
+                )}
+                {i < breadcrumbItems.length - 1 ? (
+                  <a href={item.url} class="hover:text-primary transition-colors no-underline">
+                    {item.name}
+                  </a>
+                ) : (
+                  <span class="text-(--color-text) font-medium truncate max-w-[200px]">
+                    {item.name}
+                  </span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
       <a
         href={base + 'blog'}
         class="inline-flex items-center text-sm text-text-secondary hover:text-primary transition-colors mb-8 no-underline"

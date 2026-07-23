@@ -42,10 +42,10 @@ function filterProjects() {
 chips.forEach(function (chip) {
   chip.addEventListener('click', function () {
     chips.forEach(function (c) {
-      c.classList.remove('active', 'bg-(--color-primary)', 'text-white', 'border-primary');
+      c.classList.remove('active', 'bg-primary', 'text-white', 'border-primary');
       c.classList.add('border-border', 'text-text-secondary');
     });
-    chip.classList.add('active', 'bg-(--color-primary)', 'text-white', 'border-primary');
+    chip.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
     chip.classList.remove('border-border', 'text-text-secondary');
     activeFilter = (chip as HTMLElement).dataset.filter || 'all';
     filterProjects();

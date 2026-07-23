@@ -14,10 +14,10 @@
     } catch {
       theme = 'dark';
     }
-    document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach(function (btn) {
+    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
       if (btn.dataset.toggleReady) return;
-      const darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
-      const lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
+      const darkIcon = btn.querySelector('.dark-icon');
+      const lightIcon = btn.querySelector('.light-icon');
       if (theme === 'dark') {
         if (lightIcon) lightIcon.style.display = 'none';
       } else {
@@ -51,7 +51,7 @@
       btn.addEventListener('click', function () {
         updateIcons(toggleTheme());
         const icon = btn.querySelector<HTMLSpanElement>(
-          '.theme-icon:not([style*="display: none"])',
+          '.theme-icon:not([style*="display: none"])'
         );
         // Use optional chaining to safely handle possible null
         icon?.classList.add('theme-spin');

@@ -1,4 +1,5 @@
 import { FORMSPREE_URL } from '../data/social';
+import { showToast } from './toast';
 
 const form = document.getElementById('contact-form') as HTMLFormElement | null;
 const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
@@ -38,24 +39,6 @@ function clearErrors() {
 
 function validateEmail(e: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-}
-
-function showToast(msg: string) {
-  const existing = document.getElementById('form-toast');
-  if (existing) existing.remove();
-  const toast = document.createElement('div');
-  toast.id = 'form-toast';
-  toast.className =
-    'fixed top-24 right-4 z-[100] bg-(--color-error) text-white px-5 py-3 rounded-lg shadow-lg text-sm font-medium max-w-sm animate-slide-in';
-  toast.textContent = msg;
-  toast.setAttribute('role', 'alert');
-  document.body.appendChild(toast);
-  setTimeout(function () {
-    toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
-    setTimeout(function () {
-      toast.remove();
-    }, 300);
-  }, 4000);
 }
 
 if (form) {

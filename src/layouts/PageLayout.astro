@@ -17,7 +17,11 @@ const props = Astro.props;
 <BaseLayout {...props}>
   <Navbar />
 
-  <main id="page-content" tabindex="-1" class="pt-16 min-h-screen outline-none">
+  <main
+    id="main-content"
+    tabindex="-1"
+    class="pt-16 min-h-screen outline-none transition-opacity duration-300"
+  >
     <slot />
   </main>
 
@@ -25,7 +29,7 @@ const props = Astro.props;
 
   <button
     id="back-to-top"
-    class="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 translate-y-5 pointer-events-none transition-all duration-300 hover:bg-primary-dark cursor-pointer"
+    class="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 translate-y-5 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:bg-primary-dark cursor-pointer"
     aria-label="Back to top"
   >
     <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48" aria-hidden="true">

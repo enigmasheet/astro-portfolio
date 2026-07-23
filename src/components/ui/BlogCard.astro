@@ -15,9 +15,8 @@ const readingTime = Math.ceil(post.summary.split(' ').length / 200) || 1;
 ---
 
 <article
-  class="blog-card bg-surface border border-border rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300 relative before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100"
+  class="blog-card card-hover relative before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100"
   data-reveal
-  data-theme-aware
 >
   <a href={base + 'blog/' + post.slug} class="block p-6 no-underline">
     <div class="flex items-center gap-3 text-xs text-text-secondary mb-3">
@@ -33,9 +32,7 @@ const readingTime = Math.ceil(post.summary.split(' ').length / 200) || 1;
     <div class="flex flex-wrap gap-2 mt-4">
       {
         post.tags.map((tag) => (
-          <span class="px-2 py-0.5 text-xs rounded-md bg-bg text-text-secondary" data-theme-aware>
-            #{tag}
-          </span>
+          <span class="px-2 py-0.5 text-xs rounded-md bg-bg text-text-secondary">#{tag}</span>
         ))
       }
     </div>

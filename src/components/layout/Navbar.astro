@@ -7,7 +7,7 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
 <nav
   class="fixed top-0 left-0 right-0 z-50 bg-bg/85 md:backdrop-blur-md backdrop-blur-sm border-b border-border transition-colors duration-300"
-  data-theme-aware
+  transition:name="navbar"
 >
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
     <a href={base} class="text-xl font-bold tracking-tight no-underline text-(--color-text)">
@@ -49,7 +49,6 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 <div
   id="mobile-drawer"
   class="fixed top-16 left-0 right-0 z-40 bg-surface border-b border-border shadow-lg md:hidden invisible opacity-0 -translate-y-2 transition-[opacity,transform,visibility] duration-300 ease-in-out"
-  data-theme-aware
 >
   <div class="px-4 py-2 flex flex-col gap-1">
     {

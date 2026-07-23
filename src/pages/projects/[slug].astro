@@ -1,6 +1,8 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import { PROJECTS } from '../../data/projects';
+import { SITE_URL } from '../../data/social';
+
 export async function getStaticPaths() {
   return PROJECTS.map((p) => ({
     params: { slug: p.slug },
@@ -12,9 +14,24 @@ if (!project) {
   return Astro.redirect('/404');
 }
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
+const breadcrumbItems = [
+  { name: 'Home', url: SITE_URL },
+  { name: 'Projects', url: `${SITE_URL}/projects` },
+  { name: project.title, url: `${SITE_URL}/projects/${project.slug}` },
+];
 ---
 
 <PageLayout title={project.title} description={project.description}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  })}></script>
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
       <a href="/projects" class="inline-flex items-center text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors mb-8 no-underline">

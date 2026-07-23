@@ -1,0 +1,38 @@
+---
+title: Building Scalable REST APIs with ASP.NET Core
+date: 2026-07-15
+summary: Patterns and practices for building maintainable, high-performance REST APIs — from clean architecture to efficient data access.
+tags:
+  - ASP.NET Core
+  - API
+  - Backend
+  - C#
+---
+
+Over the past few years, I've built and maintained several production APIs. Here are the patterns and practices that have consistently delivered maintainable, high-performance services.
+
+## Clean Architecture Matters
+
+Splitting your application into distinct layers — API, Application, Domain, and Infrastructure — keeps concerns separated and makes your codebase testable and adaptable. The domain layer should have zero external dependencies.
+
+## Efficient Data Access
+
+Entity Framework Core is powerful, but raw performance requires attention. Use projection with `Select()` to avoid over-fetching, enable query splitting for complex includes, and always measure with `ToQueryString()` during development.
+
+## Validation at the Edge
+
+Validate incoming requests as early as possible. FluentValidation combined with ASP.NET Core's built-in model validation gives you clean, reusable validation logic that doesn't clutter your controllers.
+
+## Authentication & Authorization
+
+JWT-based authentication with refresh tokens is the standard for stateless APIs. Use policy-based authorization to keep access control declarative and centralized rather than scattered across controllers.
+
+## Observability
+
+Structured logging with Serilog, health checks, and basic metrics give you visibility into production behaviour without needing a full observability stack from day one.
+
+## Key Takeaways
+
+- Clean architecture pays off as the project grows — don't skip it.
+- Measure query performance early; don't optimize blind.
+- Good validation and auth are non-negotiable for production APIs.

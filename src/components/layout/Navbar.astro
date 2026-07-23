@@ -13,7 +13,7 @@ import ThemeToggle from './ThemeToggle.astro';
         NAV_LINKS.map((link) => (
           <a
             href={link.href}
-            class="px-3 py-2 rounded-lg text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors no-underline"
+            class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors no-underline"
           >
             {link.label}
           </a>
@@ -23,21 +23,20 @@ import ThemeToggle from './ThemeToggle.astro';
     </div>
     <div class="flex md:hidden items-center gap-2">
       <ThemeToggle />
-      <button id="nav-toggle" class="p-2 rounded-lg text-(--color-text-secondary) hover:text-(--color-primary) transition-colors" aria-label="Toggle menu">
+      <button id="nav-toggle" class="p-2 rounded-lg text-(--color-text-secondary) hover:text-(--color-primary) transition-colors cursor-pointer" aria-label="Toggle menu" aria-expanded="false">
         <span class="material-symbols-outlined text-2xl">menu</span>
       </button>
     </div>
   </div>
 </nav>
 
-<div id="mobile-drawer" class="fixed top-16 left-0 right-0 z-40 bg-(--color-surface) border-b border-(--color-border) shadow-lg hidden md:hidden transition-all duration-300" data-theme-aware>
-  <div class="px-4 py-4 flex flex-col gap-1">
+<div id="mobile-drawer" class="fixed top-16 left-0 right-0 z-40 bg-(--color-surface) border-b border-(--color-border) shadow-lg md:hidden max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out" data-theme-aware>
+  <div class="px-4 py-2 flex flex-col gap-1">
     {
       NAV_LINKS.map((link) => (
         <a
           href={link.href}
-          class="px-3 py-3 rounded-lg text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors no-underline"
-          onclick="document.getElementById('mobile-drawer').classList.add('hidden')"
+          class="nav-link px-3 py-3 rounded-lg text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors no-underline"
         >
           {link.label}
         </a>
@@ -47,21 +46,33 @@ import ThemeToggle from './ThemeToggle.astro';
 </div>
 
 <script>
-  const toggle = document.getElementById('nav-toggle');
-  const drawer = document.getElementById('mobile-drawer');
+  var toggle = document.getElementById('nav-toggle');
+  var drawer = document.getElementById('mobile-drawer');
   if (toggle && drawer) {
     toggle.addEventListener('click', function () {
-      drawer.classList.toggle('hidden');
+      var open = drawer.classList.toggle('mobile-drawer-open');
+      toggle.setAttribute('aria-expanded', open);
     });
-    document.querySelectorAll('#mobile-drawer a').forEach(function (a) {
+    drawer.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
-        drawer.classList.add('hidden');
+        drawer.classList.remove('mobile-drawer-open');
+        toggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
+  var navLinks = document.querySelectorAll('.nav-link');
+  var currentPath = window.location.pathname;
+  navLinks.forEach(function (link) {
+    var href = link.getAttribute('href');
+    if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
+      link.classList.add('text-(--color-primary)', 'bg-(--color-primary)/5');
+      link.classList.remove('text-(--color-text-secondary)');
+    }
+  });
+
   var appbar = document.querySelector('nav');
   document.addEventListener('scroll', function () {
-    if (appbar) appbar.classList.toggle('shadow-sm', window.scrollY > 10);
+    appbar.classList.toggle('shadow-sm', window.scrollY > 10);
   }, { passive: true });
 </script>

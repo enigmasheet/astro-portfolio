@@ -143,11 +143,39 @@ html[data-theme="dark"] body {
 }
 
 @keyframes skeleton-pulse {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.8;
-  }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes heroOrbA {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(60px, -40px) scale(1.1); }
+  50% { transform: translate(30px, 20px) scale(0.9); }
+  75% { transform: translate(-40px, 60px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes heroOrbB {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-50px, 50px) scale(0.95); }
+  50% { transform: translate(40px, -30px) scale(1.1); }
+  75% { transform: translate(-20px, -60px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.skill-bar-fill {
+  transition: width 1.2s ease-out;
+}
+
+.mobile-drawer-open {
+  max-height: 300px !important;
+  opacity: 1 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

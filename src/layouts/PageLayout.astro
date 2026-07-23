@@ -15,10 +15,14 @@ const props = Astro.props;
 ---
 
 <BaseLayout {...props}>
+  <a href="#page-content" class="skip-link">Skip to content</a>
+
   <Navbar />
-  <main id="page-content" class="pt-16 min-h-screen">
+
+  <main id="page-content" tabindex="-1" class="pt-16 min-h-screen outline-none">
     <slot />
   </main>
+
   <Footer />
 
   <button

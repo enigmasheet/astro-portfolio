@@ -2,8 +2,8 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import SocialLinks from '../components/ui/SocialLinks.astro';
-import { SECTIONS, CONTACT_INTRO, RESUME, SITE } from '../data/site';
-import { EMAIL } from '../data/social';
+import { SECTIONS, CONTACT_INTRO } from '../data/site';
+import { EMAIL, FORMSPREE_URL } from '../data/social';
 ---
 
 <PageLayout title="Contact" description={SECTIONS.contact.description}>
@@ -16,31 +16,104 @@ import { EMAIL } from '../data/social';
           <SocialLinks />
         </div>
       </div>
-      <form action="https://formspree.io/f/xvgkrkwk" method="POST" class="space-y-4" data-reveal>
-        <div class="visually-hidden" aria-hidden="true">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+
+      <div id="contact-form-wrapper" data-reveal>
+        <form id="contact-form" class="space-y-4">
+          <input type="text" name="_gotcha" class="visually-hidden" aria-hidden="true" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="Portfolio Contact" />
+
+          <div>
+            <label for="name" class="block text-sm font-medium text-(--color-text) mb-1">Name</label>
+            <input type="text" id="name" name="name" required maxlength="100"
+              class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all" />
+            <p class="text-xs text-(--color-error) mt-1 hidden" data-error="name">Name is required.</p>
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-(--color-text) mb-1">Email</label>
+            <input type="email" id="email" name="email" required
+              class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all" />
+            <p class="text-xs text-(--color-error) mt-1 hidden" data-error="email">Please enter a valid email.</p>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-(--color-text) mb-1">Message</label>
+            <textarea id="message" name="message" required maxlength="5000" rows="5"
+              class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all resize-y"></textarea>
+            <p class="text-xs text-(--color-error) mt-1 hidden" data-error="message">Message cannot be empty.</p>
+          </div>
+
+          <button type="submit" id="submit-btn"
+            class="w-full px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+            Send Message
+          </button>
+        </form>
+
+        <div id="form-success" class="hidden text-center py-12">
+          <span class="material-symbols-outlined text-5xl text-(--color-tertiary) mb-4 block">check_circle</span>
+          <h3 class="text-xl font-semibold text-(--color-text) mb-2">Message sent!</h3>
+          <p class="text-(--color-text-secondary)">Thanks for reaching out. I'll get back to you soon.</p>
         </div>
-        <input type="hidden" name="_subject" value="Portfolio Contact" />
-        <div>
-          <label for="name" class="block text-sm font-medium text-(--color-text) mb-1">Name</label>
-          <input type="text" id="name" name="name" required maxlength="100"
-            class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all" />
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium text-(--color-text) mb-1">Email</label>
-          <input type="email" id="email" name="email" required
-            class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all" />
-        </div>
-        <div>
-          <label for="message" class="block text-sm font-medium text-(--color-text) mb-1">Message</label>
-          <textarea id="message" name="message" required maxlength="5000" rows="5"
-            class="w-full px-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all resize-y"></textarea>
-        </div>
-        <button type="submit"
-          class="w-full px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors cursor-pointer">
-          Send Message
-        </button>
-      </form>
+      </div>
     </div>
   </section>
+
+  <script>
+    var form = document.getElementById('contact-form');
+    var submitBtn = document.getElementById('submit-btn');
+    var successDiv = document.getElementById('form-success');
+
+    function showError(field) {
+      var err = document.querySelector('[data-error="' + field + '"]');
+      if (err) err.classList.remove('hidden');
+    }
+
+    function clearErrors() {
+      document.querySelectorAll('[data-error]').forEach(function (e) { e.classList.add('hidden'); });
+    }
+
+    function validateEmail(e) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+    }
+
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        clearErrors();
+
+        var name = form.querySelector('[name="name"]').value.trim();
+        var email = form.querySelector('[name="email"]').value.trim();
+        var message = form.querySelector('[name="message"]').value.trim();
+        var valid = true;
+
+        if (!name) { showError('name'); valid = false; }
+        if (!email || !validateEmail(email)) { showError('email'); valid = false; }
+        if (!message) { showError('message'); valid = false; }
+
+        if (!valid) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+          var res = await fetch('{FORMSPREE_URL}', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' },
+          });
+          if (res.ok) {
+            form.classList.add('hidden');
+            successDiv.classList.remove('hidden');
+          } else {
+            alert('Something went wrong. Please try again or email me directly.');
+          }
+        } catch {
+          alert('Network error. Please try again or email me directly.');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
+      });
+    }
+  </script>
 </PageLayout>

@@ -14,8 +14,10 @@ const imgSrc = hasImage ? `/${project.imageUrls[0]}` : '';
       <img
         src={imgSrc}
         alt={project.title}
-        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 blur-sm"
         loading="lazy"
+        onload="this.classList.remove('blur-sm')"
+        onerror="this.style.display='none'"
       />
     </div>
   )}
@@ -35,29 +37,19 @@ const imgSrc = hasImage ? `/${project.imageUrls[0]}` : '';
       )}
     </div>
     <div class="flex items-center gap-3">
-      <a
-        href={`/projects/${project.slug}`}
-        class="text-sm font-medium text-(--color-primary) hover:underline"
-      >
+      <a href={`/projects/${project.slug}`}
+        class="text-sm font-medium text-(--color-primary) hover:underline">
         Details →
       </a>
       {project.githubLink && (
-        <a
-          href={project.githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors"
-        >
+        <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
+          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors">
           Source
         </a>
       )}
       {project.liveDemoActive && project.liveDemo && (
-        <a
-          href={project.liveDemo}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors"
-        >
+        <a href={project.liveDemo} target="_blank" rel="noopener noreferrer"
+          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors">
           Live Demo
         </a>
       )}

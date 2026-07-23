@@ -9,6 +9,7 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/abhaykumarmandal/';
 export const ROADMAP_URL = 'https://roadmap.sh/u/devabhay';
 export const RESUME_PATH = '/Abhay_Resume.pdf';
 export const OG_IMAGE_PATH = '/og-image.png';
+export const FORMSPREE_URL = 'https://formspree.io/f/xvgkrkwk';
 
 export const SOCIAL_LINKS: SocialLink[] = [
   { label: 'GitHub', href: GITHUB_URL, icon: 'github' },

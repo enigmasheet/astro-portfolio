@@ -7,7 +7,7 @@ document.querySelectorAll<HTMLImageElement>('[data-lightbox]').forEach(function 
     overlay.setAttribute('aria-label', 'Image lightbox');
 
     var closeBtn = document.createElement('button');
-    closeBtn.className = 'absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer text-2xl';
+    closeBtn.className = 'absolute top-4 right-4 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer text-2xl';
     closeBtn.setAttribute('aria-label', 'Close');
     closeBtn.textContent = 'close';
     closeBtn.className += ' material-symbols-outlined';

@@ -20,15 +20,15 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
             id="project-search"
             type="text"
             placeholder="Search projects..."
-            class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all"
+            class="w-full pl-10 pr-4 py-3 rounded-lg border border-(--color-border) bg-(--color-surface) text-(--color-text) focus:outline-none focus:ring-2 focus:ring-(--color-primary) focus:border-transparent transition-all"
           />
         </div>
         <div class="flex flex-wrap justify-center gap-2" id="filter-chips">
-          <button class="filter-chip active px-3 py-1.5 text-sm font-medium rounded-full border transition-colors cursor-pointer" data-filter="all">
+          <button class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border transition-colors cursor-pointer" data-filter="all">
             All
           </button>
           {allTechnologies.map((tech) => (
-            <button class="filter-chip px-3 py-1.5 text-sm font-medium rounded-full border border-(--color-border) text-(--color-text-secondary) hover:border-(--color-primary) hover:text-(--color-primary) transition-colors cursor-pointer" data-filter={tech}>
+            <button class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-(--color-border) text-(--color-text-secondary) hover:border-(--color-primary) hover:text-(--color-primary) transition-colors cursor-pointer" data-filter={tech}>
               {tech}
             </button>
           ))}

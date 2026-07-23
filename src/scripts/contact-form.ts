@@ -7,10 +7,12 @@ var textarea = document.getElementById('message') as HTMLTextAreaElement | null;
 var charCount = document.getElementById('char-count');
 
 if (textarea && charCount) {
-  textarea.addEventListener('input', function () {
-    var len = textarea.value.length;
-    charCount.textContent = len + '/5000';
-    charCount.style.color = len > 4500 ? 'var(--color-error)' : '';
+  var textareaEl = textarea;
+  var charCountEl = charCount;
+  textareaEl.addEventListener('input', function () {
+    var len = textareaEl.value.length;
+    charCountEl.textContent = len + '/5000';
+    charCountEl.style.color = len > 4500 ? 'var(--color-error)' : '';
   });
 }
 

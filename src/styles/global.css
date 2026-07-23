@@ -113,6 +113,8 @@ section[id] { scroll-margin-top: 5rem; }
 
 @media (max-width: 768px) {
   .page-section { padding: 48px 0; }
+  [style*="animation: heroOrb"] { animation: none !important; }
+  .exp-card span { white-space: normal; }
 }
 
 @media (max-width: 480px) {

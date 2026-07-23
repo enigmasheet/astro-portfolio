@@ -24,7 +24,7 @@ const iconMap: Record<string, AstroComponent> = {
         href={link.href}
         target={link.href.startsWith('http') ? '_blank' : undefined}
         rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-        class="p-2 rounded-lg text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors"
+        class="p-3 rounded-lg text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors"
         aria-label={link.label}
       >
         {Icon && <Icon />}

@@ -2,25 +2,28 @@ var toggle = document.getElementById('nav-toggle');
 var drawer = document.getElementById('mobile-drawer');
 var backdrop = document.getElementById('drawer-backdrop');
 if (toggle && drawer && backdrop) {
+  const drawerEl = drawer;
+  const backdropEl = backdrop;
+  const toggleEl = toggle;
   function closeDrawer() {
-    drawer.classList.remove('mobile-drawer-open');
-    backdrop.classList.remove('mobile-drawer-open');
-    toggle.setAttribute('aria-expanded', 'false');
+    drawerEl.classList.remove('mobile-drawer-open');
+    backdropEl.classList.remove('mobile-drawer-open');
+    toggleEl.setAttribute('aria-expanded', 'false');
   }
   function openDrawer() {
-    drawer.classList.add('mobile-drawer-open');
-    backdrop.classList.add('mobile-drawer-open');
-    toggle.setAttribute('aria-expanded', 'true');
+    drawerEl.classList.add('mobile-drawer-open');
+    backdropEl.classList.add('mobile-drawer-open');
+    toggleEl.setAttribute('aria-expanded', 'true');
   }
-  toggle.addEventListener('click', function () {
-    if (drawer.classList.contains('mobile-drawer-open')) {
+  toggleEl.addEventListener('click', function () {
+    if (drawerEl.classList.contains('mobile-drawer-open')) {
       closeDrawer();
     } else {
       openDrawer();
     }
   });
-  backdrop.addEventListener('click', closeDrawer);
-  drawer.querySelectorAll('a').forEach(function (a) {
+  backdropEl.addEventListener('click', closeDrawer);
+  drawerEl.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', closeDrawer);
   });
 }
@@ -40,7 +43,8 @@ navLinks.forEach(function (link) {
 
 var appbar = document.querySelector('nav');
 if (appbar) {
+  const appbarEl = appbar;
   document.addEventListener('scroll', function () {
-    appbar.classList.toggle('shadow-sm', window.scrollY > 10);
+    appbarEl.classList.toggle('shadow-sm', window.scrollY > 10);
   }, { passive: true });
 }

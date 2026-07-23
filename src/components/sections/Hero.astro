@@ -1,0 +1,54 @@
+---
+import { HERO, SITE } from '../../data/site';
+import SocialLinks from '../ui/SocialLinks.astro';
+const phrases = 'Backend Software Developer|Product-Oriented Technologist|Full-Stack Web Developer|Problem Solver';
+const firstPhrase = 'Backend Software Developer';
+---
+
+<section class="relative min-h-[calc(100vh-64px)] flex items-center overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-(--color-primary)/10 rounded-full blur-[100px]"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-(--color-secondary)/10 rounded-full blur-[100px]"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 40px 40px;"></div>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 py-24 relative z-10 w-full">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold tracking-widest uppercase text-(--color-primary) mb-4" style="animation: heroFadeIn 0.6s ease 0.1s forwards; opacity:0;">
+        {HERO.greeting}
+      </p>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-(--color-text) mb-4 leading-tight" style="animation: heroFadeIn 0.6s ease 0.2s forwards; opacity:0;">
+        {SITE.fullName}
+      </h1>
+      <div class="text-xl md:text-2xl text-(--color-text-secondary) mb-6 min-h-[2rem]" style="animation: heroFadeIn 0.6s ease 0.3s forwards; opacity:0;">
+        <span
+          data-typing
+          data-phrases={phrases}
+          data-speed="80"
+          data-delete-speed="40"
+          data-pause="2500"
+          data-delay="1200"
+        >{firstPhrase}</span>
+      </div>
+      <p class="text-lg text-(--color-text-secondary) max-w-xl leading-relaxed mb-8" style="animation: heroFadeIn 0.6s ease 0.4s forwards; opacity:0;">
+        {HERO.description}
+      </p>
+      <div class="flex flex-wrap gap-4" style="animation: heroFadeIn 0.6s ease 0.5s forwards; opacity:0;">
+        <a
+          href="/projects"
+          class="inline-flex items-center px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors no-underline"
+        >
+          {HERO.primaryCta}
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-(--color-primary) text-(--color-primary) font-medium hover:bg-(--color-primary)/5 transition-colors no-underline"
+        >
+          {HERO.secondaryCta}
+        </a>
+      </div>
+      <div class="mt-12" style="animation: heroFadeIn 0.6s ease 0.6s forwards; opacity:0;">
+        <SocialLinks />
+      </div>
+    </div>
+  </div>
+</section>

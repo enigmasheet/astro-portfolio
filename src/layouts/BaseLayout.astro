@@ -1,0 +1,240 @@
+---
+import { SITE_URL, DOMAIN, SOCIAL_LINKS, OG_IMAGE_PATH } from '../data/social';
+import { SITE } from '../data/site';
+
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonical?: string;
+}
+
+const { title, description, ogImage, ogType, canonical } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.fullName} — ${SITE.shortTitle}`;
+const metaDesc = description || SITE.shortTitle;
+const ogImg = ogImage || `${SITE_URL}${OG_IMAGE_PATH}`;
+const canonicalUrl = canonical || SITE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={metaDesc} />
+    <meta name="author" content={SITE.fullName} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={metaDesc} />
+    <meta property="og:image" content={ogImg} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={ogType || 'website'} />
+    <meta property="og:site_name" content={SITE.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={metaDesc} />
+    <meta name="twitter:image" content={ogImg} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: SITE.fullName,
+      jobTitle: SITE.title,
+      url: SITE_URL,
+      knowsAbout: SITE.knowsAbout,
+      sameAs: SOCIAL_LINKS.filter(l => l.href.startsWith('http')).map(l => l.href),
+    })}></script>
+
+    <slot name="head" />
+
+    <style is:global>
+      @import '../styles/global.css';
+    </style>
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      import { initTheme } from '../styles/theme-toggle';
+      initTheme();
+    </script>
+
+    <script>
+      function initReveal() {
+        var els = document.querySelectorAll('[data-reveal]:not(.revealed)');
+        if (!els.length) return;
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(function (el) {
+          var staggerParent = el.closest('[data-reveal-stagger]');
+          if (staggerParent) {
+            var stagger = Number.parseInt(staggerParent.dataset.revealStagger) || 100;
+            var children = staggerParent.querySelectorAll('[data-reveal]:not(.revealed)');
+            children.forEach(function (child, i) {
+              child.style.transitionDelay = (i * stagger) + 'ms';
+              observer.observe(child);
+            });
+          } else {
+            observer.observe(el);
+          }
+        });
+      }
+
+      function watchReveals() {
+        var app = document.getElementById('page-content');
+        if (!app) return;
+        var timer;
+        var mo = new MutationObserver(function () {
+          clearTimeout(timer);
+          timer = setTimeout(initReveal, 50);
+        });
+        mo.observe(app, { childList: true, subtree: true });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+          initReveal();
+          watchReveals();
+        });
+      } else {
+        initReveal();
+        watchReveals();
+      }
+    </script>
+
+    <script>
+      function animateCounter(el) {
+        var target = Number.parseInt(el.dataset.target) || 0;
+        var suffix = el.dataset.suffix || '';
+        var duration = 1500;
+        var start = performance.now();
+        function update(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(eased * target);
+          el.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+
+      function initCounters() {
+        var counters = document.querySelectorAll('.counter[data-target]:not(.counter-animated)');
+        if (!counters.length) return;
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              entry.target.classList.add('counter-animated');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        counters.forEach(function (el) { observer.observe(el); });
+      }
+
+      function watchCounters() {
+        var app = document.getElementById('page-content');
+        if (!app) return;
+        var timer;
+        var mo = new MutationObserver(function () {
+          clearTimeout(timer);
+          timer = setTimeout(initCounters, 50);
+        });
+        mo.observe(app, { childList: true, subtree: true });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+          initCounters();
+          watchCounters();
+        });
+      } else {
+        initCounters();
+        watchCounters();
+      }
+    </script>
+
+    <script>
+      function initTyping() {
+        var el = document.querySelector('[data-typing]:not(.typing-active)');
+        if (!el) return;
+        el.classList.add('typing-active');
+        var phrases = (el.getAttribute('data-phrases') || '').split('|').filter(Boolean);
+        if (!phrases.length) return;
+        var speed = parseInt(el.getAttribute('data-speed')) || 80;
+        var deleteSpeed = parseInt(el.getAttribute('data-delete-speed')) || 40;
+        var pause = parseInt(el.getAttribute('data-pause')) || 2000;
+        var delay = parseInt(el.getAttribute('data-delay')) || 0;
+        var phraseIndex = 0;
+        var charIndex = 0;
+        var isDeleting = false;
+        var cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        cursor.textContent = '|';
+        el.after(cursor);
+        function type() {
+          var current = phrases[phraseIndex];
+          if (isDeleting) {
+            el.textContent = current.substring(0, charIndex--);
+            if (charIndex < 0) {
+              isDeleting = false;
+              phraseIndex = (phraseIndex + 1) % phrases.length;
+              setTimeout(type, 500);
+              return;
+            }
+            setTimeout(type, deleteSpeed);
+          } else {
+            el.textContent = current.substring(0, charIndex++);
+            if (charIndex > current.length) {
+              isDeleting = true;
+              setTimeout(type, pause);
+              return;
+            }
+            setTimeout(type, speed);
+          }
+        }
+        setTimeout(type, delay);
+      }
+
+      function watchTyping() {
+        var app = document.getElementById('page-content');
+        if (!app) return;
+        var timer;
+        var mo = new MutationObserver(function () {
+          clearTimeout(timer);
+          timer = setTimeout(initTyping, 50);
+        });
+        mo.observe(app, { childList: true, subtree: true });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+          initTyping();
+          watchTyping();
+        });
+      } else {
+        initTyping();
+        watchTyping();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+---
+import { NAV_LINKS } from '../../data/navigation';
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-(--color-bg)/85 backdrop-blur-(12px) border-b border-(--color-border) transition-colors duration-300" data-theme-aware>
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold tracking-tight no-underline text-(--color-text)">
+      &lt;Abhay /&gt;
+    </a>
+    <div class="hidden md:flex items-center gap-1">
+      {
+        NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class="px-3 py-2 rounded-lg text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors no-underline"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <ThemeToggle />
+    </div>
+    <div class="flex md:hidden items-center gap-2">
+      <ThemeToggle />
+      <button id="nav-toggle" class="p-2 rounded-lg text-(--color-text-secondary) hover:text-(--color-primary) transition-colors" aria-label="Toggle menu">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div id="mobile-drawer" class="fixed top-16 left-0 right-0 z-40 bg-(--color-surface) border-b border-(--color-border) shadow-lg hidden md:hidden transition-all duration-300" data-theme-aware>
+  <div class="px-4 py-4 flex flex-col gap-1">
+    {
+      NAV_LINKS.map((link) => (
+        <a
+          href={link.href}
+          class="px-3 py-3 rounded-lg text-sm font-medium text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors no-underline"
+          onclick="document.getElementById('mobile-drawer').classList.add('hidden')"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  if (toggle && drawer) {
+    toggle.addEventListener('click', function () {
+      drawer.classList.toggle('hidden');
+    });
+    document.querySelectorAll('#mobile-drawer a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        drawer.classList.add('hidden');
+      });
+    });
+  }
+
+  var appbar = document.querySelector('nav');
+  document.addEventListener('scroll', function () {
+    if (appbar) appbar.classList.toggle('shadow-sm', window.scrollY > 10);
+  }, { passive: true });
+</script>

@@ -1,0 +1,20 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<PageLayout title="Now" description={`What ${SITE.name} is doing now`}>
+  <section class="page-section">
+    <div class="max-w-3xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-6" data-reveal>Now</h1>
+      <p class="text-sm text-(--color-text-secondary) mb-8" data-reveal><em>Last updated July 2026</em></p>
+      <div class="space-y-6 text-(--color-text-secondary) leading-relaxed" data-reveal>
+        <p>• Working as a Software Developer at Codebee Nepal, building the Logistics Management System with ASP.NET Core.</p>
+        <p>• Co-founding and managing projects at Sunya Technology.</p>
+        <p>• Migrating my portfolio from Blazor WebAssembly to Astro for better performance and developer experience.</p>
+        <p>• Writing about backend development, .NET, and cloud architecture on my blog.</p>
+        <p>• Preparing for the AZ-204 (Azure Developer Associate) certification.</p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

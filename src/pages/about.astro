@@ -1,0 +1,76 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Skills from '../components/sections/Skills.astro';
+import Stats from '../components/sections/Stats.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import { SITE, ABOUT, SECTIONS, STATS } from '../data/site';
+import { CERTIFICATIONS } from '../data/certifications';
+---
+
+<PageLayout title="About" description={SECTIONS.about.description}>
+  <section class="page-section">
+    <div class="max-w-6xl mx-auto px-4">
+      <SectionHeading label={SECTIONS.about.label} title={SECTIONS.about.title} description={SECTIONS.about.description} centered />
+      <div class="grid lg:grid-cols-[1fr_400px] gap-12 items-start">
+        <div class="space-y-4" data-reveal>
+          {ABOUT.paragraphs.map((p) => (
+            <p class="text-(--color-text-secondary) leading-relaxed">{p}</p>
+          ))}
+        </div>
+        <div class="space-y-8">
+          <div data-reveal>
+            <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.skills}</h3>
+            <Skills />
+          </div>
+          {CERTIFICATIONS.length > 0 && (
+            <div data-reveal>
+              <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.certifications}</h3>
+              <div class="space-y-3">
+                {CERTIFICATIONS.map((cert) => (
+                  <a href={cert.link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-4 rounded-xl bg-(--color-bg) border border-(--color-border) hover:border-(--color-primary) transition-colors no-underline">
+                    <span class="material-symbols-outlined text-(--color-primary)">verified</span>
+                    <div>
+                      <p class="text-sm font-medium text-(--color-text)">{cert.title}</p>
+                      <p class="text-xs text-(--color-text-secondary)">{cert.issuer}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+          <div data-reveal>
+            <h3 class="text-base font-semibold text-(--color-text) mb-4">{ABOUT.blockTitles.achievements}</h3>
+            <div class="space-y-3">
+              {ABOUT.achievements.map((a) => (
+                <div class="flex gap-3 p-4 rounded-xl bg-(--color-bg) border border-(--color-border)">
+                  <span class="text-xs font-bold text-(--color-primary) whitespace-nowrap mt-0.5">{a.year}</span>
+                  <div>
+                    <p class="text-sm font-medium text-(--color-text)">{a.title}</p>
+                    <p class="text-xs text-(--color-text-secondary)">{a.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+    <div class="max-w-6xl mx-auto px-4">
+      <Stats />
+    </div>
+  </section>
+  <section class="page-section">
+    <div class="max-w-4xl mx-auto px-4">
+      <SectionHeading label={SECTIONS.testimonials.label} title={SECTIONS.testimonials.title} description={SECTIONS.testimonials.description} centered />
+      <Testimonials />
+    </div>
+  </section>
+  <section class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <blockquote class="text-xl md:text-2xl font-medium text-(--color-text) italic" data-reveal>"{ABOUT.quote}"</blockquote>
+    </div>
+  </section>
+</PageLayout>

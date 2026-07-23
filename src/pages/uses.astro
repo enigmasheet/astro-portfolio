@@ -1,0 +1,40 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+---
+
+<PageLayout title="Uses" description="Tools and technologies I use daily">
+  <section class="page-section">
+    <div class="max-w-3xl mx-auto px-4">
+      <SectionHeading label="Uses" title="What I Use" description="Tools, technologies, and gear I rely on daily." centered />
+      <div class="space-y-8">
+        <div data-reveal>
+          <h2 class="text-xl font-semibold text-(--color-text) mb-4">Editor &amp; Terminal</h2>
+          <ul class="space-y-2 text-(--color-text-secondary)">
+            <li>• <strong class="text-(--color-text)">VS Code</strong> with C#, JavaScript, Tailwind extensions</li>
+            <li>• <strong class="text-(--color-text)">Windows Terminal</strong> with PowerShell 7</li>
+            <li>• <strong class="text-(--color-text)">JetBrains Mono</strong> for code</li>
+          </ul>
+        </div>
+        <div data-reveal>
+          <h2 class="text-xl font-semibold text-(--color-text) mb-4">Languages &amp; Frameworks</h2>
+          <ul class="space-y-2 text-(--color-text-secondary)">
+            <li>• C# / .NET / ASP.NET Core</li>
+            <li>• JavaScript / TypeScript / Node.js</li>
+            <li>• React / Next.js</li>
+            <li>• Blazor WebAssembly</li>
+            <li>• Tailwind CSS</li>
+          </ul>
+        </div>
+        <div data-reveal>
+          <h2 class="text-xl font-semibold text-(--color-text) mb-4">Cloud &amp; DevOps</h2>
+          <ul class="space-y-2 text-(--color-text-secondary)">
+            <li>• Microsoft Azure (Static Web Apps, App Service)</li>
+            <li>• GitHub Actions for CI/CD</li>
+            <li>• Docker for local development</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

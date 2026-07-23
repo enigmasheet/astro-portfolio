@@ -1,0 +1,18 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ProjectCard from '../components/ui/ProjectCard.astro';
+import { PROJECTS } from '../data/projects';
+import { SECTIONS } from '../data/site';
+---
+
+<PageLayout title="Projects" description={SECTIONS.projects.description}>
+  <section class="page-section">
+    <div class="max-w-6xl mx-auto px-4">
+      <SectionHeading label={SECTIONS.projects.label} title={SECTIONS.projects.title} description={SECTIONS.projects.description} centered />
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {PROJECTS.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+</PageLayout>

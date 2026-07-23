@@ -1,0 +1,25 @@
+---
+export interface Props {
+  label?: string;
+  title: string;
+  description?: string;
+  centered?: boolean;
+}
+const { label, title, description, centered } = Astro.props;
+---
+
+<div class={`mb-12 ${centered ? 'text-center' : ''}`} data-reveal>
+  {label && (
+    <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-primary) mb-3">
+      {label}
+    </span>
+  )}
+  <h2 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4">
+    {title}
+  </h2>
+  {description && (
+    <p class="text-(--color-text-secondary) max-w-2xl text-lg leading-relaxed mx-auto">
+      {description}
+    </p>
+  )}
+</div>

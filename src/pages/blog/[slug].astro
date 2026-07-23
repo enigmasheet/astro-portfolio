@@ -1,0 +1,96 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { BLOG_POSTS } from '../../data/blog';
+import { blogContent } from '../../data/blog-content';
+export async function getStaticPaths() {
+  return BLOG_POSTS.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+const { post } = Astro.props;
+if (!post) {
+  return Astro.redirect('/404');
+}
+const htmlContent = blogContent[post.slug] || '';
+const postDate = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const readingTime = Math.ceil(post.summary.split(' ').length / 200) || 1;
+---
+
+<PageLayout title={post.title} description={post.summary}>
+  <section class="page-section">
+    <div class="max-w-3xl mx-auto px-4">
+      <a href="/blog" class="inline-flex items-center text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors mb-8 no-underline">
+        ← Back to Blog
+      </a>
+      <header class="mb-8" data-reveal>
+        <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4">{post.title}</h1>
+        <div class="flex flex-wrap items-center gap-4 text-sm text-(--color-text-secondary)">
+          <span>{postDate}</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-(--color-primary)/10 text-(--color-primary) font-medium">
+            {readingTime} min read
+          </span>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {post.tags.map((tag) => (
+            <span class="px-2.5 py-1 text-xs rounded-md bg-(--color-bg) text-(--color-text-secondary)">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </header>
+      {htmlContent ? (
+        <article class="blog-content max-w-none" data-reveal>
+          <div set:html={htmlContent} />
+        </article>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-(--color-text-secondary)">Post content could not be loaded.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</PageLayout>
+
+<style is:global>
+  .blog-content h1, .blog-content h2, .blog-content h3 {
+    color: var(--color-text);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  .blog-content h1 { font-size: 1.75rem; }
+  .blog-content h2 { font-size: 1.5rem; }
+  .blog-content h3 { font-size: 1.25rem; }
+  .blog-content p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .blog-content pre {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  .blog-content code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+  }
+  .blog-content a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .blog-content a:hover { text-decoration: underline; }
+  .blog-content ul, .blog-content ol {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  .blog-content li { margin-bottom: 0.25rem; }
+  .blog-content em { font-style: italic; }
+  .blog-content strong { font-weight: 600; }
+</style>

@@ -1,0 +1,30 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Timeline from '../components/sections/Timeline.astro';
+import { EXPERIENCES } from '../data/experience';
+import { SECTIONS, RESUME } from '../data/site';
+---
+
+<PageLayout title="Experience" description={SECTIONS.experience.description}>
+  <section class="page-section">
+    <div class="max-w-4xl mx-auto px-4">
+      <SectionHeading label={SECTIONS.experience.label} title={SECTIONS.experience.title} description={SECTIONS.experience.description} centered />
+      <Timeline items={EXPERIENCES} />
+    </div>
+  </section>
+  <section class="page-section bg-(--color-surface) transition-colors duration-300" data-theme-aware>
+    <div class="max-w-4xl mx-auto px-4">
+      <SectionHeading label="Education" title="Education & Credentials" centered />
+      <div class="max-w-xl mx-auto" data-reveal>
+        {RESUME.education.map((edu) => (
+          <div class="bg-(--color-bg) border border-(--color-border) rounded-xl p-6 text-center">
+            <h3 class="text-base font-semibold text-(--color-text) mb-1">{edu.degree}</h3>
+            <p class="text-sm text-(--color-primary) mb-1">{edu.school}</p>
+            <p class="text-xs text-(--color-text-secondary)">{edu.dates}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>

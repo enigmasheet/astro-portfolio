@@ -1,0 +1,29 @@
+<button id="theme-toggle" class="p-2 rounded-lg text-(--color-text-secondary) hover:text-(--color-primary) hover:bg-(--color-primary)/5 transition-colors cursor-pointer" aria-label="Toggle theme">
+  <span class="material-symbols-outlined text-2xl block dark-icon">dark_mode</span>
+  <span class="material-symbols-outlined text-2xl hidden light-icon">light_mode</span>
+</button>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  if (btn) {
+    function updateIcons(theme) {
+      var darkIcon = btn.querySelector('.dark-icon');
+      var lightIcon = btn.querySelector('.light-icon');
+      if (theme === 'dark') {
+        darkIcon?.classList.remove('hidden');
+        lightIcon?.classList.add('hidden');
+      } else {
+        darkIcon?.classList.add('hidden');
+        lightIcon?.classList.remove('hidden');
+      }
+    }
+    updateIcons(document.documentElement.getAttribute('data-theme') || 'dark');
+    btn.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch {}
+      updateIcons(next);
+    });
+  }
+</script>

@@ -1,0 +1,69 @@
+---
+import type { Project } from '../../types';
+export interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
+const imgSrc = hasImage ? `/${project.imageUrls[0]}` : '';
+---
+
+<article class="project-card group bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300" data-reveal data-theme-aware>
+  {imgSrc && (
+    <div class="relative aspect-video overflow-hidden bg-(--color-bg)">
+      <img
+        src={imgSrc}
+        alt={project.title}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="p-6">
+    <h3 class="text-lg font-semibold text-(--color-text) mb-2">{project.title}</h3>
+    <p class="text-sm text-(--color-text-secondary) mb-4 line-clamp-2">{project.description}</p>
+    <div class="flex flex-wrap gap-2 mb-4">
+      {project.technologies.slice(0, 4).map((tech) => (
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-(--color-primary)/10 text-(--color-primary)">
+          {tech}
+        </span>
+      ))}
+      {project.technologies.length > 4 && (
+        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-(--color-border) text-(--color-text-secondary)">
+          +{project.technologies.length - 4}
+        </span>
+      )}
+    </div>
+    <div class="flex items-center gap-3">
+      <a
+        href={`/projects/${project.slug}`}
+        class="text-sm font-medium text-(--color-primary) hover:underline"
+      >
+        Details →
+      </a>
+      {project.githubLink && (
+        <a
+          href={project.githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors"
+        >
+          Source
+        </a>
+      )}
+      {project.liveDemoActive && project.liveDemo && (
+        <a
+          href={project.liveDemo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors"
+        >
+          Live Demo
+        </a>
+      )}
+      {!project.liveDemoActive && (
+        <span class="text-sm text-(--color-text-secondary) opacity-50">Offline</span>
+      )}
+    </div>
+  </div>
+</article>

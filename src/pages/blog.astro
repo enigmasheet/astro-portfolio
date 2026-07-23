@@ -1,0 +1,18 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import BlogCard from '../components/ui/BlogCard.astro';
+import { BLOG_POSTS } from '../data/blog';
+import { SECTIONS } from '../data/site';
+---
+
+<PageLayout title="Blog" description={SECTIONS.blog.description}>
+  <section class="page-section">
+    <div class="max-w-4xl mx-auto px-4">
+      <SectionHeading label={SECTIONS.blog.label} title={SECTIONS.blog.title} description={SECTIONS.blog.description} centered />
+      <div class="grid md:grid-cols-2 gap-6">
+        {BLOG_POSTS.map((post) => <BlogCard post={post} />)}
+      </div>
+    </div>
+  </section>
+</PageLayout>

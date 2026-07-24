@@ -15,7 +15,7 @@ const readingTime = Math.ceil(post.summary.split(' ').length / 200) || 1;
 ---
 
 <article
-  class="blog-card card-hover relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100"
+  class="blog-card card-hover relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100 hover:-translate-y-1 transition-all duration-300"
   data-reveal
 >
   <a href={base + 'blog/' + post.slug} class="block p-6 no-underline">

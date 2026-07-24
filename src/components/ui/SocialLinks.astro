@@ -29,8 +29,9 @@ function getIcon(name: string) {
           rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
           class="p-3 rounded-lg text-text-secondary hover:text-primary hover:bg-primary/5 hover:scale-110 transition-all"
           aria-label={link.label}
+          title={link.label}
         >
-          {Icon && <Icon />}
+          {Icon && <span aria-hidden="true"><Icon /></span>}
         </a>
       );
     })

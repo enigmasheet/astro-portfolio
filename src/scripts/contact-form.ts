@@ -3,6 +3,8 @@ import { showToast } from './toast';
 
 const form = document.getElementById('contact-form') as HTMLFormElement | null;
 const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+const btnSpinner = document.getElementById('btn-spinner') as HTMLElement | null;
+const btnLabel = document.getElementById('btn-label') as HTMLElement | null;
 const successDiv = document.getElementById('form-success');
 const textarea = document.getElementById('message') as HTMLTextAreaElement | null;
 const charCount = document.getElementById('char-count');
@@ -78,7 +80,8 @@ if (form) {
 
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+      if (btnLabel) btnLabel.textContent = 'Sending...';
     }
 
     try {
@@ -98,7 +101,8 @@ if (form) {
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
+        if (btnSpinner) btnSpinner.classList.add('hidden');
+        if (btnLabel) btnLabel.textContent = 'Send Message';
       }
     }
   });

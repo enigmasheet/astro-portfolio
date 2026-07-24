@@ -28,7 +28,7 @@ function getAvatarColor(name: string): string {
   aria-label="Testimonials carousel"
   aria-roledescription="carousel"
 >
-  <div class="flex transition-transform duration-500 ease-in-out" data-track>
+  <div class="flex transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]" data-track>
     {
       TESTIMONIALS.map((t, i) => (
         <div
@@ -76,11 +76,7 @@ function getAvatarColor(name: string): string {
     }
   </div>
 
-  <div class="h-1 bg-border rounded-full overflow-hidden mt-6" aria-hidden="true">
-    <div class="h-full w-0 bg-primary rounded-full" data-progress></div>
-  </div>
-
-  <div class="flex justify-center gap-2 mt-3" role="tablist" aria-label="Select testimonial">
+  <div class="flex justify-center gap-2 mt-6" role="tablist" aria-label="Select testimonial">
     {
       TESTIMONIALS.map((_, i) => (
         <button
@@ -107,7 +103,6 @@ function getAvatarColor(name: string): string {
     const track = container.querySelector<HTMLElement>('[data-track]');
     const slides = track?.children;
     const dots = container.querySelectorAll<HTMLElement>('[data-dot]');
-    const progress = container.querySelector<HTMLElement>('[data-progress]');
     if (!track || !slides || !slides.length) return;
 
     let current = 0;
@@ -126,7 +121,6 @@ function getAvatarColor(name: string): string {
         d.setAttribute('aria-selected', String(active));
       });
       current = index;
-      resetProgress();
     }
 
     function next() {
@@ -137,52 +131,24 @@ function getAvatarColor(name: string): string {
       show((current - 1 + slides.length) % slides.length);
     }
 
-    function resetProgress() {
-      if (!progress) return;
-      progress.style.animation = 'none';
-      progress.style.width = '0%';
-      void progress.offsetWidth;
-      progress.style.animation = '';
-      progress.style.width = '100%';
-      progress.style.transition = `width ${interval}ms linear`;
-    }
-
     function startTimer() {
       stopTimer();
       if (!isPaused) {
-        resetProgress();
         timer = setInterval(next, interval);
       }
     }
 
     function stopTimer() {
       clearInterval(timer);
-      if (progress) {
-        progress.style.transition = 'none';
-      }
     }
 
     function pause() {
       isPaused = true;
       stopTimer();
-      if (progress) {
-        progress.style.animationPlayState = 'paused';
-        const currentWidth = progress.getBoundingClientRect().width /
-          progress.parentElement!.getBoundingClientRect().width * 100;
-        progress.style.width = currentWidth + '%';
-      }
     }
 
     function resume() {
       isPaused = false;
-      if (progress) {
-        const remaining = parseFloat(progress.style.width || '0');
-        progress.style.transition = `none`;
-        progress.style.width = remaining + '%';
-        void progress.offsetWidth;
-        progress.style.transition = `width ${interval * (remaining / 100)}ms linear`;
-        progress.style.width = '100%';
-      }
       startTimer();
     }
 

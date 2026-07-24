@@ -2,14 +2,15 @@
 import { STATS } from '../../data/site';
 ---
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-reveal>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6" data-reveal aria-live="polite" aria-label="Statistics">
   {
     STATS.map((stat) => (
       <div class="stat-tile text-center p-6 rounded-xl bg-surface border border-border transition-all hover:shadow-md duration-300 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100">
         <div class="text-3xl md:text-4xl font-bold text-primary mb-2">
-          <span class="counter" data-target={stat.target} data-suffix={stat.suffix}>
+          <span class="counter font-mono" data-target={stat.target} data-suffix={stat.suffix}>
             0{stat.suffix}
           </span>
+          <span class="sr-only">{stat.target}{stat.suffix} {stat.label}</span>
         </div>
         <div class="text-sm text-text-secondary font-medium">{stat.label}</div>
       </div>

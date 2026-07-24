@@ -1,7 +1,8 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
-import Timeline from '../components/sections/Timeline.astro';
+import ExperienceTimeline from '../components/sections/ExperienceTimeline.astro';
+import EducationCard from '../components/ui/EducationCard.astro';
 import { EXPERIENCES } from '../data/experience';
 import { SECTIONS, RESUME } from '../data/site';
 ---
@@ -15,22 +16,14 @@ import { SECTIONS, RESUME } from '../data/site';
         description={SECTIONS.experience.description}
         centered
       />
-      <Timeline items={EXPERIENCES} />
+      <ExperienceTimeline items={EXPERIENCES} />
     </div>
   </section>
   <section class="page-section bg-surface transition-colors duration-300">
     <div class="max-w-4xl mx-auto px-4">
       <SectionHeading label="Education" title="Education & Credentials" centered />
       <div class="max-w-xl mx-auto" data-reveal>
-        {
-          RESUME.education.map((edu) => (
-            <div class="bg-bg border border-border rounded-xl p-6 text-center">
-              <h3 class="text-base font-semibold text-(--color-text) mb-1">{edu.degree}</h3>
-              <p class="text-sm text-primary mb-1">{edu.school}</p>
-              <p class="text-xs text-text-secondary">{edu.dates}</p>
-            </div>
-          ))
-        }
+        <EducationCard items={RESUME.education} />
       </div>
     </div>
   </section>

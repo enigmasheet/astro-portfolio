@@ -85,29 +85,8 @@ export const ABOUT: AboutContent = {
   blockTitles: {
     skills: 'Skills & Technologies',
     certifications: 'Certifications',
-    achievements: 'Achievements',
     testimonials: 'Testimonials',
   },
-  achievements: [
-    {
-      year: '2026',
-      title: 'Launched Multi-Tenant SaaS',
-      description:
-        'Built and deployed LaundryManager, a production-grade multi-tenant SaaS serving laundry businesses across Nepal.',
-    },
-    {
-      year: '2025',
-      title: 'Hackathon Finalist',
-      description:
-        'Finalist in a national-level hackathon, building a real-time logistics tracking solution.',
-    },
-    {
-      year: '2024',
-      title: 'Product Launch',
-      description:
-        'Led the development and launch of a production-grade logistics platform serving 50+ users.',
-    },
-  ],
   stats: [
     { label: 'Projects Built', target: 7, suffix: '+' },
     { label: 'Years of Experience', target: 3, suffix: '+' },

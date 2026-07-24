@@ -21,12 +21,6 @@ export interface SectionHeader {
   cta?: string;
 }
 
-export interface Achievement {
-  year: string;
-  title: string;
-  description: string;
-}
-
 export interface StatItem {
   label: string;
   target: number;
@@ -38,10 +32,8 @@ export interface AboutContent {
   blockTitles: {
     skills: string;
     certifications: string;
-    achievements: string;
     testimonials: string;
   };
-  achievements: Achievement[];
   stats: StatItem[];
   quotes: string[];
 }

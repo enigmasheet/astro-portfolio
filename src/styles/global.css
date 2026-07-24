@@ -81,7 +81,37 @@ textarea[aria-invalid='true'] {
 }
 
 .page-section {
-  padding: 80px 0;
+  padding: 96px 0;
+  position: relative;
+}
+
+.page-section + .page-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-primary), transparent);
+  opacity: 0.15;
+}
+
+@media (max-width: 768px) {
+  .page-section {
+    padding: 56px 0;
+  }
+  [style*='animation: heroOrb'] {
+    animation: none !important;
+  }
+  .exp-card span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-section {
+    padding: 40px 0;
+  }
 }
 
 html.astro-fallback-loading::before {
@@ -133,22 +163,4 @@ html.astro-fallback-loading::before {
 .project-item,
 .blog-item {
   transition: opacity 0.2s;
-}
-
-@media (max-width: 768px) {
-  .page-section {
-    padding: 48px 0;
-  }
-  [style*='animation: heroOrb'] {
-    animation: none !important;
-  }
-  .exp-card span {
-    white-space: normal;
-  }
-}
-
-@media (max-width: 480px) {
-  .page-section {
-    padding: 32px 0;
-  }
 }

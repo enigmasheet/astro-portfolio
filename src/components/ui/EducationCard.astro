@@ -1,0 +1,19 @@
+---
+import type { EducationItem } from '../../types';
+export interface Props {
+  items: EducationItem[];
+}
+const { items } = Astro.props;
+---
+
+<div class="space-y-4">
+  {
+    items.map((edu) => (
+      <div class="bg-surface border border-border rounded-xl p-6 text-center">
+        <h3 class="text-base font-semibold text-(--color-text) mb-1">{edu.degree}</h3>
+        <p class="text-sm text-primary mb-1">{edu.school}</p>
+        <p class="text-xs text-text-secondary">{edu.dates}</p>
+      </div>
+    ))
+  }
+</div>

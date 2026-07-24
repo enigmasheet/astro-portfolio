@@ -1,7 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
-import Timeline from '../components/sections/Timeline.astro';
+import ResumeExperienceList from '../components/sections/ResumeExperienceList.astro';
 import Skills from '../components/sections/Skills.astro';
 import { SITE, RESUME } from '../data/site';
 import { EXPERIENCES } from '../data/experience';
@@ -39,7 +39,7 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
         <div class="space-y-8">
           <div data-reveal>
             <SectionHeading title="Experience" />
-            <Timeline items={EXPERIENCES} />
+            <ResumeExperienceList items={EXPERIENCES} />
           </div>
           <div data-reveal>
             <SectionHeading title="Education" />

@@ -40,7 +40,7 @@ import { CERTIFICATIONS } from '../data/certifications';
                       href={cert.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline"
+                      class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100"
                     >
                       {cert.imageUrl ? (
                         <img
@@ -62,26 +62,7 @@ import { CERTIFICATIONS } from '../data/certifications';
               </div>
             )
           }
-          <div data-reveal>
-            <h3 class="text-base font-semibold text-(--color-text) mb-4">
-              {ABOUT.blockTitles.achievements}
-            </h3>
-            <div class="space-y-3">
-              {
-                ABOUT.achievements.map((a) => (
-                  <div class="flex gap-3 p-4 rounded-xl bg-bg border border-border">
-                    <span class="text-xs font-bold text-primary whitespace-nowrap mt-0.5">
-                      {a.year}
-                    </span>
-                    <div>
-                      <p class="text-sm font-medium text-(--color-text)">{a.title}</p>
-                      <p class="text-xs text-text-secondary">{a.description}</p>
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
+
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ const breadcrumbItems = [
 ];
 ---
 
-<PageLayout title={title} description={summary} canonical={shareUrl}>
+<PageLayout title={title} description={summary} canonical={shareUrl} ogType="article" ogImage={`${SITE_URL}/og-image.png`}>
   <script
     is:inline
     type="application/ld+json"
@@ -54,6 +54,23 @@ const breadcrumbItems = [
   <div id="progress-bar" class="fixed top-16 left-0 right-0 h-1 bg-border z-40" aria-hidden="true">
     <div class="h-full bg-primary w-0 transition-all duration-100"></div>
   </div>
+
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      datePublished: date.toISOString(),
+      author: {
+        '@type': 'Person',
+        name: 'Abhay Kumar Mandal',
+      },
+      description: summary,
+      url: shareUrl,
+    })}
+  />
 
   <section class="page-section">
     <div class="max-w-3xl mx-auto px-4">

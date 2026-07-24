@@ -20,6 +20,7 @@ const allTags = [...new Set(blogPosts.flatMap((p) => p.tags))].sort();
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
       <SectionHeading
+        as="h1"
         label={SECTIONS.blog.label}
         title={SECTIONS.blog.title}
         description={SECTIONS.blog.description}

@@ -7,7 +7,13 @@ import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs';
 
 export default defineConfig({
   site: 'https://abhaymandal.com.np',
-  integrations: [mdx(), sitemap()],
+  trailingSlash: 'always',
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes('/404/'),
+    }),
+  ],
   markdown: {
     processor: unified({
       remarkPlugins: [remarkReadingTime],

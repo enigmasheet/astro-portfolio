@@ -24,7 +24,7 @@ const breadcrumbItems = [
 ];
 ---
 
-<PageLayout title={project.title} description={project.description}>
+<PageLayout title={project.title} description={project.description} canonical={`${SITE_URL}/projects/${project.slug}/`} ogImage={hasImage ? `${SITE_URL}/${project.imageUrls[0]}` : `${SITE_URL}/og-image.png`}>
   <script
     is:inline
     type="application/ld+json"
@@ -39,6 +39,25 @@ const breadcrumbItems = [
       })),
     })}
   />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: project.title,
+      description: project.description,
+      url: `${SITE_URL}/projects/${project.slug}/`,
+      applicationCategory: 'WebApplication',
+      operatingSystem: 'Web',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    })}
+  />
+
   <section class="page-section">
     <div class="max-w-4xl mx-auto px-4">
       <nav aria-label="Breadcrumb" class="mb-4 hidden sm:block">

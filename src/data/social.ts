@@ -10,7 +10,7 @@ export const GITHUB_USERNAME = 'enigmasheet';
 export const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}`;
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/abhaykumarmandal/';
 export const ROADMAP_URL = 'https://roadmap.sh/u/devabhay';
-export const RESUME_PATH = base + 'Abhay_Resume.pdf';
+export const RESUME_PATH = base + 'abhay-resume.pdf';
 export const OG_IMAGE_PATH = '/og-image.png';
 export const FORMSPREE_URL = 'https://formspree.io/f/xvgkrkwk';
 

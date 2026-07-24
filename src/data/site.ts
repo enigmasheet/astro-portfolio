@@ -13,7 +13,7 @@ export const SITE: SiteInfo = {
   title: '.NET Backend Developer',
   shortTitle: '.NET Backend Developer',
   description:
-    '.NET Backend Developer specializing in ASP.NET Core, C#, and clean architecture. I build production-grade backend systems from legacy migrations to modern microservices.',
+    '.NET Backend Developer specializing in ASP.NET Core and clean architecture. I build production-grade backend systems from legacy migrations to modern microservices.',
   jobTitle: 'Backend Developer',
   knowsAbout: ['.NET Framework', '.NET 6+', 'ASP.NET Core', 'C#', 'Legacy Migration', 'Debugging'],
 };
@@ -21,7 +21,7 @@ export const SITE: SiteInfo = {
 export const HERO: HeroContent = {
   greeting: 'Hi, my name is',
   description:
-    'I engineer backend systems across the full .NET ecosystem — from sustaining battle-tested legacy code to architecting modern, high-performance solutions with clean architecture and an unwavering commitment to problem-solving.',
+    'I engineer backend systems across the full .NET ecosystem — from sustaining battle-tested legacy code to architecting modern, high-performance solutions with clean architecture and an unwavering commitment to problem-solving. My name is Abhay Kumar Mandal, and I build systems that perform under pressure.',
   primaryCta: 'View Projects',
   secondaryCta: 'Get In Touch',
 };

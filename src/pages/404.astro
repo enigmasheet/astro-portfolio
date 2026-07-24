@@ -4,7 +4,7 @@ const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 ---
 
-<PageLayout title="404" description="Page not found">
+<PageLayout title="Page Not Found" description="The page you are looking for does not exist. Browse Abhay Kumar Mandal's portfolio — projects, blog, and experience.">
   <section class="page-section min-h-[calc(100vh-16rem)] flex items-center">
     <div class="max-w-xl mx-auto px-4 text-center">
       <div class="text-8xl font-bold text-primary/20 mb-6" aria-hidden="true">404</div>
@@ -12,12 +12,32 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
       <p class="text-text-secondary mb-8 max-w-md mx-auto">
         The page you're looking for doesn't exist or has been moved.
       </p>
-      <a
-        href={base}
-        class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors no-underline"
-      >
-        Go Home
-      </a>
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <a
+          href={base}
+          class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors no-underline"
+        >
+          Home
+        </a>
+        <a
+          href={base + 'projects/'}
+          class="inline-flex items-center px-6 py-3 rounded-lg border border-border text-text-secondary font-medium hover:text-primary hover:border-primary transition-colors no-underline"
+        >
+          Projects
+        </a>
+        <a
+          href={base + 'blog/'}
+          class="inline-flex items-center px-6 py-3 rounded-lg border border-border text-text-secondary font-medium hover:text-primary hover:border-primary transition-colors no-underline"
+        >
+          Blog
+        </a>
+        <a
+          href={base + 'contact/'}
+          class="inline-flex items-center px-6 py-3 rounded-lg border border-border text-text-secondary font-medium hover:text-primary hover:border-primary transition-colors no-underline"
+        >
+          Contact
+        </a>
+      </div>
     </div>
   </section>
 </PageLayout>

@@ -6,8 +6,8 @@ export const PROJECTS: Project[] = [
     title: 'LaundryManager',
     description:
       'A multi-tenant laundry management SaaS built for Nepal. Order management, customer database, role-based access, reports & analytics, and SMS notifications — all in one dashboard. Replaces paper-based systems for laundry businesses.',
-    imageUrls: ['images/laundryManagement.png'],
-    githubLink: 'https://github.com/enigmasheet/Laundary-Management-System',
+    imageUrls: ['images/laundry-management.png'],
+    githubLink: 'https://github.com/enigmasheet/Laundry-Management-System',
     liveDemo: 'https://laundry.abhaymandal.com.np/',
     liveDemoActive: true,
     technologies: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Nginx', 'REST API', 'SMS'],
@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
     title: 'Sajilo Inventory',
     description:
       'A multitenant inventory management system for small shops. Track stock movements, define custom product attributes, get low-stock alerts, and manage everything from one dashboard with data isolation across shops.',
-    imageUrls: ['images/inventoryManagement.png'],
+    imageUrls: ['images/inventory-management.png'],
     githubLink: 'https://github.com/enigmasheet/inventoryMangement',
     liveDemo: 'https://inventory-mangement-pearl.vercel.app/',
     liveDemoActive: true,
@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     title: 'HMC Nepal Multi-App Portal',
     description:
       'A centralized multi-application portal for HMC Nepal, integrating multiple business services — including claims management, member services, and administrative tools — into a unified dashboard with role-based access and real-time analytics.',
-    imageUrls: ['images/hmcnepal.png'],
+    imageUrls: ['images/hmc-nepal.png'],
     githubLink: '',
     liveDemo: 'https://www.hmcnepal.com.np/',
     liveDemoActive: true,
@@ -78,7 +78,7 @@ export const PROJECTS: Project[] = [
     title: 'Hotel Booking API',
     description:
       'RESTful API for hotel booking management with authentication, authorization, and data validation to support scalable booking systems.',
-    imageUrls: ['images/hotel_booking.svg'],
+    imageUrls: ['images/hotel-booking.svg'],
     githubLink: 'https://github.com/enigmasheet/HotelBookingAPI',
     liveDemo: '',
     liveDemoActive: false,

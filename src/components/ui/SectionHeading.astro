@@ -4,8 +4,10 @@ export interface Props {
   title: string;
   description?: string;
   centered?: boolean;
+  as?: 'h1' | 'h2' | 'h3';
 }
-const { label, title, description, centered } = Astro.props;
+const { label, title, description, centered, as = 'h2' } = Astro.props;
+const Tag = as;
 ---
 
 <div class={`mb-14 ${centered ? 'text-center' : ''}`} data-reveal>
@@ -16,9 +18,9 @@ const { label, title, description, centered } = Astro.props;
       </span>
     )
   }
-  <h2 class="text-4xl md:text-5xl font-extrabold text-(--color-text) mb-4 leading-tight tracking-tight">
+  <Tag class="text-4xl md:text-5xl font-extrabold text-(--color-text) mb-4 leading-tight tracking-tight">
     {title}
-  </h2>
+  </Tag>
   {
     description && (
       <p class="text-text-secondary max-w-2xl text-lg md:text-xl font-medium leading-relaxed mx-auto">{description}</p>

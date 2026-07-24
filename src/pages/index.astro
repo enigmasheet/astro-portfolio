@@ -76,7 +76,16 @@ const blogPosts = (await getCollection('blog')).map((p) => ({
                       rel="noopener noreferrer"
                       class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline"
                     >
-                      <span class="material-symbols-outlined text-primary">verified</span>
+                      {cert.imageUrl ? (
+                        <img
+                          src={cert.imageUrl}
+                          alt={cert.title}
+                          class="w-10 h-10 rounded object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span class="material-symbols-outlined text-primary">verified</span>
+                      )}
                       <div>
                         <p class="text-sm font-medium text-(--color-text)">{cert.title}</p>
                         <p class="text-xs text-text-secondary">{cert.issuer}</p>

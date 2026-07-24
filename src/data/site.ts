@@ -90,10 +90,10 @@ export const ABOUT: AboutContent = {
   },
   achievements: [
     {
-      year: '2025',
-      title: 'AZ-900 Certified',
+      year: '2026',
+      title: 'Launched Multi-Tenant SaaS',
       description:
-        'Microsoft Azure Fundamentals certification — foundational knowledge of cloud services.',
+        'Built and deployed LaundryManager, a production-grade multi-tenant SaaS serving laundry businesses across Nepal.',
     },
     {
       year: '2025',
@@ -109,10 +109,10 @@ export const ABOUT: AboutContent = {
     },
   ],
   stats: [
-    { label: 'Projects Built', target: 5, suffix: '+' },
+    { label: 'Projects Built', target: 7, suffix: '+' },
     { label: 'Years of Experience', target: 3, suffix: '+' },
     { label: 'Blog Posts', target: 2, suffix: '+' },
-    { label: 'Certification', target: 1, suffix: '' },
+    { label: 'Certifications', target: 6, suffix: '+' },
   ],
   quotes: [
     'The best code is the code you don\'t have to write — but when you do, make it count.',

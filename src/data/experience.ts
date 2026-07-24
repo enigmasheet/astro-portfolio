@@ -5,7 +5,7 @@ export const EXPERIENCES: Experience[] = [
     title: 'Software Developer',
     company: 'Codebee Nepal Pvt Ltd',
     description:
-      'Developing and maintaining Logistics Management System, building applications using C#, ASP.NET Core, and modern frontend frameworks. Responsible for RESTful API design, SQL Server and Entity Framework integration, and optimizing performance for scalability and security.',
+      'Developing and maintaining production-grade systems using C#, ASP.NET Core, Entity Framework, and SQL Server. Building RESTful APIs and modern full-stack applications with .NET ecosystem — from legacy framework maintenance to modern .NET architecture. Focused on performance optimization, clean architecture, and delivering scalable, secure solutions.',
     link: '',
     date: '2025-03-01',
     endDate: null,

@@ -6,27 +6,6 @@
   <span class="material-symbols-outlined text-2xl light-icon theme-icon">dark_mode</span>
 </button>
 
-<script is:inline>
-  (function () {
-    let theme = 'dark';
-    try {
-      theme = localStorage.getItem('theme') || 'dark';
-    } catch {
-      theme = 'dark';
-    }
-    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
-      if (btn.dataset.toggleReady) return;
-      const darkIcon = btn.querySelector('.dark-icon');
-      const lightIcon = btn.querySelector('.light-icon');
-      if (theme === 'dark') {
-        if (lightIcon) lightIcon.style.display = 'none';
-      } else {
-        if (darkIcon) darkIcon.style.display = 'none';
-      }
-    });
-  })();
-</script>
-
 <script>
   import { toggleTheme, getStoredTheme } from '../../styles/theme-toggle';
 
@@ -35,25 +14,11 @@
     btns.forEach(function (btn) {
       if (btn.dataset.toggleInit) return;
       btn.dataset.toggleInit = 'true';
-      function updateIcons(theme: string) {
-        const darkIcon = btn.querySelector<HTMLSpanElement>('.dark-icon');
-        const lightIcon = btn.querySelector<HTMLSpanElement>('.light-icon');
-        if (!darkIcon || !lightIcon) return;
-        if (theme === 'dark') {
-          darkIcon.style.display = '';
-          lightIcon.style.display = 'none';
-        } else {
-          darkIcon.style.display = 'none';
-          lightIcon.style.display = '';
-        }
-      }
-      updateIcons(getStoredTheme());
       btn.addEventListener('click', function () {
-        updateIcons(toggleTheme());
+        const nextTheme = toggleTheme();
         const icon = btn.querySelector<HTMLSpanElement>(
-          '.theme-icon:not([style*="display: none"])',
+          nextTheme === 'dark' ? '.dark-icon' : '.light-icon',
         );
-        // Use optional chaining to safely handle possible null
         icon?.classList.add('theme-spin');
         setTimeout(function () {
           icon?.classList.remove('theme-spin');

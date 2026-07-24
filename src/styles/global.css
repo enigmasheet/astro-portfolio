@@ -164,3 +164,7 @@ html.astro-fallback-loading::before {
 .blog-item {
   transition: opacity 0.2s;
 }
+
+/* Theme toggle icon visibility — no JS needed, CSS reacts to data-theme */
+[data-theme="dark"] .light-icon { display: none; }
+[data-theme="light"] .dark-icon { display: none; }

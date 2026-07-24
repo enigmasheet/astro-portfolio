@@ -15,7 +15,7 @@ const { title, description, ogImage, ogType, canonical } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.fullName} — ${SITE.shortTitle}`;
-const metaDesc = description || SITE.shortTitle;
+const metaDesc = description || SITE.description;
 const ogImg = ogImage || `${SITE_URL}${OG_IMAGE_PATH}`;
 const canonicalUrl = canonical || SITE_URL;
 ---

@@ -8,6 +8,13 @@ const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const imgSrc = hasImage ? base + project.imageUrls[0] : '';
+
+function getStatus(): { label: string; color: string } {
+  if (project.liveDemoActive && project.liveDemo) return { label: 'Live', color: 'text-[var(--success)] bg-[var(--success)]/10' };
+  if (!project.liveDemoActive && project.liveDemo) return { label: 'Offline', color: 'text-[var(--danger)] bg-[var(--danger)]/10' };
+  return { label: 'Source', color: 'text-[var(--warning)] bg-[var(--warning)]/10' };
+}
+const status = getStatus();
 ---
 
 <article
@@ -17,6 +24,7 @@ const imgSrc = hasImage ? base + project.imageUrls[0] : '';
   {
     imgSrc && (
       <div class="relative aspect-video overflow-hidden bg-bg">
+        <div class="absolute inset-0 bg-gradient-to-t from-[var(--accent)]/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
         <img
           src={imgSrc}
           alt={project.title}
@@ -25,6 +33,9 @@ const imgSrc = hasImage ? base + project.imageUrls[0] : '';
           onload="this.classList.remove('blur-sm')"
           onerror="this.style.display='none'"
         />
+        <span class="absolute top-2 right-2 z-10 px-2 py-0.5 text-xs font-semibold rounded-full ${status.color} backdrop-blur-sm">
+          {status.label}
+        </span>
       </div>
     )
   }
@@ -53,6 +64,7 @@ const imgSrc = hasImage ? base + project.imageUrls[0] : '';
       <a
         href={base + 'projects/' + project.slug}
         class="text-sm font-medium text-primary hover:underline py-2"
+        aria-label={`View ${project.title} details`}
       >
         Details →
       </a>
@@ -63,6 +75,7 @@ const imgSrc = hasImage ? base + project.imageUrls[0] : '';
             target="_blank"
             rel="noopener noreferrer"
             class="text-sm text-text-secondary hover:text-primary transition-colors py-2"
+            aria-label={`${project.title} source code on GitHub`}
           >
             Source
           </a>
@@ -75,6 +88,7 @@ const imgSrc = hasImage ? base + project.imageUrls[0] : '';
             target="_blank"
             rel="noopener noreferrer"
             class="text-sm text-text-secondary hover:text-primary transition-colors py-2"
+            aria-label={`${project.title} live demo`}
           >
             Live Demo
           </a>
@@ -82,7 +96,7 @@ const imgSrc = hasImage ? base + project.imageUrls[0] : '';
       }
       {
         !project.liveDemoActive && (
-          <span class="text-sm text-text-secondary opacity-50 py-2">Offline</span>
+          <span class="text-sm ${status.color} py-2">{status.label}</span>
         )
       }
     </div>

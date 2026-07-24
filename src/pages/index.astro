@@ -23,7 +23,7 @@ const blogPosts = (await getCollection('blog')).map((p) => ({
 }));
 ---
 
-<PageLayout title={SITE.fullName} description={SITE.shortTitle}>
+<PageLayout title={SITE.fullName} description={SITE.description}>
   <Hero />
 
   <section id="about" class="page-section bg-surface transition-colors duration-300">
@@ -42,13 +42,13 @@ const blogPosts = (await getCollection('blog')).map((p) => ({
           class="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline group"
         >
           More about me
-          <span class="group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+          <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
         </a>
       </div>
 
       <div class="mt-16 text-center" data-reveal>
         <blockquote
-          class="text-xl md:text-2xl font-medium text-(--color-text) italic max-w-2xl mx-auto"
+          class="text-xl md:text-2xl font-medium text-(--color-text) italic max-w-2xl mx-auto pl-6 border-l-4 border-[var(--accent)] text-left"
           id="rotating-quote"
           data-quotes={JSON.stringify(ABOUT.quotes)}
         >
@@ -96,43 +96,10 @@ const blogPosts = (await getCollection('blog')).map((p) => ({
       <div class="text-center mt-8" data-reveal>
         <a
           href={base + 'projects/'}
-          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline"
+          class="inline-flex items-center gap-1 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline group"
         >
-          View All Projects →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonials" class="page-section bg-surface transition-colors duration-300">
-    <div class="max-w-4xl mx-auto px-4">
-      <SectionHeading
-        label={SECTIONS.testimonials.label}
-        title={SECTIONS.testimonials.title}
-        description={SECTIONS.testimonials.description}
-        centered
-      />
-      <Testimonials />
-    </div>
-  </section>
-
-  <section id="projects" class="page-section">
-    <div class="max-w-6xl mx-auto px-4">
-      <SectionHeading
-        label={SECTIONS.projects.label}
-        title={SECTIONS.projects.title}
-        description={SECTIONS.projects.description}
-        centered
-      />
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PROJECTS.slice(0, 3).map((p) => <ProjectCard project={p} />)}
-      </div>
-      <div class="text-center mt-8" data-reveal>
-        <a
-          href={base + 'projects/'}
-          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline"
-        >
-          View All Projects →
+          View All Projects
+          <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
         </a>
       </div>
     </div>
@@ -164,9 +131,10 @@ const blogPosts = (await getCollection('blog')).map((p) => ({
       <div class="text-center mt-8" data-reveal>
         <a
           href={base + 'blog/'}
-          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline"
+          class="inline-flex items-center gap-1 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline group"
         >
-          View All Posts →
+          View All Posts
+          <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
         </a>
       </div>
     </div>

@@ -2,38 +2,109 @@
 import { TESTIMONIALS } from '../../data/testimonials';
 ---
 
-<div class="grid md:grid-cols-2 gap-6" data-reveal>
+<div class="relative max-w-2xl mx-auto" data-reveal data-testimonials-carousel>
   {
-    TESTIMONIALS.map((t) => (
-      <blockquote class="bg-surface border border-border rounded-xl p-6 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100">
-        <div
-          class="text-4xl text-primary/20 absolute top-4 left-4 leading-none select-none"
-          aria-hidden="true"
-        >
-          "
-        </div>
-        <p class="text-sm text-text-secondary leading-relaxed relative z-10 mb-4 italic">
-          "{t.text}"
-        </p>
-        <footer>
-          {t.link ? (
-            <a
-              href={t.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-sm font-semibold text-(--color-text) hover:text-primary no-underline transition-colors"
-            >
-              {t.name}
-            </a>
-          ) : (
-            <p class="text-sm font-semibold text-(--color-text)">{t.name}</p>
-          )}
-          <p class="text-xs text-text-secondary">{t.role}</p>
-          {t.date && t.relationship && (
-            <p class="text-xs text-text-secondary/60 mt-1">{t.date} &middot; {t.relationship}</p>
-          )}
-        </footer>
-      </blockquote>
+    TESTIMONIALS.map((t, i) => (
+      <div
+        data-slide={i}
+        class="transition-all duration-500 ease-in-out absolute inset-0 opacity-0 pointer-events-none"
+        class:list={{ 'opacity-100 pointer-events-auto relative': i === 0 }}
+      >
+        <blockquote class="bg-surface border border-border rounded-xl p-8 text-center relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary">
+          <div class="text-5xl text-primary/20 leading-none select-none mb-4" aria-hidden="true">&ldquo;</div>
+          <p class="text-base md:text-lg text-text-secondary leading-relaxed mb-6 italic">
+            &ldquo;{t.text}&rdquo;
+          </p>
+          <footer>
+            {t.link ? (
+              <a
+                href={t.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm font-semibold text-(--color-text) hover:text-primary no-underline transition-colors"
+              >
+                {t.name}
+              </a>
+            ) : (
+              <p class="text-sm font-semibold text-(--color-text)">{t.name}</p>
+            )}
+            <p class="text-xs text-text-secondary mt-0.5">{t.role}</p>
+            {t.date && t.relationship && (
+              <p class="text-xs text-text-secondary/60 mt-1">{t.date} &middot; {t.relationship}</p>
+            )}
+          </footer>
+        </blockquote>
+      </div>
     ))
   }
+
+  <div class="flex justify-center gap-2 mt-[calc(100%+1.5rem)]">
+    {
+      TESTIMONIALS.map((_, i) => (
+        <button
+          data-dot={i}
+          class="w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer"
+          class:list={{
+            'bg-primary w-6': i === 0,
+            'bg-border hover:bg-primary/50': i !== 0,
+          }}
+          aria-label={`Go to testimonial ${i + 1}`}
+        />
+      ))
+    }
+  </div>
 </div>
+
+<script>
+  (function () {
+    const container = document.querySelector<HTMLElement>('[data-testimonials-carousel]');
+    if (!container) return;
+
+    const slides = container.querySelectorAll<HTMLElement>('[data-slide]');
+    const dots = container.querySelectorAll<HTMLElement>('[data-dot]');
+    if (!slides.length) return;
+
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    function show(index: number) {
+      slides.forEach((s, i) => {
+        s.style.position = i === index ? 'relative' : 'absolute';
+        s.style.opacity = i === index ? '1' : '0';
+        s.style.pointerEvents = i === index ? 'auto' : 'none';
+      });
+      dots.forEach((d, i) => {
+        if (i === index) {
+          d.classList.add('bg-primary', 'w-6');
+          d.classList.remove('bg-border', 'hover:bg-primary/50');
+        } else {
+          d.classList.remove('bg-primary', 'w-6');
+          d.classList.add('bg-border', 'hover:bg-primary/50');
+        }
+      });
+      current = index;
+    }
+
+    function next() {
+      show((current + 1) % slides.length);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(next, 4000);
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', function () {
+        const idx = Number(this.getAttribute('data-dot'));
+        show(idx);
+        resetTimer();
+      });
+    });
+
+    container.addEventListener('mouseenter', () => clearInterval(timer));
+    container.addEventListener('mouseleave', resetTimer);
+
+    timer = setInterval(next, 4000);
+  })();
+</script>

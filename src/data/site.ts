@@ -12,6 +12,8 @@ export const SITE: SiteInfo = {
   fullName: 'Abhay Kumar Mandal',
   title: '.NET Backend Developer',
   shortTitle: '.NET Backend Developer',
+  description:
+    '.NET Backend Developer specializing in ASP.NET Core, C#, and clean architecture. I build production-grade backend systems from legacy migrations to modern microservices.',
   jobTitle: 'Backend Developer',
   knowsAbout: ['.NET Framework', '.NET 6+', 'ASP.NET Core', 'C#', 'Legacy Migration', 'Debugging'],
 };
@@ -19,7 +21,7 @@ export const SITE: SiteInfo = {
 export const HERO: HeroContent = {
   greeting: 'Hi, my name is',
   description:
-    'I build robust backend systems across the full .NET ecosystem — from maintaining proven legacy code to architecting modern solutions with clean architecture and a relentless focus on problem-solving.',
+    'I engineer backend systems across the full .NET ecosystem — from sustaining battle-tested legacy code to architecting modern, high-performance solutions with clean architecture and an unwavering commitment to problem-solving.',
   primaryCta: 'View Projects',
   secondaryCta: 'Get In Touch',
 };
@@ -29,37 +31,37 @@ export const SECTIONS: Record<string, SectionHeader> = {
     label: 'Overview',
     title: 'What I Do',
     description:
-      'Backend development across the full .NET ecosystem — from legacy frameworks (.NET Framework, ASP.NET MVC) to modern platforms (.NET 6+, ASP.NET Core, Blazor). I solve complex problems, debug deep issues, and build systems that stand the test of time.',
+      'Full-spectrum .NET backend engineering — from maintaining legacy enterprise systems (.NET Framework, ASP.NET MVC) to architecting modern, scalable platforms (.NET 8+, ASP.NET Core, Blazor). I solve complex problems at the system level and build infrastructure that performs under pressure.',
   },
   about: {
     label: 'About',
     title: 'About Me',
     description:
-      'A .NET backend developer who bridges legacy and modern, solving complex problems with clean architecture and a passion for continuous learning.',
+      'A .NET backend engineer who bridges legacy and modern architectures — solving complex problems with clean design, production-grade code, and an obsession for continuous mastery.',
   },
   experience: {
     label: 'Career',
     title: 'My Experience',
     description:
-      "Places I've worked, teams I've collaborated with, and production-grade systems I've built from the ground up.",
+      "The teams I've led, the systems I've architected, and the production environments I've strengthened — from legacy migrations to greenfield platforms.",
   },
   projects: {
     label: 'Work',
     title: "Projects I've Built",
     description:
-      "A selection of applications, platforms, and tools I've designed, built, and shipped — from concept to production deployment.",
+      'Real-world backend systems, APIs, and platforms I have designed, built, and shipped — from database schema to deployment pipeline.',
   },
   blog: {
     label: 'Blog',
     title: 'Articles & Thoughts',
     description:
-      'Writing about backend development, modern web technologies like Blazor and Next.js, cloud architecture on Azure, and building things that matter.',
+      'Deep dives into backend architecture, .NET internals, cloud infrastructure, system design, and the engineering decisions that separate good systems from great ones.',
   },
   contact: {
     label: 'Contact',
     title: 'Get In Touch',
     description:
-      "Have a question, a project idea, or just want to say hello? I'm always open to discussing new opportunities and collaborations.",
+      'Have a backend challenge, a system to build, or an idea worth engineering? Let\'s talk.',
   },
   github: {
     label: 'GitHub',
@@ -72,15 +74,15 @@ export const SECTIONS: Record<string, SectionHeader> = {
     label: 'Kind Words',
     title: 'What People Say',
     description:
-      "Feedback and recommendations from colleagues, managers, and collaborators I've had the pleasure of working with.",
+      'What colleagues, managers, and collaborators say about working with me — the problems we solved and the systems we built together.',
   },
 };
 
 export const ABOUT: AboutContent = {
   paragraphs: [
-    "I'm a backend developer specializing in .NET — working across both legacy frameworks and modern platforms. I thrive on problem-solving and debugging complex issues, approaching each challenge as an opportunity to build more robust systems. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
-    'With experience spanning the full .NET ecosystem, I bridge the gap between maintaining proven legacy code and implementing cutting-edge solutions. What excites me most is continuous learning: staying ahead of industry trends while deepening my technical expertise.',
-    'Based in Kathmandu, I\'m always open to connecting with fellow developers and exploring new opportunities in backend development. Whether it\'s debugging a thorny legacy issue or architecting a new microservice from scratch, I bring curiosity, persistence, and craftsmanship to every line of code.',
+    "I'm a backend engineer specializing in .NET — spanning legacy frameworks and modern platforms with equal rigor. I thrive on deep problem-solving and debugging complex system-level issues, approaching each challenge as an opportunity to build more resilient infrastructure. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
+    'With experience across the full .NET ecosystem, I bridge the gap between maintaining battle-tested legacy code and architecting modern, high-performance solutions. What drives me is continuous mastery: staying ahead of industry evolution while deepening my technical expertise in backend systems, API design, and clean architecture.',
+    'Based in Kathmandu, I\'m always open to connecting with fellow engineers and exploring opportunities where I can architect, build, and ship. Whether it\'s debugging a thorny legacy migration or designing a new microservice from scratch, I bring curiosity, persistence, and craftsmanship to every line of code.',
   ],
   blockTitles: {
     skills: 'Skills & Technologies',
@@ -141,4 +143,4 @@ export const RESUME: ResumeContent = {
 };
 
 export const CONTACT_INTRO =
-  "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Whether you have a freelance gig, a full-time role, or just want to connect and talk about technology and product development, feel free to reach out!";
+  "Have a project to build, a system to scale, or a team that needs a strong backend engineer? I'm always open to engineering challenges, freelance work, or a conversation about technology and product development. Let's build something.";

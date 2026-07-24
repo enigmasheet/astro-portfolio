@@ -3,6 +3,7 @@ export interface SiteInfo {
   fullName: string;
   title: string;
   shortTitle: string;
+  description: string;
   jobTitle: string;
   knowsAbout: string[];
 }

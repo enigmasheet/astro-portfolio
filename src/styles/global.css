@@ -13,8 +13,17 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--accent);
+  border-radius: 2px;
+}
+
+/* Form input focus glow */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--accent);
+  border-color: var(--accent);
 }
 
 ::selection {
@@ -156,7 +165,8 @@ html.astro-fallback-loading::before {
 .card-hover:hover {
   box-shadow:
     0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+    0 4px 6px -4px rgb(0 0 0 / 0.1),
+    inset 0 0 0 1px var(--accent);
   translate: 0 -0.25rem;
 }
 
@@ -168,3 +178,14 @@ html.astro-fallback-loading::before {
 /* Theme toggle icon visibility — no JS needed, CSS reacts to data-theme */
 [data-theme="dark"] .light-icon { display: none; }
 [data-theme="light"] .dark-icon { display: none; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}

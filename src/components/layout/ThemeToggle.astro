@@ -28,12 +28,5 @@
   }
 
   initToggles();
-  const w = window as Window & { __themeToggleMO?: MutationObserver };
-  if (!w.__themeToggleMO) {
-    w.__themeToggleMO = new MutationObserver(initToggles);
-    w.__themeToggleMO.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-  }
+  document.addEventListener('astro:after-swap', initToggles);
 </script>

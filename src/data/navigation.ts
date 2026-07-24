@@ -5,10 +5,10 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Home', href: base },
-  { label: 'About', href: `${base}about` },
-  { label: 'Experience', href: `${base}experience` },
-  { label: 'Projects', href: `${base}projects` },
-  { label: 'Blog', href: `${base}blog` },
-  { label: 'Resume', href: `${base}resume` },
-  { label: 'Contact', href: `${base}contact` },
+  { label: 'About', href: `${base}about/` },
+  { label: 'Experience', href: `${base}experience/` },
+  { label: 'Projects', href: `${base}projects/` },
+  { label: 'Blog', href: `${base}blog/` },
+  { label: 'Resume', href: `${base}resume/` },
+  { label: 'Contact', href: `${base}contact/` },
 ];

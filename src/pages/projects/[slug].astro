@@ -18,9 +18,9 @@ if (!project) {
 }
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const breadcrumbItems = [
-  { name: 'Home', url: SITE_URL },
-  { name: 'Projects', url: `${SITE_URL}/projects` },
-  { name: project.title, url: `${SITE_URL}/projects/${project.slug}` },
+  { name: 'Home', url: SITE_URL + '/' },
+  { name: 'Projects', url: `${SITE_URL}/projects/` },
+  { name: project.title, url: `${SITE_URL}/projects/${project.slug}/` },
 ];
 ---
 
@@ -65,7 +65,7 @@ const breadcrumbItems = [
       </nav>
 
       <a
-        href={base + 'projects'}
+        href={base + 'projects/'}
         class="inline-flex items-center text-sm text-text-secondary hover:text-primary transition-colors mb-8 no-underline"
       >
         ← Back to Projects

@@ -26,11 +26,11 @@ const postDate = date.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
-const shareUrl = `${SITE_URL}/blog/${post.id}`;
+const shareUrl = `${SITE_URL}/blog/${post.id}/`;
 const shareText = `${title} by Abhay Kumar Mandal`;
 const breadcrumbItems = [
-  { name: 'Home', url: SITE_URL },
-  { name: 'Blog', url: `${SITE_URL}/blog` },
+  { name: 'Home', url: SITE_URL + '/' },
+  { name: 'Blog', url: `${SITE_URL}/blog/` },
   { name: title, url: shareUrl },
 ];
 ---
@@ -83,7 +83,7 @@ const breadcrumbItems = [
       </nav>
 
       <a
-        href={base + 'blog'}
+        href={base + 'blog/'}
         class="inline-flex items-center text-sm text-text-secondary hover:text-primary transition-colors mb-8 no-underline"
       >
         ← Back to Blog

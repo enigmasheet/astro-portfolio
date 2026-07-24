@@ -1,15 +1,19 @@
+import { getCollection } from 'astro:content';
 import { SITE_URL } from '../data/social';
 import { SITE } from '../data/site';
-import { BLOG_POSTS } from '../data/blog';
 
-const posts = BLOG_POSTS.map((post) => ({
-  title: post.title,
-  description: post.summary,
-  link: `${SITE_URL}/blog/${post.slug}`,
-  pubDate: new Date(post.date),
-})).sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+export async function GET() {
+  const entries = await getCollection('blog');
+  const posts = entries
+    .map((post) => ({
+      title: post.data.title,
+      description: post.data.summary,
+      link: `${SITE_URL}/blog/${post.id}/`,
+      pubDate: post.data.date,
+    }))
+    .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 
-const rss = `<?xml version="1.0" encoding="UTF-8"?>
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>${SITE.name} — Blog</title>
@@ -32,7 +36,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
   </channel>
 </rss>`;
 
-export const GET = () =>
-  new Response(rss, {
+  return new Response(rss, {
     headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' },
   });
+}

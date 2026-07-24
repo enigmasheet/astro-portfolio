@@ -15,17 +15,20 @@ if (toggle && drawer && backdrop) {
     backdropEl.classList.add('mobile-drawer-open');
     toggleEl.setAttribute('aria-expanded', 'true');
   }
-  toggleEl.addEventListener('click', function () {
-    if (drawerEl.classList.contains('mobile-drawer-open')) {
-      closeDrawer();
-    } else {
-      openDrawer();
-    }
-  });
-  backdropEl.addEventListener('click', closeDrawer);
-  drawerEl.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', closeDrawer);
-  });
+  if (!document.documentElement.dataset.navReady) {
+    document.documentElement.dataset.navReady = '';
+    toggleEl.addEventListener('click', function () {
+      if (drawerEl.classList.contains('mobile-drawer-open')) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+    backdropEl.addEventListener('click', closeDrawer);
+    drawerEl.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeDrawer);
+    });
+  }
 }
 
 const navLinks = document.querySelectorAll('.nav-link');

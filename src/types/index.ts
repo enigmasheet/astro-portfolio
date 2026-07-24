@@ -43,7 +43,7 @@ export interface AboutContent {
   };
   achievements: Achievement[];
   stats: StatItem[];
-  quote: string;
+  quotes: string[];
 }
 
 export interface EducationItem {
@@ -96,12 +96,17 @@ export interface Certification {
   title: string;
   issuer: string;
   link: string;
+  imageUrl?: string;
+  date?: string;
 }
 
 export interface Testimonial {
   name: string;
   role: string;
   text: string;
+  link?: string;
+  date?: string;
+  relationship?: string;
 }
 
 export interface NavLink {

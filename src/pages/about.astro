@@ -42,10 +42,19 @@ import { CERTIFICATIONS } from '../data/certifications';
                       rel="noopener noreferrer"
                       class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline"
                     >
-                      <span class="material-symbols-outlined text-primary">verified</span>
+                      {cert.imageUrl ? (
+                        <img
+                          src={cert.imageUrl}
+                          alt={cert.title}
+                          class="w-10 h-10 rounded object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span class="material-symbols-outlined text-primary">verified</span>
+                      )}
                       <div>
                         <p class="text-sm font-medium text-(--color-text)">{cert.title}</p>
-                        <p class="text-xs text-text-secondary">{cert.issuer}</p>
+                        <p class="text-xs text-text-secondary">{cert.issuer}{cert.date ? ` · ${cert.date}` : ''}</p>
                       </div>
                     </a>
                   ))}
@@ -95,8 +104,13 @@ import { CERTIFICATIONS } from '../data/certifications';
   </section>
   <section class="page-section bg-surface transition-colors duration-300">
     <div class="max-w-3xl mx-auto px-4 text-center">
-      <blockquote class="text-xl md:text-2xl font-medium text-(--color-text) italic" data-reveal>
-        "{ABOUT.quote}"
+      <blockquote
+        class="text-xl md:text-2xl font-medium text-(--color-text) italic"
+        data-reveal
+        id="rotating-quote"
+        data-quotes={JSON.stringify(ABOUT.quotes)}
+      >
+        &ldquo;{ABOUT.quotes[0]}&rdquo;
       </blockquote>
     </div>
   </section>

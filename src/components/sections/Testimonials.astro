@@ -16,8 +16,22 @@ import { TESTIMONIALS } from '../../data/testimonials';
           "{t.text}"
         </p>
         <footer>
-          <p class="text-sm font-semibold text-(--color-text)">{t.name}</p>
+          {t.link ? (
+            <a
+              href={t.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-semibold text-(--color-text) hover:text-primary no-underline transition-colors"
+            >
+              {t.name}
+            </a>
+          ) : (
+            <p class="text-sm font-semibold text-(--color-text)">{t.name}</p>
+          )}
           <p class="text-xs text-text-secondary">{t.role}</p>
+          {t.date && t.relationship && (
+            <p class="text-xs text-text-secondary/60 mt-1">{t.date} &middot; {t.relationship}</p>
+          )}
         </footer>
       </blockquote>
     ))

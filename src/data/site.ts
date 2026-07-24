@@ -10,16 +10,16 @@ import type {
 export const SITE: SiteInfo = {
   name: 'Abhay',
   fullName: 'Abhay Kumar Mandal',
-  title: 'Backend Software Developer & Product-Oriented Technologist',
-  shortTitle: 'Backend Software Developer',
-  jobTitle: 'Web Developer',
-  knowsAbout: ['JavaScript', 'Next.js', 'React', 'Node.js', '.NET', 'Azure'],
+  title: '.NET Backend Developer',
+  shortTitle: '.NET Backend Developer',
+  jobTitle: 'Backend Developer',
+  knowsAbout: ['.NET Framework', '.NET 6+', 'ASP.NET Core', 'C#', 'Legacy Migration', 'Debugging'],
 };
 
 export const HERO: HeroContent = {
   greeting: 'Hi, my name is',
   description:
-    'I build scalable backend systems, RESTful APIs, and modern full-stack web applications — blending clean architecture with thoughtful product design and a strong focus on developer experience.',
+    'I build robust backend systems across the full .NET ecosystem — from maintaining proven legacy code to architecting modern solutions with clean architecture and a relentless focus on problem-solving.',
   primaryCta: 'View Projects',
   secondaryCta: 'Get In Touch',
 };
@@ -29,13 +29,13 @@ export const SECTIONS: Record<string, SectionHeader> = {
     label: 'Overview',
     title: 'What I Do',
     description:
-      'Modern backend development with a product mindset. I design and build scalable server-side applications, RESTful APIs, and full-stack web solutions using JavaScript, Next.js, .NET, and Azure cloud services.',
+      'Backend development across the full .NET ecosystem — from legacy frameworks (.NET Framework, ASP.NET MVC) to modern platforms (.NET 6+, ASP.NET Core, Blazor). I solve complex problems, debug deep issues, and build systems that stand the test of time.',
   },
   about: {
     label: 'About',
     title: 'About Me',
     description:
-      'A dedicated backend developer with a passion for clean architecture, thoughtful product design, and building software that solves real-world problems.',
+      'A .NET backend developer who bridges legacy and modern, solving complex problems with clean architecture and a passion for continuous learning.',
   },
   experience: {
     label: 'Career',
@@ -78,12 +78,9 @@ export const SECTIONS: Record<string, SectionHeader> = {
 
 export const ABOUT: AboutContent = {
   paragraphs: [
-    "I am a dedicated Backend Software Developer with a strong foundation in modern application development using JavaScript, Next.js, and cloud technologies. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
-    'My journey into software development stems from a deep-rooted interest in technology and a passion for solving meaningful, real-world problems. Over the years, I have developed and contributed to applications that are scalable, maintainable, and user-centric.',
-    'In addition to my technical background, I bring experience in software product management, where I collaborate with cross-functional teams to lead the planning, development, and delivery of software products. This dual perspective strengthens my ability to align technical implementation with strategic business goals.',
-    'Outside of work, I enjoy activities that challenge my creativity and focus — including sight seeing, casual gaming, and swimming. These hobbies contribute to my problem-solving mindset and help me stay balanced and motivated.',
-    'My technical toolkit spans the JavaScript and .NET ecosystems. I work extensively with Next.js and React for front-end development, Node.js and ASP.NET Core for building robust APIs and backend services, and Azure for cloud infrastructure, deployment, and CI/CD. I also have hands-on experience with Blazor WebAssembly, TypeScript, and PostgreSQL.',
-    "I believe that great software is built at the intersection of technical excellence and clear communication. Whether I'm architecting a microservice, reviewing a pull request, or planning a sprint with stakeholders, I strive to bring clarity, collaboration, and craftsmanship to every stage of the development lifecycle.",
+    "I'm a backend developer specializing in .NET — working across both legacy frameworks and modern platforms. I thrive on problem-solving and debugging complex issues, approaching each challenge as an opportunity to build more robust systems. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
+    'With experience spanning the full .NET ecosystem, I bridge the gap between maintaining proven legacy code and implementing cutting-edge solutions. What excites me most is continuous learning: staying ahead of industry trends while deepening my technical expertise.',
+    'Based in Kathmandu, I\'m always open to connecting with fellow developers and exploring new opportunities in backend development. Whether it\'s debugging a thorny legacy issue or architecting a new microservice from scratch, I bring curiosity, persistence, and craftsmanship to every line of code.',
   ],
   blockTitles: {
     skills: 'Skills & Technologies',
@@ -117,7 +114,38 @@ export const ABOUT: AboutContent = {
     { label: 'Blog Posts', target: 2, suffix: '+' },
     { label: 'Certification', target: 1, suffix: '' },
   ],
-  quote: 'Code should not only work — it should inspire.',
+  quotes: [
+    'The best code is the code you don\'t have to write — but when you do, make it count.',
+    'Debugging is not about finding what\'s broken. It\'s about understanding what\'s working.',
+    'Legacy code isn\'t a burden. It\'s a history lesson written in a language you understand.',
+    'Great software is built at the intersection of technical excellence and clear communication.',
+    'A robust system isn\'t one that never fails — it\'s one that fails gracefully.',
+    'Learning never exhausts the mind. In software, it\'s the only way to keep up.',
+    'Bridging legacy and modern isn\'t just about code — it\'s about understanding how systems evolve.',
+    'Every bug you fix teaches you more about the system than any feature you build.',
+    'Clean architecture isn\'t about perfection. It\'s about making future you grateful.',
+    'The .NET ecosystem is vast — mastery comes from knowing both where the framework has been and where it\'s going.',
+    'Software development is a continuous loop of learning, building, debugging, and improving.',
+    'Your code should tell a story — one that the next developer can actually follow.',
+    'Refactoring isn\'t rewriting history. It\'s making the future easier to navigate.',
+    'The most valuable skill in tech isn\'t a programming language — it\'s the ability to learn the next one.',
+    'A well-architected system is like a well-designed building: invisible infrastructure that just works.',
+    'Courage is not knowing when to write code. It\'s knowing when to refactor it.',
+    'Every great developer you know got there by solving problems they didn\'t understand at first.',
+    'The difference between a good system and a great one is how it handles the unexpected.',
+    'Code should not only work — it should inspire.',
+    'The best way to predict the future of software is to build it, one clean commit at a time.',
+    'Great problem solvers don\'t just fix bugs — they understand why they existed in the first place.',
+    'Technology changes, but the principles of clean, maintainable code are timeless.',
+    'Mastering both legacy and modern frameworks isn\'t a contradiction. It\'s a superpower.',
+    'The best investment you can make in your career is the time you spend learning something new.',
+    'There\'s no such thing as done in software. There\'s only deployed and improving.',
+    'A debugger is the closest thing to a time machine that software developers have.',
+    'Building robust systems requires patience, persistence, and a willingness to question your own assumptions.',
+    'Your reputation is built on the problems you solve, not the technologies you use.',
+    'The gap between a working solution and an elegant one is where craftsmanship lives.',
+    'Stay curious. The moment you stop learning is the moment your code starts aging.',
+  ],
 };
 
 export const STATS: StatItem[] = ABOUT.stats;

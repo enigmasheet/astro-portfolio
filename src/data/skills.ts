@@ -8,7 +8,16 @@ export const SKILLS: SkillCategory[] = [
   },
   {
     category: 'Backend',
-    skills: ['.NET', 'ASP.NET Core', 'C#', 'REST APIs', 'MVC', 'Web API'],
+    skills: [
+      '.NET Framework',
+      '.NET 6+',
+      'ASP.NET Core',
+      'C#',
+      'ASP.NET MVC',
+      'REST APIs',
+      'Legacy Migration',
+      'ADO.NET',
+    ],
     level: 92,
   },
   {
@@ -23,7 +32,7 @@ export const SKILLS: SkillCategory[] = [
   },
   {
     category: 'Tools & Practices',
-    skills: ['Git', 'Clean Architecture', 'Product Management', 'Agile'],
+    skills: ['Git', 'Clean Architecture', 'Debugging', 'Refactoring', 'Agile'],
     level: 88,
   },
 ];

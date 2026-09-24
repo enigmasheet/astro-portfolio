@@ -1,204 +1,241 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/sections/Hero.astro';
-import Stats from '../components/sections/Stats.astro';
+import Skills from '../components/sections/Skills.astro';
 import ExperienceTimeline from '../components/sections/ExperienceTimeline.astro';
-import Testimonials from '../components/sections/Testimonials.astro';
+import FeaturedProject from '../components/sections/FeaturedProject.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
-import ProjectCard from '../components/ui/ProjectCard.astro';
 import BlogCard from '../components/ui/BlogCard.astro';
 import { SECTIONS, ABOUT, SITE } from '../data/site';
 import { EXPERIENCES } from '../data/experience';
 import { PROJECTS } from '../data/projects';
+import { EMAIL } from '../data/social';
 import { getCollection } from 'astro:content';
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
-const blogPosts = (await getCollection('blog')).map((p) => ({
-  slug: p.id,
-  title: p.data.title,
-  date: p.data.date.toISOString().split('T')[0],
-  summary: p.data.summary,
-  tags: p.data.tags,
-}));
+const blogPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2)
+  .map((p) => ({
+    slug: p.id,
+    title: p.data.title,
+    date: p.data.date.toISOString().split('T')[0],
+    summary: p.data.summary,
+    tags: p.data.tags,
+  }));
+const featuredProjects = PROJECTS.slice(0, 3);
+const additionalProjects = PROJECTS.slice(3);
 ---
 
 <PageLayout title={SITE.fullName} description={SITE.description}>
   <Hero />
 
-  <section id="about" class="page-section bg-surface transition-colors duration-300">
-    <div class="max-w-4xl mx-auto px-4 text-center">
+  <section id="projects" class="page-section">
+    <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
-        label={SECTIONS.about.label}
-        title={SECTIONS.about.title}
-        description={SECTIONS.about.description}
-        centered
+        label="Selected work"
+        title="Systems built for real workflows."
+        description="A few projects where product needs, data, and day-to-day operations meet."
       />
 
-      <div class="max-w-2xl mx-auto" data-reveal>
-        <p class="text-text-secondary leading-relaxed text-lg">{ABOUT.paragraphs[0]}</p>
-        <a
-          href={base + 'about/'}
-          class="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline group"
-        >
-          More about me
-          <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
-        </a>
+      <div class="divide-y divide-border">
+        {featuredProjects.map((project, index) => (
+          <FeaturedProject project={project} index={index + 1} featured={index === 0} />
+        ))}
       </div>
 
-      <div class="mt-16 text-center" data-reveal>
-        <blockquote
-          class="text-xl md:text-2xl font-medium text-(--color-text) italic max-w-2xl mx-auto pl-6 border-l-4 border-[var(--accent)] text-left"
-          id="rotating-quote"
-          data-quotes={JSON.stringify(ABOUT.quotes)}
-        >
-          &ldquo;{ABOUT.quotes[0]}&rdquo;
-        </blockquote>
+      <div class="more-work" data-reveal>
+        <div>
+          <p class="eyebrow">More work</p>
+          <p class="text-sm text-text-secondary mt-2">Including ASP.NET Core APIs and data-driven applications.</p>
+        </div>
+        <ul class="more-work-list">
+          {
+            additionalProjects.slice(0, 4).map((project) => (
+              <li>
+                <a href={base + 'projects/' + project.slug}>
+                  <span>{project.title}</span>
+                  <span class="more-work-tech">{project.technologies.slice(0, 3).join(' · ')}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
+
+      <a href={base + 'projects/'} class="section-link">Explore all projects <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
-  <section id="overview" class="page-section">
+  <section id="stack" class="page-section bg-surface transition-colors duration-300">
     <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.overview.label}
         title={SECTIONS.overview.title}
         description={SECTIONS.overview.description}
-        centered
       />
-      <Stats />
+      <Skills />
     </div>
   </section>
 
-  <section id="experience" class="page-section bg-surface transition-colors duration-300">
-    <div class="max-w-4xl mx-auto px-4">
+  <section id="experience" class="page-section">
+    <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.experience.label}
         title={SECTIONS.experience.title}
         description={SECTIONS.experience.description}
-        centered
       />
-      <ExperienceTimeline items={EXPERIENCES} />
+      <ExperienceTimeline items={EXPERIENCES.slice(0, 3)} />
+      <a href={base + 'experience/'} class="section-link">Full experience <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
-  <section id="projects" class="page-section">
-    <div class="max-w-6xl mx-auto px-4">
-      <SectionHeading
-        label={SECTIONS.projects.label}
-        title={SECTIONS.projects.title}
-        description={SECTIONS.projects.description}
-        centered
-      />
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PROJECTS.slice(0, 3).map((p) => <ProjectCard project={p} />)}
-      </div>
-      <div class="text-center mt-8" data-reveal>
-        <a
-          href={base + 'projects/'}
-          class="inline-flex items-center gap-1 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline group"
-        >
-          View All Projects
-          <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonials" class="page-section bg-surface transition-colors duration-300">
-    <div class="max-w-4xl mx-auto px-4">
-      <SectionHeading
-        label={SECTIONS.testimonials.label}
-        title={SECTIONS.testimonials.title}
-        description={SECTIONS.testimonials.description}
-        centered
-      />
-      <Testimonials />
-    </div>
-  </section>
-
-  <section id="blog" class="page-section transition-colors duration-300">
+  <section id="blog" class="page-section bg-surface transition-colors duration-300">
     <div class="max-w-6xl mx-auto px-4">
       <SectionHeading
         label={SECTIONS.blog.label}
         title={SECTIONS.blog.title}
         description={SECTIONS.blog.description}
-        centered
       />
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-2 gap-x-10">
         {blogPosts.map((post) => <BlogCard post={post} />)}
       </div>
-      <div class="text-center mt-8" data-reveal>
-        <a
-          href={base + 'blog/'}
-          class="inline-flex items-center gap-1 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline group"
-        >
-          View All Posts
-          <span class="inline-block group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>
-        </a>
+      <a href={base + 'blog/'} class="section-link">Read all notes <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section id="about" class="page-section">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-[0.7fr_1.3fr] gap-8 md:gap-16">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-(--color-text)">{SECTIONS.about.title}</h2>
+      </div>
+      <div data-reveal>
+        <p class="text-base md:text-lg leading-relaxed text-text-secondary">{ABOUT.paragraphs[0]}</p>
+        <a href={base + 'about/'} class="section-link">More about Abhay <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
 
   <section id="contact" class="page-section bg-surface transition-colors duration-300">
-    <div class="max-w-6xl mx-auto px-4">
-      <SectionHeading
-        label={SECTIONS.contact.label}
-        title={SECTIONS.contact.title}
-        description={SECTIONS.contact.description}
-        centered
-      />
-      <div class="max-w-xl mx-auto" data-reveal>
-        <form action="https://formspree.io/f/xvgkrkwk" method="POST" class="space-y-4">
-          <div class="sr-only" aria-hidden="true">
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
-          </div>
-          <input type="hidden" name="_subject" value="Portfolio Contact" />
-          <div>
-            <label for="name" class="block text-sm font-medium text-(--color-text) mb-1">Name</label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              maxlength="100"
-              class="w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            />
-          </div>
-          <div>
-            <label for="email" class="block text-sm font-medium text-(--color-text) mb-1"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              class="w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            />
-          </div>
-          <div>
-            <label for="message" class="block text-sm font-medium text-(--color-text) mb-1"
-              >Message</label
-            >
-            <textarea
-              id="message"
-              name="message"
-              required
-              maxlength="5000"
-              rows="5"
-              class="w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-(--color-text) focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-y"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            class="w-full px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors cursor-pointer"
-          >
-            Send Message
-          </button>
-        </form>
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-[0.7fr_1.3fr] gap-8 md:gap-16 items-start">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight text-(--color-text)">{SECTIONS.contact.title}</h2>
+      </div>
+      <div>
+        <p class="max-w-2xl text-lg text-text-secondary leading-relaxed">{SECTIONS.contact.description}</p>
+        <a class="contact-email" href={`mailto:${EMAIL}`}>{EMAIL}<span aria-hidden="true">↗</span></a>
+        <p class="text-sm text-text-muted mt-3">Kathmandu, Nepal</p>
       </div>
     </div>
   </section>
 </PageLayout>
+
+<style>
+  .eyebrow {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .section-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .section-link:hover {
+    color: var(--accent-hover);
+  }
+
+  .more-work {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: 1rem 3rem;
+    margin-top: 2.5rem;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .more-work-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .more-work-list li + li {
+    border-top: 1px solid var(--border);
+  }
+
+  .more-work-list a {
+    min-height: 48px;
+    display: grid;
+    grid-template-columns: minmax(8rem, 0.8fr) minmax(0, 1.2fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.84rem;
+    text-decoration: none;
+  }
+
+  .more-work-list a:hover {
+    color: var(--accent);
+  }
+
+  .more-work-tech {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+  }
+
+  .contact-email {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 0.35rem;
+  }
+
+  .contact-email:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .more-work {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .more-work-list a {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .more-work-tech {
+      grid-column: 1;
+      grid-row: 2;
+      padding-bottom: 0.5rem;
+    }
+
+    .more-work-list a > span:last-child {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+  }
+</style>

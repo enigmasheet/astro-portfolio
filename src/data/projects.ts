@@ -8,10 +8,20 @@ export const PROJECTS: Project[] = [
       'A multi-tenant laundry management SaaS built for Nepal. Order management, customer database, role-based access, reports & analytics, and SMS notifications — all in one dashboard. Replaces paper-based systems for laundry businesses.',
     imageUrls: ['images/laundry-management.png'],
     githubLink: 'https://github.com/enigmasheet/Laundry-Management-System',
-    liveDemo: 'https://laundry.abhaymandal.com.np/',
-    liveDemoActive: true,
+    liveDemo: '',
+    liveDemoActive: false,
     technologies: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Nginx', 'REST API', 'SMS'],
     tags: ['SaaS', 'Multi-Tenant', 'Web App', 'Operations'],
+    caseStudy: {
+      context:
+        'Laundry businesses needed a digital alternative to paper-based order and customer records.',
+      capabilities: [
+        'Order and customer management',
+        'Role-based access',
+        'Reports and analytics',
+        'SMS notifications',
+      ],
+    },
   },
   {
     slug: 'sajilo-inventory',
@@ -24,6 +34,15 @@ export const PROJECTS: Project[] = [
     liveDemoActive: true,
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Google OAuth', 'PWA'],
     tags: ['Inventory', 'Multitenant', 'Web App', 'Productivity'],
+    caseStudy: {
+      context: 'Small shops needed a shared inventory view with each shop’s data kept separate.',
+      capabilities: [
+        'Shop-level data isolation',
+        'Stock movement tracking',
+        'Custom product attributes',
+        'Low-stock alerts',
+      ],
+    },
   },
   {
     slug: 'hmc-nepal-portal',
@@ -36,6 +55,16 @@ export const PROJECTS: Project[] = [
     liveDemoActive: true,
     technologies: ['Next.js', 'Node.js', 'Express', 'MongoDB', 'Nginx', 'PM2', 'TypeScript'],
     tags: ['Portal', 'Multi-App', 'Enterprise', 'Dashboard'],
+    caseStudy: {
+      context:
+        'HMC Nepal needed a common entry point for several business services and administrative tools.',
+      capabilities: [
+        'Claims management and member services',
+        'Unified application dashboard',
+        'Role-based access',
+        'Real-time analytics',
+      ],
+    },
   },
   {
     slug: 'personal-portfolio',

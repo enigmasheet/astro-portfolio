@@ -9,10 +9,10 @@ const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const imgSrc = hasImage ? base + project.imageUrls[0] : '';
 
-function getStatus(): { label: string; color: string } {
+function getStatus(): { label: string; color: string } | undefined {
   if (project.liveDemoActive && project.liveDemo) return { label: 'Live', color: 'text-[var(--success)] bg-[var(--success)]/10' };
   if (!project.liveDemoActive && project.liveDemo) return { label: 'Offline', color: 'text-[var(--danger)] bg-[var(--danger)]/10' };
-  return { label: 'Source', color: 'text-[var(--warning)] bg-[var(--warning)]/10' };
+  return undefined;
 }
 const status = getStatus();
 ---
@@ -35,9 +35,11 @@ const status = getStatus();
           onerror="this.style.display='none'"
           style="transition: filter 0.5s ease"
         />
-        <span class="absolute top-2 right-2 z-10 px-2 py-0.5 text-xs font-semibold rounded-full ${status.color} backdrop-blur-sm">
-          {status.label}
-        </span>
+        {status && (
+          <span class:list={['absolute top-2 right-2 z-10 px-2 py-0.5 text-xs font-semibold rounded-sm backdrop-blur-sm', status.color]}>
+            {status.label}
+          </span>
+        )}
       </div>
     )
   }

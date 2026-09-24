@@ -19,7 +19,9 @@ if (toggle && drawer && backdrop) {
     firstLink?.focus();
   }
   function getFocusableElements() {
-    return Array.from(drawerEl.querySelectorAll<HTMLElement>('a, button, [tabindex]:not([tabindex="-1"])'));
+    return Array.from(
+      drawerEl.querySelectorAll<HTMLElement>('a, button, [tabindex]:not([tabindex="-1"])'),
+    );
   }
   if (!document.documentElement.dataset.navReady) {
     document.documentElement.dataset.navReady = '';
@@ -35,7 +37,10 @@ if (toggle && drawer && backdrop) {
       a.addEventListener('click', closeDrawer);
     });
     drawerEl.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { closeDrawer(); return; }
+      if (e.key === 'Escape') {
+        closeDrawer();
+        return;
+      }
       if (e.key === 'Tab') {
         const focusable = getFocusableElements();
         const first = focusable[0];
@@ -61,7 +66,12 @@ const navLinks = document.querySelectorAll('.nav-link');
 const currentPath = window.location.pathname;
 navLinks.forEach(function (link) {
   const href = link.getAttribute('href');
-  if (href === currentPath || (href && href !== '/' && currentPath.startsWith(href))) {
+  if (!href) return;
+  const target = new URL(href, window.location.origin);
+  const isCurrentRoute = target.pathname === currentPath && !target.hash;
+  const isCurrentSection =
+    target.pathname === currentPath && Boolean(target.hash) && target.hash === window.location.hash;
+  if (isCurrentRoute || isCurrentSection) {
     link.classList.add('text-primary', 'bg-(--color-primary)/5');
     link.classList.add('font-semibold');
     link.classList.remove('text-text-secondary');

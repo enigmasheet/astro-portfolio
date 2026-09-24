@@ -60,6 +60,10 @@ export interface Project {
   liveDemoActive: boolean;
   technologies: string[];
   tags: string[];
+  caseStudy?: {
+    context: string;
+    capabilities: string[];
+  };
 }
 
 export interface Experience {
@@ -74,7 +78,6 @@ export interface Experience {
 export interface SkillCategory {
   category: string;
   skills: string[];
-  level: number;
 }
 
 export interface BlogPostMeta {

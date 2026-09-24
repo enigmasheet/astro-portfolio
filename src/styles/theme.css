@@ -1,74 +1,53 @@
 /* =========================================================
-   NORD-INSPIRED THEME — Developer Portfolio
-   Full palette + semantic tokens
-   Toggle dark mode by setting data-theme="dark" on <html>
+   EDITORIAL ENGINEERING THEME
+   Semantic tokens shared by both intentional color schemes.
    ========================================================= */
-
-/* ---- Raw Nord palette (reference only) ---- */
 :root {
-  --nord0: #2E3440;
-  --nord1: #3B4252;
-  --nord2: #434C5E;
-  --nord3: #4C566A;
-  --nord4: #D8DEE9;
-  --nord5: #E5E9F0;
-  --nord6: #ECEFF4;
-  --nord7: #8FBCBB;
-  --nord8: #88C0D0;
-  --nord9: #81A1C1;
-  --nord10: #5E81AC;
-  --nord11: #BF616A;
-  --nord12: #D08770;
-  --nord13: #EBCB8B;
-  --nord14: #A3BE8C;
-  --nord15: #B48EAD;
+  --bg-page: #f8f8f5;
+  --bg-surface: #f0f1ed;
+  --bg-surface-2: #ffffff;
+  --bg-code: #e8eae5;
 
-  /* ---- Semantic tokens: LIGHT MODE ---- */
-  --bg-page:        var(--nord6);
-  --bg-surface:     var(--nord5);
-  --bg-surface-2:   #FFFFFF;
-  --bg-code:        var(--nord4);
+  --text-primary: #171a17;
+  --text-secondary: #535a54;
+  --text-muted: #747b74;
+  --text-on-accent: #f8f8f5;
 
-  --text-primary:   var(--nord0);
-  --text-secondary: var(--nord3);
-  --text-muted:     #7A8393;
-  --text-on-accent: var(--nord6);
+  --border: #dfe2dc;
+  --border-strong: #a9b0a8;
 
-  --border:         var(--nord4);
-  --border-strong:  var(--nord3);
+  --accent: #536b58;
+  --accent-hover: #3e5543;
+  --accent-soft: #e5ebe5;
 
-  --accent:         var(--nord10);
-  --accent-hover:   #4C6C8C;
-  --accent-soft:    #DCE6F0;
-
-  --success:        var(--nord14);
-  --warning:        var(--nord13);
-  --danger:         var(--nord11);
-  --info:           var(--nord8);
+  --success: #42764d;
+  --warning: #9a6a24;
+  --danger: #a84f4f;
+  --info: #4c6d78;
 }
 
-[data-theme="dark"] {
-  --bg-page:        var(--nord0);
-  --bg-surface:     var(--nord1);
-  --bg-surface-2:   var(--nord2);
-  --bg-code:        var(--nord1);
+[data-theme='dark'] {
+  --bg-page: #111411;
+  --bg-surface: #191d19;
+  --bg-surface-2: #222722;
+  --bg-code: #202520;
 
-  --text-primary:   var(--nord6);
-  --text-secondary: var(--nord4);
-  --text-muted:     #8B96A8;
-  --text-on-accent: var(--nord0);
+  --text-primary: #eff1eb;
+  --text-secondary: #bbc1b9;
+  --text-muted: #909990;
+  --text-on-accent: #111411;
 
-  --border:         var(--nord2);
-  --border-strong:  var(--nord3);
+  --border: #303830;
+  --border-strong: #535d53;
 
-  --accent:         var(--nord8);
-  --accent-hover:   #A3D4E0;
-  --accent-soft:    #2E3E47;
+  --accent: #a9c1ab;
+  --accent-hover: #c2d5c3;
+  --accent-soft: #273229;
 
-  --success:        var(--nord14);
-  --warning:        var(--nord13);
-  --danger:         var(--nord11);
-  --info:           var(--nord7);
+  --success: #88b891;
+  --warning: #d5ad6d;
+  --danger: #d17d7d;
+  --info: #9dbfc9;
 }
 
 @theme {
@@ -85,15 +64,15 @@
   --color-primary: var(--accent);
   --color-primary-dark: var(--accent-hover);
   --color-primary-soft: var(--accent-soft);
-  --color-secondary: #B48EAD;
+  --color-secondary: #78867b;
   --color-tertiary: var(--success);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-danger: var(--danger);
   --color-error: var(--danger);
   --color-info: var(--info);
-  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
 }
 
 html {

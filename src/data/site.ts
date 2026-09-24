@@ -10,58 +10,55 @@ import type {
 export const SITE: SiteInfo = {
   name: 'Abhay',
   fullName: 'Abhay Kumar Mandal',
-  title: '.NET Backend Developer',
-  shortTitle: '.NET Backend Developer',
+  title: '.NET Backend Engineer',
+  shortTitle: '.NET Backend Engineer',
   description:
-    '.NET Backend Developer specializing in ASP.NET Core and clean architecture. I build production-grade backend systems from legacy migrations to modern microservices.',
-  jobTitle: 'Backend Developer',
+    '.NET backend engineer working across C#, ASP.NET Core, APIs, data systems, and the modernization of legacy software.',
+  jobTitle: '.NET Backend Engineer',
   knowsAbout: ['.NET Framework', '.NET 6+', 'ASP.NET Core', 'C#', 'Legacy Migration', 'Debugging'],
 };
 
 export const HERO: HeroContent = {
-  greeting: 'Hi, my name is',
+  greeting: '.NET Backend Engineer',
   description:
-    'I engineer backend systems across the full .NET ecosystem — from sustaining battle-tested legacy code to architecting modern, high-performance solutions with clean architecture and an unwavering commitment to problem-solving. My name is Abhay Kumar Mandal, and I build systems that perform under pressure.',
-  primaryCta: 'View Projects',
-  secondaryCta: 'Get In Touch',
+    'I build and modernize backend systems with C#, .NET, ASP.NET Core, SQL, and Azure—working across the move from established software to maintainable modern services.',
+  primaryCta: 'View selected work',
+  secondaryCta: 'Get in touch',
 };
 
 export const SECTIONS: Record<string, SectionHeader> = {
   overview: {
-    label: 'Overview',
-    title: 'What I Do',
-    description:
-      'Full-spectrum .NET backend engineering — from maintaining legacy enterprise systems (.NET Framework, ASP.NET MVC) to architecting modern, scalable platforms (.NET 8+, ASP.NET Core, Blazor). I solve complex problems at the system level and build infrastructure that performs under pressure.',
+    label: 'Approach',
+    title: 'Engineering stack',
+    description: 'The platforms, data tools, and delivery practices I work with.',
   },
   about: {
     label: 'About',
-    title: 'About Me',
+    title: 'A little about how I work',
     description:
-      'A .NET backend engineer who bridges legacy and modern architectures — solving complex problems with clean design, production-grade code, and an obsession for continuous mastery.',
+      'I work across legacy and modern .NET systems, with a focus on clear APIs, dependable data access, and software that remains understandable as it changes.',
   },
   experience: {
     label: 'Career',
-    title: 'My Experience',
+    title: 'Experience',
     description:
-      "The teams I've led, the systems I've architected, and the production environments I've strengthened — from legacy migrations to greenfield platforms.",
+      'Software development, project delivery, and earlier robotics education and leadership work.',
   },
   projects: {
     label: 'Work',
-    title: "Projects I've Built",
-    description:
-      'Real-world backend systems, APIs, and platforms I have designed, built, and shipped — from database schema to deployment pipeline.',
+    title: 'Systems I’ve worked on',
+    description: 'A selection of applications, platforms, and backend work.',
   },
   blog: {
-    label: 'Blog',
-    title: 'Articles & Thoughts',
-    description:
-      'Deep dives into backend architecture, .NET internals, cloud infrastructure, system design, and the engineering decisions that separate good systems from great ones.',
+    label: 'Writing',
+    title: 'Engineering Notes',
+    description: 'Practical notes on building with .NET and modern web platforms.',
   },
   contact: {
     label: 'Contact',
-    title: 'Get In Touch',
+    title: 'Have something to build?',
     description:
-      'Have a backend challenge, a system to build, or an idea worth engineering? Let\'s talk.',
+      "Have a backend challenge, a system to build, or an idea worth engineering? Let's talk.",
   },
   github: {
     label: 'GitHub',
@@ -80,9 +77,9 @@ export const SECTIONS: Record<string, SectionHeader> = {
 
 export const ABOUT: AboutContent = {
   paragraphs: [
-    "I'm a backend engineer specializing in .NET — spanning legacy frameworks and modern platforms with equal rigor. I thrive on deep problem-solving and debugging complex system-level issues, approaching each challenge as an opportunity to build more resilient infrastructure. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
-    'With experience across the full .NET ecosystem, I bridge the gap between maintaining battle-tested legacy code and architecting modern, high-performance solutions. What drives me is continuous mastery: staying ahead of industry evolution while deepening my technical expertise in backend systems, API design, and clean architecture.',
-    'Based in Kathmandu, I\'m always open to connecting with fellow engineers and exploring opportunities where I can architect, build, and ship. Whether it\'s debugging a thorny legacy migration or designing a new microservice from scratch, I bring curiosity, persistence, and craftsmanship to every line of code.',
+    "I'm a backend engineer focused on .NET, from legacy applications to modern services. I enjoy debugging difficult problems and making systems easier to maintain. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
+    'My work spans backend development, API design, data access, and project delivery. I also have an earlier background in robotics education and technical events.',
+    "Based in Kathmandu, I'm always open to connecting with fellow engineers and exploring opportunities where I can architect, build, and ship. Whether it's debugging a thorny legacy migration or designing a new microservice from scratch, I bring curiosity, persistence, and craftsmanship to every line of code.",
   ],
   blockTitles: {
     skills: 'Skills & Technologies',
@@ -96,31 +93,31 @@ export const ABOUT: AboutContent = {
     { label: 'Certifications', target: 6, suffix: '+' },
   ],
   quotes: [
-    'The best code is the code you don\'t have to write — but when you do, make it count.',
-    'Debugging is not about finding what\'s broken. It\'s about understanding what\'s working.',
-    'Legacy code isn\'t a burden. It\'s a history lesson written in a language you understand.',
+    "The best code is the code you don't have to write — but when you do, make it count.",
+    "Debugging is not about finding what's broken. It's about understanding what's working.",
+    "Legacy code isn't a burden. It's a history lesson written in a language you understand.",
     'Great software is built at the intersection of technical excellence and clear communication.',
-    'A robust system isn\'t one that never fails — it\'s one that fails gracefully.',
-    'Learning never exhausts the mind. In software, it\'s the only way to keep up.',
-    'Bridging legacy and modern isn\'t just about code — it\'s about understanding how systems evolve.',
+    "A robust system isn't one that never fails — it's one that fails gracefully.",
+    "Learning never exhausts the mind. In software, it's the only way to keep up.",
+    "Bridging legacy and modern isn't just about code — it's about understanding how systems evolve.",
     'Every bug you fix teaches you more about the system than any feature you build.',
-    'Clean architecture isn\'t about perfection. It\'s about making future you grateful.',
-    'The .NET ecosystem is vast — mastery comes from knowing both where the framework has been and where it\'s going.',
+    "Clean architecture isn't about perfection. It's about making future you grateful.",
+    "The .NET ecosystem is vast — mastery comes from knowing both where the framework has been and where it's going.",
     'Software development is a continuous loop of learning, building, debugging, and improving.',
     'Your code should tell a story — one that the next developer can actually follow.',
-    'Refactoring isn\'t rewriting history. It\'s making the future easier to navigate.',
-    'The most valuable skill in tech isn\'t a programming language — it\'s the ability to learn the next one.',
+    "Refactoring isn't rewriting history. It's making the future easier to navigate.",
+    "The most valuable skill in tech isn't a programming language — it's the ability to learn the next one.",
     'A well-architected system is like a well-designed building: invisible infrastructure that just works.',
-    'Courage is not knowing when to write code. It\'s knowing when to refactor it.',
-    'Every great developer you know got there by solving problems they didn\'t understand at first.',
+    "Courage is not knowing when to write code. It's knowing when to refactor it.",
+    "Every great developer you know got there by solving problems they didn't understand at first.",
     'The difference between a good system and a great one is how it handles the unexpected.',
     'Code should not only work — it should inspire.',
     'The best way to predict the future of software is to build it, one clean commit at a time.',
-    'Great problem solvers don\'t just fix bugs — they understand why they existed in the first place.',
+    "Great problem solvers don't just fix bugs — they understand why they existed in the first place.",
     'Technology changes, but the principles of clean, maintainable code are timeless.',
-    'Mastering both legacy and modern frameworks isn\'t a contradiction. It\'s a superpower.',
+    "Mastering both legacy and modern frameworks isn't a contradiction. It's a superpower.",
     'The best investment you can make in your career is the time you spend learning something new.',
-    'There\'s no such thing as done in software. There\'s only deployed and improving.',
+    "There's no such thing as done in software. There's only deployed and improving.",
     'A debugger is the closest thing to a time machine that software developers have.',
     'Building robust systems requires patience, persistence, and a willingness to question your own assumptions.',
     'Your reputation is built on the problems you solve, not the technologies you use.',

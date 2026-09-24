@@ -23,7 +23,6 @@ function getAvatarColor(name: string): string {
 <div
   class="relative overflow-hidden"
   data-testimonials-carousel
-  tabindex="0"
   role="region"
   aria-label="Testimonials carousel"
   aria-roledescription="carousel"
@@ -105,13 +104,16 @@ function getAvatarColor(name: string): string {
     const dots = container.querySelectorAll<HTMLElement>('[data-dot]');
     if (!track || !slides || !slides.length) return;
 
+    const trackElement = track;
+    const slideCount = slides.length;
+
     let current = 0;
     let timer: ReturnType<typeof setInterval>;
     let isPaused = false;
     const interval = 5000;
 
     function show(index: number) {
-      track.style.transform = `translateX(-${index * 100}%)`;
+      trackElement.style.transform = `translateX(-${index * 100}%)`;
       dots.forEach((d, i) => {
         const active = i === index;
         d.classList.toggle('bg-primary', active);
@@ -124,11 +126,11 @@ function getAvatarColor(name: string): string {
     }
 
     function next() {
-      show((current + 1) % slides.length);
+      show((current + 1) % slideCount);
     }
 
     function prev() {
-      show((current - 1 + slides.length) % slides.length);
+      show((current - 1 + slideCount) % slideCount);
     }
 
     function startTimer() {

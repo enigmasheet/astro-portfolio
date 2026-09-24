@@ -1,37 +1,89 @@
 ---
 import type { Experience } from '../../types';
+
 export interface Props {
   items: Experience[];
 }
+
 const { items } = Astro.props;
 
-function formatDate(d: string): string {
-  const date = new Date(d);
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+}
+
+function formatRange(item: Experience): string {
+  const start = formatDate(item.date);
+  const end = item.endDate ? formatDate(item.endDate) : 'Present';
+  return `${start} — ${end}`;
 }
 ---
 
-<div class="relative" data-reveal>
-  <div class="absolute left-4.75 top-2 bottom-2 w-0.5 bg-border"></div>
-  <div class="space-y-8">
-    {
-      items.map((item) => (
-        <div class="relative pl-12">
-          <div class="absolute left-2.5 top-1.5 w-2.25 h-2.25 rounded-full bg-primary ring-4 ring-bg" />
-          <div class="exp-card bg-surface border border-border rounded-xl p-6 transition-all hover:shadow-md duration-300 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-              <div>
-                <h3 class="text-lg font-semibold text-(--color-text)">{item.title}</h3>
-                <p class="text-sm font-medium text-primary">{item.company}</p>
-              </div>
-              <span class="text-xs text-text-secondary whitespace-nowrap px-3 py-1 rounded-full bg-bg">
-                {formatDate(item.date)} – {item.endDate ? formatDate(item.endDate) : 'Present'}
-              </span>
-            </div>
-            <p class="text-sm text-text-secondary leading-relaxed">{item.description}</p>
-          </div>
+<ol class="experience-list">
+  {
+    items.map((item) => (
+      <li class="experience-item" data-reveal>
+        <p class="experience-date">{formatRange(item)}</p>
+        <div class="experience-copy">
+          <h3 class="experience-title">{item.title}</h3>
+          <p class="experience-company">{item.company}</p>
+          <p class="experience-description">{item.description}</p>
         </div>
-      ))
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .experience-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .experience-item {
+    display: grid;
+    grid-template-columns: minmax(8.5rem, 0.32fr) minmax(0, 1fr);
+    gap: 1rem 2rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .experience-date {
+    margin: 0.2rem 0 0;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.6;
+  }
+
+  .experience-title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .experience-company {
+    margin: 0.25rem 0 0;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .experience-description {
+    max-width: 46rem;
+    margin: 0.75rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    .experience-item {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.4rem;
+      padding: 1.2rem 0;
     }
-  </div>
-</div>
+  }
+</style>

@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import { PROJECTS } from '../../data/projects';
 import { SITE_URL } from '../../data/social';
+import type { Project } from '../../types';
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
@@ -12,11 +13,14 @@ export async function getStaticPaths() {
     props: { project: p },
   }));
 }
-const { project } = Astro.props;
+const { project } = Astro.props as { project: Project };
 if (!project) {
   Astro.redirect(base + '404');
 }
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
+const projectNumber = String(PROJECTS.findIndex((item) => item.slug === project.slug) + 1).padStart(2, '0');
+const projectContext = project.caseStudy?.context || project.description;
+const projectCapabilities = project.caseStudy?.capabilities || project.tags;
 const breadcrumbItems = [
   { name: 'Home', url: SITE_URL + '/' },
   { name: 'Projects', url: `${SITE_URL}/projects/` },
@@ -50,32 +54,21 @@ const breadcrumbItems = [
       url: `${SITE_URL}/projects/${project.slug}/`,
       applicationCategory: 'WebApplication',
       operatingSystem: 'Web',
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'USD',
-      },
     })}
   />
 
   <section class="page-section">
-    <div class="max-w-4xl mx-auto px-4">
-      <nav aria-label="Breadcrumb" class="mb-4 hidden sm:block">
-        <ol class="flex items-center gap-2 text-sm text-text-secondary">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex flex-wrap items-center gap-2 text-xs text-text-secondary">
           {
             breadcrumbItems.map((item, i) => (
               <li class="flex items-center gap-2">
-                {i > 0 && (
-                  <span class="text-border" aria-hidden="true">
-                    /
-                  </span>
-                )}
+                {i > 0 && <span class="text-text-muted" aria-hidden="true">/</span>}
                 {i < breadcrumbItems.length - 1 ? (
-                  <a href={item.url} class="hover:text-primary transition-colors no-underline">
-                    {item.name}
-                  </a>
+                  <a href={item.url} class="hover:text-primary transition-colors no-underline">{item.name}</a>
                 ) : (
-                  <span class="text-(--color-text) font-medium truncate max-w-50">{item.name}</span>
+                  <span class="text-(--color-text) font-medium">{item.name}</span>
                 )}
               </li>
             ))
@@ -83,100 +76,234 @@ const breadcrumbItems = [
         </ol>
       </nav>
 
-      <a
-        href={base + 'projects/'}
-        class="inline-flex items-center text-sm text-text-secondary hover:text-primary transition-colors mb-8 no-underline"
-      >
-        ← Back to Projects
-      </a>
+      <a href={base + 'projects/'} class="back-link">← All projects</a>
+
+      <header class="project-header" data-reveal>
+        <p class="project-eyebrow">{projectNumber} <span aria-hidden="true">/</span> {project.tags[0]}</p>
+        <h1>{project.title}</h1>
+        <p class="project-summary">{project.description}</p>
+      </header>
+
       {
         hasImage && (
-          <div class="aspect-video rounded-xl overflow-hidden mb-8 bg-bg" data-reveal>
+          <div class="project-visual" data-reveal>
             <img
               src={base + project.imageUrls[0]}
-              alt={project.title}
-              class="w-full h-full object-cover cursor-pointer"
-              loading="lazy"
+              alt={`${project.title} interface`}
+              loading="eager"
               data-lightbox
             />
           </div>
         )
       }
-      <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4" data-reveal>
-        {project.title}
-      </h1>
-      <p class="text-lg text-text-secondary mb-8 leading-relaxed" data-reveal>
-        {project.description}
-      </p>
-      <div class="grid md:grid-cols-2 gap-8" data-reveal>
-        {
-          project.technologies.length > 0 && (
-            <div>
-              <h2 class="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-3">
-                Technologies
-              </h2>
-              <div class="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span class="px-3 py-1.5 text-sm font-medium rounded-lg bg-primary/10 text-primary">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )
-        }
-        {
-          project.tags.length > 0 && (
-            <div>
-              <h2 class="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-3">
-                Tags
-              </h2>
-              <div class="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span class="px-3 py-1.5 text-sm rounded-lg bg-border text-text-secondary">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )
-        }
-      </div>
-      <div class="flex flex-wrap gap-4 mt-8" data-reveal>
-        {
-          project.githubLink && (
-            <a
-              href={project.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors no-underline"
-            >
-              View Source
-            </a>
-          )
-        }
-        {
-          project.liveDemoActive && project.liveDemo && (
-            <a
-              href={project.liveDemo}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors no-underline"
-            >
-              Live Demo
-            </a>
-          )
-        }
-        {
-          !project.liveDemoActive && (
-            <span class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-border text-text-secondary opacity-50">
-              Offline
-            </span>
-          )
-        }
+
+      <div class="case-study-grid" data-reveal>
+        <div class="case-study-content">
+          <section class="case-study-section">
+            <p class="project-eyebrow">Context</p>
+            <h2>Why it was built</h2>
+            <p>{projectContext}</p>
+          </section>
+
+          <section class="case-study-section">
+            <p class="project-eyebrow">Capabilities</p>
+            <h2>What it includes</h2>
+            <ul class="capability-list">
+              {projectCapabilities.map((capability) => <li>{capability}</li>)}
+            </ul>
+          </section>
+        </div>
+
+        <aside class="project-facts" aria-label="Project details">
+          <section>
+            <h2>Technology</h2>
+            <p>{project.technologies.join(' · ')}</p>
+          </section>
+          <section>
+            <h2>Project type</h2>
+            <p>{project.tags.join(' · ')}</p>
+          </section>
+          <section class="project-actions">
+            <h2>Links</h2>
+            {
+              project.githubLink && (
+                <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                  Source code <span aria-hidden="true">↗</span>
+                </a>
+              )
+            }
+            {
+              project.liveDemoActive && project.liveDemo && (
+                <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                  Live project <span aria-hidden="true">↗</span>
+                </a>
+              )
+            }
+          </section>
+        </aside>
       </div>
     </div>
   </section>
+
+  <style>
+    .back-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .project-header {
+      max-width: 52rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .project-eyebrow {
+      margin: 0 0 0.8rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-eyebrow span {
+      padding: 0 0.3rem;
+      color: var(--text-muted);
+    }
+
+    .project-header h1 {
+      margin: 0;
+      color: var(--text-primary);
+      font-size: clamp(2.5rem, 6vw, 4.75rem);
+      font-weight: 600;
+      letter-spacing: -0.055em;
+      line-height: 1.05;
+    }
+
+    .project-summary {
+      max-width: 43rem;
+      margin: 1.25rem 0 0;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.7;
+    }
+
+    .project-visual {
+      aspect-ratio: 16 / 8.5;
+      overflow: hidden;
+      margin-bottom: clamp(3rem, 7vw, 6rem);
+      border: 1px solid var(--border);
+      border-radius: 0.4rem;
+      background: var(--bg-surface);
+    }
+
+    .project-visual img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.42fr);
+      gap: clamp(2rem, 7vw, 7rem);
+    }
+
+    .case-study-section + .case-study-section {
+      margin-top: 2.75rem;
+    }
+
+    .case-study-section h2 {
+      margin: 0 0 0.75rem;
+      color: var(--text-primary);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .case-study-section > p:last-child {
+      max-width: 42rem;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .capability-list {
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--border);
+      list-style: none;
+    }
+
+    .capability-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .project-facts {
+      align-self: start;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-facts section {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-facts h2 {
+      margin: 0 0 0.55rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-facts p,
+    .project-actions a {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    .project-actions a {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-actions a:hover {
+      color: var(--accent-hover);
+    }
+
+    @media (max-width: 768px) {
+      .project-visual {
+        aspect-ratio: 4 / 3;
+      }
+
+      .case-study-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
 
   <script>
     import '../../scripts/lightbox';

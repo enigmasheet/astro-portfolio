@@ -24,6 +24,7 @@ const projectNumber = String(PROJECTS.findIndex((item) => item.slug === project.
 );
 const projectContext = project.caseStudy?.context || project.description;
 const projectCapabilities = project.caseStudy?.capabilities || project.tags;
+const projectScale = project.caseStudy?.scale ?? [];
 const breadcrumbItems = [
   { name: 'Home', url: SITE_URL + '/' },
   { name: 'Projects', url: `${SITE_URL}/projects/` },
@@ -115,13 +116,39 @@ const breadcrumbItems = [
         )
       }
 
+      {
+        projectScale.length > 0 && (
+          <section class="case-study-scale" aria-label="Documented content scope" data-reveal>
+            <p class="project-eyebrow">Documented content scope</p>
+            <div class="scale-grid">
+              {projectScale.map((metric) => (
+                <div class="scale-item">
+                  <span class="scale-value">{metric.value}</span>
+                  <span class="scale-label">{metric.label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
       <div class="case-study-grid" data-reveal>
         <div class="case-study-content">
           <section class="case-study-section">
             <p class="project-eyebrow">Context</p>
-            <h2>Why it was built</h2>
+            <h2>The problem</h2>
             <p>{projectContext}</p>
           </section>
+
+          {
+            project.caseStudy?.solution && (
+              <section class="case-study-section">
+                <p class="project-eyebrow">Solution</p>
+                <h2>How TeachMate works</h2>
+                <p>{project.caseStudy.solution}</p>
+              </section>
+            )
+          }
 
           <section class="case-study-section">
             <p class="project-eyebrow">Capabilities</p>
@@ -130,6 +157,30 @@ const breadcrumbItems = [
               {projectCapabilities.map((capability) => <li>{capability}</li>)}
             </ul>
           </section>
+
+          {
+            project.caseStudy?.architecture && (
+              <section class="case-study-section">
+                <p class="project-eyebrow">System design</p>
+                <h2>Architecture</h2>
+                <ul class="capability-list">
+                  {project.caseStudy.architecture.map((detail) => <li>{detail}</li>)}
+                </ul>
+              </section>
+            )
+          }
+
+          {
+            project.caseStudy?.decisions && (
+              <section class="case-study-section">
+                <p class="project-eyebrow">Trade-offs</p>
+                <h2>Engineering decisions</h2>
+                <ul class="capability-list">
+                  {project.caseStudy.decisions.map((decision) => <li>{decision}</li>)}
+                </ul>
+              </section>
+            )
+          }
         </div>
 
         <aside class="project-facts" aria-label="Project details">
@@ -139,7 +190,7 @@ const breadcrumbItems = [
           </section>
           <section>
             <h2>Project type</h2>
-            <p>{project.tags.join(' · ')}</p>
+            <p>{project.category} · {project.tags.join(' · ')}</p>
           </section>
           <section class="project-actions">
             <h2>Links</h2>
@@ -231,6 +282,46 @@ const breadcrumbItems = [
       cursor: zoom-in;
     }
 
+    .case-study-scale {
+      margin: 0 0 clamp(3rem, 7vw, 6rem);
+      padding: 1rem 0 1.25rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-study-scale .project-eyebrow {
+      margin-bottom: 0.75rem;
+    }
+
+    .scale-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .scale-item + .scale-item {
+      padding-left: 1rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .scale-value,
+    .scale-label {
+      display: block;
+    }
+
+    .scale-value {
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      line-height: 1.2;
+    }
+
+    .scale-label {
+      margin-top: 0.3rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
     .case-study-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.42fr);
@@ -319,6 +410,15 @@ const breadcrumbItems = [
 
       .case-study-grid {
         grid-template-columns: minmax(0, 1fr);
+      }
+
+      .scale-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .scale-item:nth-child(3) {
+        padding-left: 0;
+        border-left: 0;
       }
     }
   </style>

@@ -10,6 +10,7 @@ interface Props {
 const { project, index, featured = false } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const projectHref = base + 'projects/' + project.slug + '/';
 const image = project.imageUrls[0] ? base + project.imageUrls[0] : undefined;
 const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
 ---
@@ -21,7 +22,7 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
       <span aria-hidden="true">/</span>
       {project.tags[0]}
     </p>
-    <h3 class="work-title"><a href={base + 'projects/' + project.slug}>{project.title}</a></h3>
+    <h3 class="work-title"><a href={projectHref}>{project.title}</a></h3>
     <p class="work-description">{project.description}</p>
 
     <div class="work-meta">
@@ -30,7 +31,7 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
     </div>
 
     <div class="work-links">
-      <a class="work-link work-link-primary" href={base + 'projects/' + project.slug}>
+      <a class="work-link work-link-primary" href={projectHref}>
         Project details <span aria-hidden="true">↗</span>
       </a>
       {
@@ -52,18 +53,14 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
 
   {
     image ? (
-      <a
-        class="work-image"
-        href={base + 'projects/' + project.slug}
-        aria-label={`View ${project.title} project details`}
-      >
+      <a class="work-image" href={projectHref} aria-label={`View ${project.title} project details`}>
         <img src={image} alt={`${project.title} interface`} loading={featured ? 'eager' : 'lazy'} />
         <span class="work-image-caption">{project.tags.slice(0, 2).join(' / ')}</span>
       </a>
     ) : (
       <a
         class="work-image work-image-placeholder"
-        href={base + 'projects/' + project.slug}
+        href={projectHref}
         aria-label={`View ${project.title} project details`}
       >
         <span class="font-mono text-sm">{project.title}</span>

@@ -19,37 +19,51 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
         centered
       />
 
-      <div class="mb-8 space-y-4" data-reveal>
-        <div class="relative max-w-md mx-auto">
-          <span
-            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl pointer-events-none"
-            >search</span
-          >
-          <input
-            id="project-search"
-            type="text"
-            placeholder="Search projects..."
-            class="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-          />
-        </div>
-        <div class="flex flex-wrap justify-center gap-2" id="filter-chips">
+      <div class="project-controls mb-8" data-project-filters data-reveal>
+        <div class="grid gap-3 sm:grid-cols-[minmax(0,1fr)_15rem_auto]">
+          <div class="relative">
+            <label for="project-search" class="sr-only">Search projects</label>
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl pointer-events-none"
+              aria-hidden="true">search</span
+            >
+            <input
+              id="project-search"
+              type="search"
+              placeholder="Search name, stack, or topic"
+              autocomplete="off"
+              class="w-full min-h-12 pl-10 pr-4 py-3 rounded-md border border-border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            />
+          </div>
+
+          <div>
+            <label for="project-technology" class="sr-only">Filter projects by technology</label>
+            <select
+              id="project-technology"
+              class="w-full min-h-12 px-3 py-3 rounded-md border border-border bg-surface text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer"
+            >
+              <option value="all">All technologies</option>
+              {allTechnologies.map((tech) => <option value={tech.toLowerCase()}>{tech}</option>)}
+            </select>
+          </div>
+
           <button
-            class="filter-chip active px-3 py-2.5 text-sm font-medium rounded-full border bg-primary text-white border-primary cursor-pointer"
-            data-filter="all"
+            id="clear-project-filters"
+            type="button"
+            class="min-h-12 px-4 rounded-md text-sm font-medium text-primary hover:bg-primary/5 transition-colors cursor-pointer hidden"
           >
-            All
+            Clear filters
           </button>
-          {
-            allTechnologies.map((tech) => (
-              <button
-                class="filter-chip px-3 py-2.5 text-sm font-medium rounded-full border border-border text-text-secondary hover:border-primary hover:text-primary transition-colors cursor-pointer"
-                data-filter={tech}
-              >
-                {tech}
-              </button>
-            ))
-          }
         </div>
+
+        <p
+          id="project-results"
+          class="mt-3 text-sm text-text-secondary"
+          role="status"
+          aria-live="polite"
+        >
+          {PROJECTS.length} projects
+        </p>
       </div>
 
       <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -57,8 +71,8 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
           PROJECTS.map((p) => (
             <div
               class="project-item"
-              data-technologies={p.technologies.join(',')}
-              data-tags={p.tags.join(',')}
+              data-technologies={p.technologies.map((tech) => tech.toLowerCase()).join('|')}
+              data-search={`${p.title} ${p.description} ${p.technologies.join(' ')} ${p.tags.join(' ')}`.toLowerCase()}
             >
               <ProjectCard project={p} />
             </div>
@@ -66,8 +80,10 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
         }
       </div>
 
-      <div id="no-results" class="text-center py-16 hidden">
-        <p class="text-text-secondary text-lg">No projects match your search.</p>
+      <div id="no-results" class="text-center py-16 hidden" aria-live="polite">
+        <p class="text-text-secondary text-lg">
+          No matching projects. Try another search or clear the filters.
+        </p>
       </div>
     </div>
   </section>

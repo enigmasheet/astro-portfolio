@@ -6,6 +6,7 @@ export interface Props {
 const { project } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const projectHref = base + 'projects/' + project.slug + '/';
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const imgSrc = hasImage ? base + project.imageUrls[0] : '';
 
@@ -73,7 +74,7 @@ const status = getStatus();
     </div>
     <div class="flex flex-wrap items-center gap-3">
       <a
-        href={base + 'projects/' + project.slug}
+        href={projectHref}
         class="text-sm font-medium text-primary hover:underline py-2"
         aria-label={`View ${project.title} details`}
       >

@@ -58,7 +58,7 @@ const additionalProjects = PROJECTS.slice(3);
           {
             additionalProjects.slice(0, 4).map((project) => (
               <li>
-                <a href={base + 'projects/' + project.slug}>
+                <a href={base + 'projects/' + project.slug + '/'}>
                   <span>{project.title}</span>
                   <span class="more-work-tech">{project.technologies.slice(0, 3).join(' · ')}</span>
                   <span aria-hidden="true">↗</span>

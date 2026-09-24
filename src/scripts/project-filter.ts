@@ -1,62 +1,60 @@
-function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number) {
-  let timer: ReturnType<typeof setTimeout>;
-  return function (...args: unknown[]) {
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      fn(...args);
-    }, ms);
-  } as T;
-}
+function initProjectFilters() {
+  const controls = document.querySelector<HTMLElement>('[data-project-filters]');
+  if (!controls || controls.dataset.initialized === 'true') return;
 
-const searchInput = document.getElementById('project-search') as HTMLInputElement | null;
-const chips = document.querySelectorAll('.filter-chip');
-const items = document.querySelectorAll('.project-item');
-const noResults = document.getElementById('no-results');
-let activeFilter = 'all';
+  const searchInput = controls.querySelector<HTMLInputElement>('#project-search');
+  const technologySelect = controls.querySelector<HTMLSelectElement>('#project-technology');
+  const clearButton = controls.querySelector<HTMLButtonElement>('#clear-project-filters');
+  const resultCount = controls.querySelector<HTMLElement>('#project-results');
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.project-item'));
+  const noResults = document.getElementById('no-results');
 
-function filterProjects() {
-  const query = (searchInput?.value || '').toLowerCase();
-  let visible = 0;
+  if (!searchInput || !technologySelect || !clearButton || !resultCount || !noResults) return;
+  const search = searchInput;
+  const technology = technologySelect;
+  const clear = clearButton;
+  const results = resultCount;
+  const emptyState = noResults;
+  controls.dataset.initialized = 'true';
 
-  items.forEach(function (item) {
-    const techs = ((item as HTMLElement).dataset.technologies || '').toLowerCase();
-    const tags = ((item as HTMLElement).dataset.tags || '').toLowerCase();
-    const all = techs + ' ' + tags;
-    const matchesFilter =
-      activeFilter === 'all' ||
-      techs.includes(activeFilter.toLowerCase()) ||
-      tags.includes(activeFilter.toLowerCase());
-    const matchesSearch = !query || all.includes(query);
-    const show = matchesFilter && matchesSearch;
-    if (show) {
-      (item as HTMLElement).classList.remove('opacity-0', 'pointer-events-none');
-    } else {
-      (item as HTMLElement).classList.add('opacity-0', 'pointer-events-none');
-    }
-    if (show) visible++;
-  });
+  function filterProjects() {
+    const query = search.value.trim().toLocaleLowerCase();
+    const selectedTechnology = technology.value;
+    let visible = 0;
 
-  if (noResults) noResults.classList.toggle('hidden', visible > 0);
-}
+    items.forEach((item) => {
+      const searchableContent = item.dataset.search || '';
+      const technologies = (item.dataset.technologies || '').split('|');
+      const matchesSearch = !query || searchableContent.includes(query);
+      const matchesTechnology =
+        selectedTechnology === 'all' || technologies.includes(selectedTechnology);
+      const matches = matchesSearch && matchesTechnology;
 
-chips.forEach(function (chip) {
-  chip.addEventListener('click', function () {
-    chips.forEach(function (c) {
-      c.classList.remove('active', 'bg-primary', 'text-white', 'border-primary');
-      c.classList.add('border-border', 'text-text-secondary');
+      item.hidden = !matches;
+      if (matches) visible += 1;
     });
-    chip.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
-    chip.classList.remove('border-border', 'text-text-secondary');
-    activeFilter = (chip as HTMLElement).dataset.filter || 'all';
-    filterProjects();
-  });
-});
 
-if (searchInput) {
-  searchInput.addEventListener('input', debounce(filterProjects, 200));
+    emptyState.classList.toggle('hidden', visible > 0);
+    results.textContent =
+      visible === items.length
+        ? `${visible} ${visible === 1 ? 'project' : 'projects'}`
+        : `Showing ${visible} of ${items.length} projects`;
+    clear.classList.toggle('hidden', !query && selectedTechnology === 'all');
+  }
+
+  search.addEventListener('input', filterProjects);
+  technology.addEventListener('change', filterProjects);
+  clear.addEventListener('click', () => {
+    search.value = '';
+    technology.value = 'all';
+    filterProjects();
+    search.focus();
+  });
+
+  filterProjects();
 }
 
-const allChip = document.querySelector('.filter-chip[data-filter="all"]');
-if (allChip) (allChip as HTMLElement).click();
+document.addEventListener('astro:page-load', initProjectFilters);
+initProjectFilters();
 
 export {};

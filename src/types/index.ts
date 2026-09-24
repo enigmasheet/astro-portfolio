@@ -54,6 +54,7 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
+  category: 'Web app' | 'API' | 'Education' | 'IoT';
   imageUrls: string[];
   githubLink: string;
   liveDemo: string;
@@ -63,6 +64,13 @@ export interface Project {
   caseStudy?: {
     context: string;
     capabilities: string[];
+    solution?: string;
+    architecture?: string[];
+    decisions?: string[];
+    scale?: {
+      value: string;
+      label: string;
+    }[];
   };
 }
 

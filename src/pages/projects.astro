@@ -1,11 +1,13 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import ProjectFilters from '../components/sections/ProjectFilters.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import ProjectCard from '../components/ui/ProjectCard.astro';
 import { PROJECTS } from '../data/projects';
 import { SECTIONS } from '../data/site';
 
 const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].sort();
+const allCategories = [...new Set(PROJECTS.map((project) => project.category))].sort();
 ---
 
 <PageLayout title="Projects" description={SECTIONS.projects.description}>
@@ -19,60 +21,20 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
         centered
       />
 
-      <div class="project-controls mb-8" data-project-filters data-reveal>
-        <div class="grid gap-3 sm:grid-cols-[minmax(0,1fr)_15rem_auto]">
-          <div class="relative">
-            <label for="project-search" class="sr-only">Search projects</label>
-            <span
-              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl pointer-events-none"
-              aria-hidden="true">search</span
-            >
-            <input
-              id="project-search"
-              type="search"
-              placeholder="Search name, stack, or topic"
-              autocomplete="off"
-              class="w-full min-h-12 pl-10 pr-4 py-3 rounded-md border border-border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-            />
-          </div>
-
-          <div>
-            <label for="project-technology" class="sr-only">Filter projects by technology</label>
-            <select
-              id="project-technology"
-              class="w-full min-h-12 px-3 py-3 rounded-md border border-border bg-surface text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer"
-            >
-              <option value="all">All technologies</option>
-              {allTechnologies.map((tech) => <option value={tech.toLowerCase()}>{tech}</option>)}
-            </select>
-          </div>
-
-          <button
-            id="clear-project-filters"
-            type="button"
-            class="min-h-12 px-4 rounded-md text-sm font-medium text-primary hover:bg-primary/5 transition-colors cursor-pointer hidden"
-          >
-            Clear filters
-          </button>
-        </div>
-
-        <p
-          id="project-results"
-          class="mt-3 text-sm text-text-secondary"
-          role="status"
-          aria-live="polite"
-        >
-          {PROJECTS.length} projects
-        </p>
-      </div>
+      <ProjectFilters
+        categories={allCategories}
+        technologies={allTechnologies}
+        total={PROJECTS.length}
+      />
 
       <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           PROJECTS.map((p) => (
             <div
               class="project-item"
+              data-category={p.category.toLowerCase()}
               data-technologies={p.technologies.map((tech) => tech.toLowerCase()).join('|')}
-              data-search={`${p.title} ${p.description} ${p.technologies.join(' ')} ${p.tags.join(' ')}`.toLowerCase()}
+              data-search={`${p.title} ${p.description} ${p.category} ${p.technologies.join(' ')} ${p.tags.join(' ')}`.toLowerCase()}
             >
               <ProjectCard project={p} />
             </div>
@@ -88,7 +50,4 @@ const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].so
     </div>
   </section>
 
-  <script>
-    import '../scripts/project-filter';
-  </script>
 </PageLayout>

@@ -89,7 +89,7 @@ const breadcrumbItems = [
                     {item.name}
                   </a>
                 ) : (
-                  <span class="text-(--color-text) font-medium truncate max-w-[200px]">
+                  <span class="text-text font-medium truncate max-w-50">
                     {item.name}
                   </span>
                 )}
@@ -107,7 +107,7 @@ const breadcrumbItems = [
       </a>
 
       <header class="mb-8" data-reveal>
-        <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4">{title}</h1>
+        <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">{title}</h1>
         <div class="flex flex-wrap items-center gap-4 text-sm text-text-secondary">
           <span>{postDate}</span>
           <span
@@ -130,7 +130,7 @@ const breadcrumbItems = [
       </article>
 
       <footer class="mt-12 pt-8 border-t border-border" data-reveal>
-        <p class="text-sm font-medium text-(--color-text) mb-4">Share this post</p>
+        <p class="text-sm font-medium text-text mb-4">Share this post</p>
         <div class="flex items-center gap-3">
           <a
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}

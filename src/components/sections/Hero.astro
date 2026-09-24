@@ -15,7 +15,7 @@ const heroStats = [
   <div class="max-w-6xl mx-auto px-4 w-full py-20 md:py-28 lg:py-32">
     <div class="max-w-4xl">
       <p class="eyebrow mb-6">.NET Backend Engineer <span aria-hidden="true">/</span> Kathmandu, Nepal</p>
-      <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-semibold tracking-[-0.055em] leading-[1.04] text-(--color-text) mb-7">
+      <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-semibold tracking-[-0.055em] leading-[1.04] text-text mb-7">
         {SITE.fullName}<span class="block mt-4 text-3xl sm:text-4xl md:text-6xl text-text-secondary font-normal tracking-[-0.045em]">I build systems that hold up in production.</span>
       </h1>
       <p class="max-w-2xl text-base md:text-lg text-text-secondary leading-relaxed mb-7">
@@ -41,7 +41,7 @@ const heroStats = [
         {
           heroStats.map((stat, index) => (
             <div class:list={['pr-4', index > 0 && 'pl-4 border-l border-border']}>
-              <p class="font-mono text-2xl md:text-3xl tracking-tight text-(--color-text)">
+              <p class="font-mono text-2xl md:text-3xl tracking-tight text-text">
                 {stat.target}{stat.suffix}
               </p>
               <p class="mt-1 text-xs md:text-sm text-text-secondary">{stat.label}</p>

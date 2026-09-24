@@ -14,7 +14,7 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
     <div class="max-w-5xl mx-auto px-4">
       <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8" data-reveal>
         <div>
-          <h1 class="text-3xl md:text-4xl font-bold text-(--color-text)">{SITE.fullName}</h1>
+          <h1 class="text-3xl md:text-4xl font-bold text-text">{SITE.fullName}</h1>
           <p class="text-primary font-medium">{SITE.title}</p>
           <p class="text-sm text-text-secondary">{RESUME.location}</p>
         </div>
@@ -47,7 +47,7 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
               {
                 RESUME.education.map((edu) => (
                   <div>
-                    <h3 class="text-base font-semibold text-(--color-text)">{edu.degree}</h3>
+                    <h3 class="text-base font-semibold text-text">{edu.degree}</h3>
                     <p class="text-sm text-primary">{edu.school}</p>
                     <p class="text-xs text-text-secondary">{edu.dates}</p>
                   </div>

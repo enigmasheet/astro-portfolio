@@ -31,7 +31,7 @@ function getAvatarColor(name: string): string {
     {
       TESTIMONIALS.map((t, i) => (
         <div
-          class="flex-shrink-0 w-full"
+          class="shrink-0 w-full"
           role="group"
           aria-roledescription="slide"
           aria-label={`Testimonial ${i + 1} of ${TESTIMONIALS.length}`}
@@ -39,7 +39,7 @@ function getAvatarColor(name: string): string {
           <blockquote class="bg-surface border border-border rounded-xl p-6 md:p-8 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary">
             <div class="flex items-center gap-3 mb-4">
               <div
-                class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+                class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
                 style={`background-color: ${getAvatarColor(t.name)}`}
                 aria-hidden="true"
               >
@@ -51,12 +51,12 @@ function getAvatarColor(name: string): string {
                     href={t.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-sm font-semibold text-(--color-text) hover:text-primary no-underline transition-colors truncate block"
+                    class="text-sm font-semibold text-text hover:text-primary no-underline transition-colors truncate block"
                   >
                     {t.name}
                   </a>
                 ) : (
-                  <p class="text-sm font-semibold text-(--color-text) truncate">{t.name}</p>
+                  <p class="text-sm font-semibold text-text truncate">{t.name}</p>
                 )}
                 <p class="text-xs text-text-secondary truncate">{t.role}</p>
               </div>

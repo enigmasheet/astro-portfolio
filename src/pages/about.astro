@@ -55,7 +55,10 @@ import { CERTIFICATIONS } from '../data/certifications';
                       )}
                       <div>
                         <p class="text-sm font-medium text-text">{cert.title}</p>
-                        <p class="text-xs text-text-secondary">{cert.issuer}{cert.date ? ` · ${cert.date}` : ''}</p>
+                        <p class="text-xs text-text-secondary">
+                          {cert.issuer}
+                          {cert.date ? ` · ${cert.date}` : ''}
+                        </p>
                       </div>
                     </a>
                   ))}
@@ -63,7 +66,6 @@ import { CERTIFICATIONS } from '../data/certifications';
               </div>
             )
           }
-
         </div>
       </div>
     </div>

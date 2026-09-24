@@ -4,26 +4,30 @@ import { RESUME_PATH } from '../../data/social';
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
-const heroStats = [
-  ABOUT.stats[0],
-  ABOUT.stats[1],
-  ABOUT.stats[3],
-];
+const heroStats = [ABOUT.stats[0], ABOUT.stats[1], ABOUT.stats[3]];
 ---
 
 <section class="hero-section relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 w-full py-20 md:py-28 lg:py-32">
     <div class="max-w-4xl">
-      <p class="eyebrow mb-6">.NET Backend Engineer <span aria-hidden="true">/</span> Kathmandu, Nepal</p>
-      <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-semibold tracking-[-0.055em] leading-[1.04] text-text mb-7">
-        {SITE.fullName}<span class="block mt-4 text-3xl sm:text-4xl md:text-6xl text-text-secondary font-normal tracking-[-0.045em]">I build systems that hold up in production.</span>
+      <p class="eyebrow mb-6">
+        .NET Backend Engineer <span aria-hidden="true">/</span> Kathmandu, Nepal
+      </p>
+      <h1
+        class="hero-title text-4xl sm:text-5xl md:text-7xl font-semibold tracking-[-0.055em] leading-[1.04] text-text mb-7"
+      >
+        {SITE.fullName}<span
+          class="block mt-4 text-3xl sm:text-4xl md:text-6xl text-text-secondary font-normal tracking-[-0.045em]"
+          >I build systems that hold up in production.</span
+        >
       </h1>
       <p class="max-w-2xl text-base md:text-lg text-text-secondary leading-relaxed mb-7">
         {HERO.description}
       </p>
 
       <p class="font-mono text-xs sm:text-sm leading-7 text-text-secondary mb-8">
-        C# <span class="text-text-muted">·</span> .NET <span class="text-text-muted">·</span> ASP.NET Core
+        C# <span class="text-text-muted">·</span> .NET <span class="text-text-muted">·</span> ASP.NET
+        Core
         <span class="text-text-muted">·</span> SQL <span class="text-text-muted">·</span> Azure
       </p>
 
@@ -32,17 +36,24 @@ const heroStats = [
           View selected work <span aria-hidden="true">↗</span>
         </a>
         <a href={base + '#contact'} class="button-secondary">Get in touch</a>
-        <a href={RESUME_PATH} class="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-3 py-3 no-underline">
+        <a
+          href={RESUME_PATH}
+          class="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-3 py-3 no-underline"
+        >
           Resume <span aria-hidden="true">↗</span>
         </a>
       </div>
 
-      <div class="mt-16 md:mt-20 pt-6 border-t border-border grid grid-cols-3 max-w-2xl" aria-label="Career highlights">
+      <div
+        class="mt-16 md:mt-20 pt-6 border-t border-border grid grid-cols-3 max-w-2xl"
+        aria-label="Career highlights"
+      >
         {
           heroStats.map((stat, index) => (
             <div class:list={['pr-4', index > 0 && 'pl-4 border-l border-border']}>
               <p class="font-mono text-2xl md:text-3xl tracking-tight text-text">
-                {stat.target}{stat.suffix}
+                {stat.target}
+                {stat.suffix}
               </p>
               <p class="mt-1 text-xs md:text-sm text-text-secondary">{stat.label}</p>
             </div>
@@ -88,7 +99,10 @@ const heroStats = [
     font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
-    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease;
   }
 
   .button-primary {

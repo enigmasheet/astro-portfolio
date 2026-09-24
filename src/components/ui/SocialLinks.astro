@@ -31,7 +31,11 @@ function getIcon(name: string) {
           aria-label={link.label}
           title={link.label}
         >
-          {Icon && <span aria-hidden="true"><Icon /></span>}
+          {Icon && (
+            <span aria-hidden="true">
+              <Icon />
+            </span>
+          )}
         </a>
       );
     })

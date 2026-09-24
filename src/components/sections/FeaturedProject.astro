@@ -16,7 +16,11 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
 
 <article class:list={['work-entry', featured && 'work-entry-featured']} data-reveal>
   <div class="work-copy">
-    <p class="work-index">{String(index).padStart(2, '0')} <span aria-hidden="true">/</span> {project.tags[0]}</p>
+    <p class="work-index">
+      {String(index).padStart(2, '0')}
+      <span aria-hidden="true">/</span>
+      {project.tags[0]}
+    </p>
     <h3 class="work-title"><a href={base + 'projects/' + project.slug}>{project.title}</a></h3>
     <p class="work-description">{project.description}</p>
 
@@ -48,12 +52,20 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
 
   {
     image ? (
-      <a class="work-image" href={base + 'projects/' + project.slug} aria-label={`View ${project.title} project details`}>
+      <a
+        class="work-image"
+        href={base + 'projects/' + project.slug}
+        aria-label={`View ${project.title} project details`}
+      >
         <img src={image} alt={`${project.title} interface`} loading={featured ? 'eager' : 'lazy'} />
         <span class="work-image-caption">{project.tags.slice(0, 2).join(' / ')}</span>
       </a>
     ) : (
-      <a class="work-image work-image-placeholder" href={base + 'projects/' + project.slug} aria-label={`View ${project.title} project details`}>
+      <a
+        class="work-image work-image-placeholder"
+        href={base + 'projects/' + project.slug}
+        aria-label={`View ${project.title} project details`}
+      >
         <span class="font-mono text-sm">{project.title}</span>
       </a>
     )

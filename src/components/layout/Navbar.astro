@@ -14,7 +14,11 @@ const contactHref = base + '#contact';
   transition:name="navbar"
 >
   <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    <a href={base} class="text-base font-semibold tracking-tight no-underline text-text" aria-label="Abhay Kumar Mandal home">
+    <a
+      href={base}
+      class="text-base font-semibold tracking-tight no-underline text-text"
+      aria-label="Abhay Kumar Mandal home"
+    >
       Abhay <span class="text-primary">/</span>
     </a>
 
@@ -30,8 +34,16 @@ const contactHref = base + '#contact';
           </a>
         ))
       }
-      <a href={RESUME_PATH} class="ml-3 px-3 py-2 text-sm font-medium text-text-secondary hover:text-primary transition-colors no-underline">Resume</a>
-      <a href={contactHref} class="ml-1 px-3.5 py-2 text-sm font-medium border border-border-strong rounded-sm text-text hover:border-primary hover:text-primary transition-colors no-underline">Contact</a>
+      <a
+        href={RESUME_PATH}
+        class="ml-3 px-3 py-2 text-sm font-medium text-text-secondary hover:text-primary transition-colors no-underline"
+        >Resume</a
+      >
+      <a
+        href={contactHref}
+        class="ml-1 px-3.5 py-2 text-sm font-medium border border-border-strong rounded-sm text-text hover:border-primary hover:text-primary transition-colors no-underline"
+        >Contact</a
+      >
       <span class="ml-2"><ThemeToggle /></span>
     </div>
 
@@ -54,7 +66,8 @@ const contactHref = base + '#contact';
   id="drawer-backdrop"
   class="fixed inset-0 z-30 bg-black/30 md:hidden invisible opacity-0 transition-[opacity,visibility] duration-200 ease-in-out"
   aria-hidden="true"
-></div>
+>
+</div>
 <div
   id="mobile-drawer"
   class="fixed top-16 left-0 right-0 z-40 bg-surface border-b border-border md:hidden invisible opacity-0 -translate-y-2 transition-[opacity,transform,visibility] duration-200 ease-in-out"

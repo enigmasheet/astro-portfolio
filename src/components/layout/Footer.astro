@@ -42,7 +42,11 @@ const year = new Date().getFullYear();
                 aria-label={link.label}
                 title={link.label}
               >
-                {Icon && <span aria-hidden="true"><Icon /></span>}
+                {Icon && (
+                  <span aria-hidden="true">
+                    <Icon />
+                  </span>
+                )}
               </a>
             );
           })

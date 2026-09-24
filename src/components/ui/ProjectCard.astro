@@ -10,8 +10,10 @@ const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
 const imgSrc = hasImage ? base + project.imageUrls[0] : '';
 
 function getStatus(): { label: string; color: string } | undefined {
-  if (project.liveDemoActive && project.liveDemo) return { label: 'Live', color: 'text-[var(--success)] bg-[var(--success)]/10' };
-  if (!project.liveDemoActive && project.liveDemo) return { label: 'Offline', color: 'text-[var(--danger)] bg-[var(--danger)]/10' };
+  if (project.liveDemoActive && project.liveDemo)
+    return { label: 'Live', color: 'text-[var(--success)] bg-[var(--success)]/10' };
+  if (!project.liveDemoActive && project.liveDemo)
+    return { label: 'Offline', color: 'text-[var(--danger)] bg-[var(--danger)]/10' };
   return undefined;
 }
 const status = getStatus();
@@ -25,7 +27,7 @@ const status = getStatus();
     imgSrc && (
       <div class="relative aspect-video overflow-hidden bg-bg">
         <div class="absolute inset-0 bg-linear-to-t from-(--accent)/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
-        <div class="absolute inset-0 bg-border/20 animate-pulse" aria-hidden="true"></div>
+        <div class="absolute inset-0 bg-border/20 animate-pulse" aria-hidden="true" />
         <img
           src={imgSrc}
           alt={project.title}
@@ -36,7 +38,12 @@ const status = getStatus();
           style="transition: filter 0.5s ease"
         />
         {status && (
-          <span class:list={['absolute top-2 right-2 z-10 px-2 py-0.5 text-xs font-semibold rounded-sm backdrop-blur-sm', status.color]}>
+          <span
+            class:list={[
+              'absolute top-2 right-2 z-10 px-2 py-0.5 text-xs font-semibold rounded-sm backdrop-blur-sm',
+              status.color,
+            ]}
+          >
             {status.label}
           </span>
         )}
@@ -98,7 +105,6 @@ const status = getStatus();
           </a>
         )
       }
-
     </div>
   </div>
 </article>

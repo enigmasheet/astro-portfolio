@@ -36,8 +36,7 @@ import { FORMSPREE_URL } from '../data/social';
           <input type="hidden" name="_subject" value="Portfolio Contact" />
 
           <div>
-            <label for="name" class="block text-sm font-medium text-text mb-1">Name</label
-            >
+            <label for="name" class="block text-sm font-medium text-text mb-1">Name</label>
             <input
               type="text"
               id="name"
@@ -50,9 +49,7 @@ import { FORMSPREE_URL } from '../data/social';
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-text mb-1"
-              >Email</label
-            >
+            <label for="email" class="block text-sm font-medium text-text mb-1">Email</label>
             <input
               type="email"
               id="email"
@@ -66,9 +63,7 @@ import { FORMSPREE_URL } from '../data/social';
           </div>
 
           <div>
-            <label for="message" class="block text-sm font-medium text-text mb-1"
-              >Message</label
-            >
+            <label for="message" class="block text-sm font-medium text-text mb-1">Message</label>
             <textarea
               id="message"
               name="message"
@@ -88,9 +83,24 @@ import { FORMSPREE_URL } from '../data/social';
             id="submit-btn"
             class="w-full px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
           >
-            <svg class="w-4 h-4 hidden animate-spin" id="btn-spinner" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            <svg
+              class="w-4 h-4 hidden animate-spin"
+              id="btn-spinner"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
             </svg>
             <span id="btn-label">Send Message</span>
           </button>

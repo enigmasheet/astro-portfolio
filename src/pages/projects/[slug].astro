@@ -18,7 +18,10 @@ if (!project) {
   Astro.redirect(base + '404');
 }
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
-const projectNumber = String(PROJECTS.findIndex((item) => item.slug === project.slug) + 1).padStart(2, '0');
+const projectNumber = String(PROJECTS.findIndex((item) => item.slug === project.slug) + 1).padStart(
+  2,
+  '0',
+);
 const projectContext = project.caseStudy?.context || project.description;
 const projectCapabilities = project.caseStudy?.capabilities || project.tags;
 const breadcrumbItems = [
@@ -28,7 +31,12 @@ const breadcrumbItems = [
 ];
 ---
 
-<PageLayout title={project.title} description={project.description} canonical={`${SITE_URL}/projects/${project.slug}/`} ogImage={hasImage ? `${SITE_URL}/${project.imageUrls[0]}` : `${SITE_URL}/og-image.png`}>
+<PageLayout
+  title={project.title}
+  description={project.description}
+  canonical={`${SITE_URL}/projects/${project.slug}/`}
+  ogImage={hasImage ? `${SITE_URL}/${project.imageUrls[0]}` : `${SITE_URL}/og-image.png`}
+>
   <script
     is:inline
     type="application/ld+json"
@@ -64,9 +72,15 @@ const breadcrumbItems = [
           {
             breadcrumbItems.map((item, i) => (
               <li class="flex items-center gap-2">
-                {i > 0 && <span class="text-text-muted" aria-hidden="true">/</span>}
+                {i > 0 && (
+                  <span class="text-text-muted" aria-hidden="true">
+                    /
+                  </span>
+                )}
                 {i < breadcrumbItems.length - 1 ? (
-                  <a href={item.url} class="hover:text-primary transition-colors no-underline">{item.name}</a>
+                  <a href={item.url} class="hover:text-primary transition-colors no-underline">
+                    {item.name}
+                  </a>
                 ) : (
                   <span class="text-text font-medium">{item.name}</span>
                 )}
@@ -79,7 +93,11 @@ const breadcrumbItems = [
       <a href={base + 'projects/'} class="back-link">← All projects</a>
 
       <header class="project-header" data-reveal>
-        <p class="project-eyebrow">{projectNumber} <span aria-hidden="true">/</span> {project.tags[0]}</p>
+        <p class="project-eyebrow">
+          {projectNumber}
+          <span aria-hidden="true">/</span>
+          {project.tags[0]}
+        </p>
         <h1>{project.title}</h1>
         <p class="project-summary">{project.description}</p>
       </header>

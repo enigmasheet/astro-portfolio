@@ -35,7 +35,13 @@ const breadcrumbItems = [
 ];
 ---
 
-<PageLayout title={title} description={summary} canonical={shareUrl} ogType="article" ogImage={`${SITE_URL}/og-image.png`}>
+<PageLayout
+  title={title}
+  description={summary}
+  canonical={shareUrl}
+  ogType="article"
+  ogImage={`${SITE_URL}/og-image.png`}
+>
   <script
     is:inline
     type="application/ld+json"
@@ -89,9 +95,7 @@ const breadcrumbItems = [
                     {item.name}
                   </a>
                 ) : (
-                  <span class="text-text font-medium truncate max-w-50">
-                    {item.name}
-                  </span>
+                  <span class="text-text font-medium truncate max-w-50">{item.name}</span>
                 )}
               </li>
             ))

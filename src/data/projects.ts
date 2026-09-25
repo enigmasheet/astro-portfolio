@@ -2,7 +2,6 @@ import type { Project } from '../types';
 import hmcNepal from '../assets/images/hmc-nepal.png';
 import inventoryManagement from '../assets/images/inventory-management.png';
 import laundryManagement from '../assets/images/laundry-management.png';
-import portfolio from '../assets/images/portfolio.svg';
 import teachMateLanding from '../assets/images/TeachMate_Landing_Page.png';
 import vatExpenseDashboard from '../assets/images/vatExpenst_Dashboard.png';
 import vatExpenseLogin from '../assets/images/vatExpenst_Login.png';

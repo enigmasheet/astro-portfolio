@@ -106,26 +106,24 @@ const breadcrumbItems = [
         <p class="project-summary">{project.description}</p>
       </header>
 
-      {
-        <div class="project-visuals" data-reveal>
-          {project.images.length > 0 ? (
-            project.images.map((image, index) => (
-              <figure class="project-visual">
-                <Image
-                  src={image}
-                  alt={project.imageAlts?.[index] ?? `${project.title} interface screenshot ${index + 1}`}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  data-lightbox
-                />
-              </figure>
-            ))
-          ) : (
-            <div class="project-visual-fallback">
-              <ProjectImageFallback project={project} variant="featured" />
-            </div>
-          )}
+      <div class="project-visuals" data-reveal>
+        {project.images.length > 0 ? (
+          project.images.map((image, index) => (
+            <figure class="project-visual">
+              <Image
+                src={image}
+                alt={project.imageAlts?.[index] ?? `${project.title} interface screenshot ${index + 1}`}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                data-lightbox
+              />
+            </figure>
+          ))
+        ) : (
+          <div class="project-visual-fallback">
+            <ProjectImageFallback project={project} variant="featured" />
           </div>
-      }
+        )}
+      </div>
 
       {
         projectScale.length > 0 && (

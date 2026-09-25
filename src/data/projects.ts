@@ -8,39 +8,6 @@ import vatExpenseLogin from '../assets/images/vatExpenst_Login.png';
 
 export const PROJECTS: Project[] = [
   {
-    slug: 'transport-expenditure-tracker',
-    title: 'Transport Expenditure Tracker',
-    description:
-      'A .NET web application for recording and tracking transport-related expenses, with reporting and data visualization built on ASP.NET Core, Entity Framework, Blazor, and SQL Server.',
-    category: 'Web app',
-    images: [],
-    githubLink: 'https://github.com/enigmasheet/TransportExpenditureTracker',
-    liveDemo: 'https://transportexpense.azurewebsites.net/',
-    liveDemoActive: false,
-    technologies: ['ASP.NET Core', 'C#', 'Entity Framework', 'Blazor', 'SQL Server'],
-    tags: ['Web App', 'Finance', 'Productivity'],
-    caseStudy: {
-      context:
-        'Transport expenses were tracked in spreadsheets, which made entries inconsistent and made it hard to see spending across vehicles and routes over time.',
-      solution:
-        'Transport Expenditure Tracker records transport-related expenses and presents them through reports and charts, using ASP.NET Core for the application and Blazor for the interface.',
-      capabilities: [
-        'Record and categorize transport expenses',
-        'Track spending over time with reports',
-        'Visualize cost patterns with charts',
-        'Manage records through Entity Framework and SQL Server',
-      ],
-      architecture: [
-        'ASP.NET Core provides the application and data services, with Entity Framework handling data access against SQL Server.',
-        'Blazor renders the interface in C#, keeping the UI and backend in the same .NET ecosystem.',
-      ],
-      decisions: [
-        'Keep the interface and backend in the same C# ecosystem so models and logic stay consistent end to end.',
-        'Model expense records in SQL Server through Entity Framework to support the reporting views.',
-      ],
-    },
-  },
-  {
     slug: 'vat-expense-ledger',
     title: 'VAT Expense Ledger',
     description:
@@ -90,40 +57,6 @@ export const PROJECTS: Project[] = [
         'Parse and validate Miti dates explicitly, then derive the fiscal year using the Nepali fiscal-year start month (Shrawan).',
         'Use a preview-and-confirm import flow so party/category suggestions and duplicate warnings can be reviewed before invoices are committed.',
         'Scope ledger and master-data records by company to support multiple businesses in one installation.',
-      ],
-    },
-  },
-  {
-    slug: 'hotel-booking-api',
-    title: 'Hotel Booking API',
-    description:
-      'A .NET RESTful API for hotel booking management with JWT authentication, authorization, request validation, and Swagger documentation for client developers.',
-    category: 'API',
-    images: [],
-    githubLink: 'https://github.com/enigmasheet/HotelBookingAPI',
-    liveDemo: '',
-    liveDemoActive: false,
-    technologies: ['ASP.NET Core', 'C#', 'JWT Authentication', 'Swagger', 'REST API'],
-    tags: ['API', 'Backend', 'Authentication'],
-    caseStudy: {
-      context:
-        'Booking systems need a clear, secured API contract that other clients can rely on for hotel and reservation data.',
-      solution:
-        'A RESTful API for hotel booking management that exposes endpoints for booking data with authentication, authorization, and request validation.',
-      capabilities: [
-        'RESTful endpoints for hotel and booking data',
-        'JWT-based authentication and authorization',
-        'Request validation for booking operations',
-        'Interactive API documentation with Swagger',
-      ],
-      architecture: [
-        'ASP.NET Core hosts the API and handles routing, model binding, and validation.',
-        'JWT authentication secures endpoints and separates authenticated access from public operations.',
-        'Swagger documents the available endpoints and request/response shapes for client developers.',
-      ],
-      decisions: [
-        'Use token-based authentication so API clients can authenticate without server-side sessions.',
-        'Document endpoints with Swagger so the API contract stays discoverable as it changes.',
       ],
     },
   },
@@ -283,27 +216,86 @@ export const PROJECTS: Project[] = [
     slug: 'personal-portfolio',
     title: 'Personal Portfolio',
     description:
-      'An earlier version of my personal portfolio, built with Blazor WebAssembly and deployed to Azure Static Web Apps. The current site you are viewing is a separate Astro rebuild.',
+      'The current version of my personal portfolio: a static Astro site for project case studies, experience, an engineering blog, and my resume. Built with Astro 7, TypeScript, and Tailwind CSS 4.',
     category: 'Web app',
     images: [],
-    githubLink: 'https://github.com/enigmasheet/PersonalPortfolio.v1',
-    liveDemo: '',
-    liveDemoActive: false,
-    technologies: ['Blazor', 'C#', 'CSS', 'JavaScript', 'Azure Static Web Apps'],
-    tags: ['Portfolio', 'Web Development'],
+    githubLink: 'https://github.com/enigmasheet/astro-portfolio',
+    liveDemo: 'https://abhaymandal.com.np/',
+    liveDemoActive: true,
+    technologies: ['Astro 7', 'TypeScript', 'Tailwind CSS 4', 'MDX', 'Vite'],
+    tags: ['Portfolio', 'Astro', 'Static Site', 'Technical Writing'],
     caseStudy: {
       context:
-        'I wanted a personal site for projects, experience, and writing, and used it as a chance to build a full application with Blazor WebAssembly.',
+        'I wanted one home for project case studies, experience, technical writing, and my resume. The current site replaces an earlier Blazor WebAssembly portfolio with a content-focused static build.',
       solution:
-        'A Blazor WebAssembly single-page site with CSS-variable theming and static content, deployed to Azure Static Web Apps.',
+        'Astro generates the portfolio pages from typed TypeScript content modules and Markdown/MDX blog posts. Reusable layouts and components present project details, career information, and writing, with small browser scripts for theme switching and interactive filters.',
       capabilities: [
-        'Projects, experience, and blog content',
-        'Light and dark theming with CSS variables',
-        'Static deployment to Azure Static Web Apps',
+        'Project directory with category and technology filters, search, and generated case-study pages',
+        'Experience, skills, profile, and resume pages with PDF download and print support',
+        'Markdown/MDX engineering blog with an RSS feed',
+        'Responsive layouts with persistent light and dark themes',
+        'Canonical and Open Graph metadata, structured data, sitemap, and optimized images',
+      ],
+      architecture: [
+        'Astro 7 builds the site as static pages; project detail routes are generated from the typed PROJECTS collection.',
+        'Typed TypeScript modules hold site, project, experience, and skills data, while Astro content collections load Markdown/MDX articles.',
+        'Tailwind CSS 4 is integrated through Vite; small JavaScript modules handle theme, navigation, filters, and progressive interactions.',
+        'Astro integrations generate the sitemap and support MDX; the site also publishes an RSS feed and structured metadata.',
       ],
       decisions: [
-        'Kept content static so the site could be hosted without a backend.',
-        'Used Blazor WebAssembly to build the interface in C# rather than JavaScript.',
+        'Use static generation for a content-focused site that does not need a runtime application server or database.',
+        'Keep structured portfolio data in typed modules and long-form writing in Markdown/MDX so each content type stays easy to maintain.',
+        'Limit browser-side JavaScript to interactions such as theme switching, project filtering, and navigation.',
+      ],
+    },
+  },
+  {
+    slug: 'graphql-dotnet-practice',
+    title: 'GraphQL .NET Practice',
+    description:
+      'An end-to-end GraphQL learning project with a Hot Chocolate API and a Blazor WebAssembly client generated with Strawberry Shake. Its sample blog schema demonstrates Relay pagination, filtering, sorting, DataLoaders, typed mutation errors, global IDs, and WebSocket subscriptions.',
+    category: 'API',
+    images: [],
+    githubLink: 'https://github.com/enigmasheet/GraphQL_DotNet_Practice',
+    liveDemo: '',
+    liveDemoActive: false,
+    technologies: [
+      '.NET 10',
+      'C#',
+      'Hot Chocolate 16',
+      'GraphQL',
+      'Entity Framework Core 10',
+      'PostgreSQL',
+      'Npgsql',
+      'Blazor WebAssembly',
+      'Strawberry Shake 16',
+    ],
+    tags: ['GraphQL', '.NET 10', 'Blazor WebAssembly', 'Developer Education'],
+    caseStudy: {
+      context:
+        'I built this project to study GraphQL end to end—from schema design and database-backed resolvers to a typed client—using a small blog domain that makes nested queries, pagination, and real-time events easy to explore.',
+      solution:
+        'A code-first Hot Chocolate API serves authors, posts, comments, and tags from PostgreSQL. A Blazor WebAssembly client uses Strawberry Shake-generated operations to query and mutate the data, while a guided study series and Postman collection make the GraphQL concepts reproducible.',
+      capabilities: [
+        'Relay connection pagination with filtering, sorting, projections, and bounded page sizes',
+        'Global object identification with the Node interface and opaque GraphQL IDs',
+        'Nested author and post resolvers with DataLoaders to batch related database lookups',
+        'Post and comment mutations with typed domain errors',
+        'WebSocket subscriptions for post publication and new comments',
+        'Blazor client for browsing, filtering, paging, creating posts, and receiving subscription events',
+        'Guided study series, schema tour, query cookbook, and runnable Postman operations',
+      ],
+      architecture: [
+        'A .NET 10 ASP.NET Core API uses Hot Chocolate 16 in a modular-monolith structure, with separate Authors, Posts, Comments, and Tags modules.',
+        'Entity Framework Core 10 and Npgsql persist the blog domain in PostgreSQL; migrations and development seed data support local setup.',
+        'The Blazor WebAssembly client uses Strawberry Shake 16 to generate a typed C# client from GraphQL operation documents.',
+        'The API exposes GraphQL over HTTP and WebSocket subscriptions, plus Nitro for exploration and an SDL schema endpoint.',
+      ],
+      decisions: [
+        'Organize schema types, resolvers, data configuration, and registrations by domain module while sharing the blog entities and database context.',
+        'Use Relay connections and global node IDs to demonstrate stable cursor-based pagination and client-independent object identity.',
+        'Apply selection-aware EF queries and DataLoaders to avoid unnecessary data retrieval and repeated nested lookups.',
+        'Use in-memory subscriptions for local learning and explicitly keep authentication, authorization, and distributed subscription infrastructure out of scope.',
       ],
     },
   },

@@ -362,13 +362,48 @@ export const PROJECTS: Project[] = [
     slug: 'smart-greenhouse',
     title: 'Local Farm: Smart Greenhouse',
     description:
-      'IoT-enabled system for real-time monitoring and automated control of greenhouse environments using Blazor and sensor data.',
+      'A greenhouse monitoring dashboard paired with NodeMCU/Arduino sensor hardware. The React app manages greenhouse profiles and environmental thresholds, visualizes temperature, humidity, and soil-moisture readings stored in Firebase, and exports sensor history and reported device status.',
     category: 'IoT',
     images: [],
     githubLink: 'https://github.com/enigmasheet/LocalFarm',
-    liveDemo: 'https://zealous-glacier-0fddea800.4.azurestaticapps.net/',
+    liveDemo: '',
     liveDemoActive: false,
-    technologies: ['NodeMCU', 'IoT', 'React', 'JS', 'Arduino'],
-    tags: ['IoT', 'Automation', 'Agriculture'],
+    technologies: [
+      'NodeMCU',
+      'Arduino',
+      'IoT Sensors',
+      'React 18',
+      'JavaScript',
+      'Vite 5',
+      'Firebase Authentication',
+      'Firebase Realtime Database',
+      'Recharts',
+      'Tailwind CSS 3',
+    ],
+    tags: ['IoT', 'Greenhouse Monitoring', 'Firebase', 'Data Visualization'],
+    caseStudy: {
+      context:
+        'Greenhouse operators need to review environmental readings against target levels. LocalFarm groups greenhouse settings, sensor readings, and reported system status so users can inspect conditions by greenhouse.',
+      solution:
+        'A Vite-built React single-page app uses Firebase Authentication for sign-in and Firebase Realtime Database for greenhouse profiles, sensor readings, and system-state data from the separate NodeMCU/Arduino setup. Greenhouse pages chart readings against configured thresholds, show the latest values, and offer CSV export.',
+      capabilities: [
+        'Create, update, and remove greenhouse profiles with plant details and temperature, humidity, and soil-moisture thresholds',
+        'Visualize temperature, humidity, and soil-moisture readings from Firebase with threshold reference lines',
+        'Review latest sensor readings and reported ventilation and water-pump status',
+        'Export greenhouse details, historical readings, thresholds, and system status as CSV',
+        'Register accounts, sign in, and request password resets through Firebase Authentication',
+      ],
+      architecture: [
+        'The React 18 frontend is built with Vite and uses React Router for the greenhouse list, detail, settings, and account pages.',
+        'Firebase Authentication manages user sign-in; Firebase Realtime Database stores greenhouse metadata, sensor readings, and reported system state.',
+        'Recharts renders sensor histories with configured temperature, humidity, and moisture thresholds; CSV reports are generated in the browser.',
+        'A GitHub Actions workflow builds the static app and deploys it to Azure Static Web Apps.',
+      ],
+      decisions: [
+        'Keep greenhouse configuration and sensor data keyed by greenhouse so each detail view can load its profile, thresholds, readings, and reported device status together.',
+        'Show configured thresholds directly on sensor charts to make readings easier to compare with each greenhouse’s target ranges.',
+        'Generate CSV reports client-side from the selected greenhouse and its available sensor history.',
+      ],
+    },
   },
 ];

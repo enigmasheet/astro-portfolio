@@ -1,12 +1,9 @@
 import type { Project } from '../types';
-import greenhouse from '../assets/images/greenhouse.svg';
 import hmcNepal from '../assets/images/hmc-nepal.png';
-import hotelBooking from '../assets/images/hotel-booking.svg';
 import inventoryManagement from '../assets/images/inventory-management.png';
 import laundryManagement from '../assets/images/laundry-management.png';
 import portfolio from '../assets/images/portfolio.svg';
 import teachMateLanding from '../assets/images/TeachMate_Landing_Page.png';
-import transport from '../assets/images/transport.svg';
 import vatExpenseDashboard from '../assets/images/vatExpenst_Dashboard.png';
 import vatExpenseLogin from '../assets/images/vatExpenst_Login.png';
 
@@ -17,7 +14,7 @@ export const PROJECTS: Project[] = [
     description:
       'A .NET web application for recording and tracking transport-related expenses, with reporting and data visualization built on ASP.NET Core, Entity Framework, Blazor, and SQL Server.',
     category: 'Web app',
-    images: [transport],
+    images: [],
     githubLink: 'https://github.com/enigmasheet/TransportExpenditureTracker',
     liveDemo: 'https://transportexpense.azurewebsites.net/',
     liveDemoActive: false,
@@ -103,7 +100,7 @@ export const PROJECTS: Project[] = [
     description:
       'A .NET RESTful API for hotel booking management with JWT authentication, authorization, request validation, and Swagger documentation for client developers.',
     category: 'API',
-    images: [hotelBooking],
+    images: [],
     githubLink: 'https://github.com/enigmasheet/HotelBookingAPI',
     liveDemo: '',
     liveDemoActive: false,
@@ -237,7 +234,7 @@ export const PROJECTS: Project[] = [
     description:
       'An earlier version of my personal portfolio, built with Blazor WebAssembly and deployed to Azure Static Web Apps. The current site you are viewing is a separate Astro rebuild.',
     category: 'Web app',
-    images: [portfolio],
+    images: [],
     githubLink: 'https://github.com/enigmasheet/PersonalPortfolio.v1',
     liveDemo: '',
     liveDemoActive: false,
@@ -287,7 +284,7 @@ export const PROJECTS: Project[] = [
     description:
       'IoT-enabled system for real-time monitoring and automated control of greenhouse environments using Blazor and sensor data.',
     category: 'IoT',
-    images: [greenhouse],
+    images: [],
     githubLink: 'https://github.com/enigmasheet/LocalFarm',
     liveDemo: 'https://zealous-glacier-0fddea800.4.azurestaticapps.net/',
     liveDemoActive: false,

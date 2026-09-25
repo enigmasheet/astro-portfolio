@@ -3,6 +3,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import { PROJECTS } from '../../data/projects';
 import { SITE_URL } from '../../data/social';
 import TechIcon from '../../components/ui/icons/TechIcon.astro';
+import ProjectImageFallback from '../../components/ui/ProjectImageFallback.astro';
 import type { Project } from '../../types';
 import { Image } from 'astro:assets';
 
@@ -106,9 +107,9 @@ const breadcrumbItems = [
       </header>
 
       {
-        project.images.length > 0 && (
-          <div class="project-visuals" data-reveal>
-            {project.images.map((image, index) => (
+        <div class="project-visuals" data-reveal>
+          {project.images.length > 0 ? (
+            project.images.map((image, index) => (
               <figure class="project-visual">
                 <Image
                   src={image}
@@ -117,9 +118,13 @@ const breadcrumbItems = [
                   data-lightbox
                 />
               </figure>
-            ))}
+            ))
+          ) : (
+            <div class="project-visual-fallback">
+              <ProjectImageFallback project={project} variant="featured" />
+            </div>
+          )}
           </div>
-        )
       }
 
       {
@@ -295,6 +300,12 @@ const breadcrumbItems = [
       background: var(--bg-surface);
     }
 
+    .project-visual-fallback {
+      aspect-ratio: 16 / 8.5;
+      overflow: hidden;
+      border-radius: 0.4rem;
+    }
+
     .project-visual img {
       width: 100%;
       height: 100%;
@@ -444,6 +455,10 @@ const breadcrumbItems = [
 
     @media (max-width: 768px) {
       .project-visual {
+        aspect-ratio: 4 / 3;
+      }
+
+      .project-visual-fallback {
         aspect-ratio: 4 / 3;
       }
 

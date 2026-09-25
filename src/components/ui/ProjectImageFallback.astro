@@ -1,0 +1,238 @@
+---
+import type { Project } from '../../types';
+
+interface Props {
+  project: Project;
+  variant?: 'card' | 'featured';
+}
+
+const { project, variant = 'card' } = Astro.props;
+const monogram = project.title.match(/\b\w/g)?.slice(0, 2).join('').toUpperCase() ?? 'PR';
+const technologies = project.technologies.slice(0, 3);
+const metrics = project.caseStudy?.scale?.slice(0, 2) ?? [];
+---
+
+<div
+  class:list={['project-cover', `project-cover-${variant}`]}
+  data-category={project.category.toLowerCase()}
+  aria-hidden="true"
+>
+  <div class="cover-grid"></div>
+  <div class="cover-watermark">{monogram}</div>
+
+  <div class="cover-header">
+    <span>PROJECT / {project.category}</span>
+    <span class="cover-status">CASE FILE</span>
+  </div>
+
+  <div class="cover-main">
+    <span class="cover-monogram">{monogram}</span>
+    <div class="cover-heading">
+      <p>{project.tags[0] ?? 'Selected work'}</p>
+      <h3>{project.title}</h3>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <span class="cover-stack-label">BUILT WITH</span>
+    <div class="cover-technologies">
+      {technologies.map((technology) => <span>{technology}</span>)}
+    </div>
+    {
+      metrics.length > 0 && (
+        <div class="cover-metrics">
+          {metrics.map((metric) => (
+            <span>
+              <strong>{metric.value}</strong>
+              {metric.label}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .project-cover {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    height: 100%;
+    min-height: 13rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: clamp(1rem, 3vw, 1.75rem);
+    border: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse at 85% 10%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 42%),
+      linear-gradient(135deg, var(--bg-surface-2), var(--bg-surface) 58%, var(--bg-page));
+    color: var(--text-primary);
+  }
+
+  .cover-grid {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.38;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--border) 70%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--border) 70%, transparent) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+    mask-image: linear-gradient(135deg, black, transparent 82%);
+  }
+
+  .cover-watermark {
+    position: absolute;
+    z-index: -1;
+    right: -0.04em;
+    bottom: -0.3em;
+    color: color-mix(in srgb, var(--accent) 12%, transparent);
+    font-size: clamp(8rem, 20vw, 17rem);
+    font-weight: 700;
+    letter-spacing: -0.12em;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .cover-header,
+  .cover-status,
+  .cover-main,
+  .cover-technologies,
+  .cover-metrics,
+  .cover-metrics span {
+    display: flex;
+  }
+
+  .cover-header {
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cover-status {
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .cover-status::before {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--accent);
+    content: '';
+  }
+
+  .cover-main {
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    margin: 1.5rem 0;
+  }
+
+  .cover-monogram {
+    flex: 0 0 auto;
+    width: clamp(3.25rem, 7vw, 5rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--accent) 60%, var(--border));
+    border-radius: 0.35rem;
+    background: color-mix(in srgb, var(--accent) 12%, var(--bg-surface));
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: -0.08em;
+  }
+
+  .cover-heading {
+    min-width: 0;
+  }
+
+  .cover-heading p,
+  .cover-stack-label {
+    margin: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cover-heading h3 {
+    max-width: 20ch;
+    margin: 0.35rem 0 0;
+    color: var(--text-primary);
+    font-size: clamp(1.1rem, 2.7vw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.1;
+  }
+
+  .cover-footer {
+    position: relative;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .cover-technologies {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.55rem;
+  }
+
+  .cover-technologies span {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0.25rem 0.45rem;
+    border: 1px solid var(--border);
+    border-radius: 0.2rem;
+    background: color-mix(in srgb, var(--bg-page) 70%, transparent);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .cover-metrics {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 0.65rem;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+  }
+
+  .cover-metrics span {
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+
+  .cover-metrics strong {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .project-cover-featured {
+    padding: clamp(1.25rem, 3.5vw, 2.25rem);
+  }
+
+  @media (max-width: 420px) {
+    .cover-status {
+      display: none;
+    }
+
+    .cover-header {
+      font-size: 0.55rem;
+    }
+  }
+</style>

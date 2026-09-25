@@ -1,6 +1,7 @@
 ---
 import type { Project } from '../../types';
 import { Image } from 'astro:assets';
+import ProjectImageFallback from './ProjectImageFallback.astro';
 import TechIcon from './icons/TechIcon.astro';
 export interface Props {
   project: Project;
@@ -51,16 +52,8 @@ const status = getStatus();
         )}
       </div>
     ) : (
-      <div class="relative aspect-video overflow-hidden border-b border-border bg-linear-to-br from-surface to-bg p-5 flex flex-col justify-between">
-        <p class="font-mono text-[0.65rem] tracking-wide uppercase text-primary">
-          {project.category} <span class="text-text-muted">/ Project</span>
-        </p>
-        <p class="max-w-[18ch] text-2xl md:text-3xl font-semibold leading-tight tracking-tight text-text">
-          {project.title}
-        </p>
-        <p class="font-mono text-[0.65rem] text-text-secondary line-clamp-1">
-          {project.technologies.slice(0, 3).join(' · ')}
-        </p>
+      <div class="relative aspect-video overflow-hidden border-b border-border">
+        <ProjectImageFallback project={project} />
       </div>
     )
   }

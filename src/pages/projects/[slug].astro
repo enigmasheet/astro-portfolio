@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import { PROJECTS } from '../../data/projects';
 import { SITE_URL } from '../../data/social';
+import TechIcon from '../../components/ui/icons/TechIcon.astro';
 import type { Project } from '../../types';
 
 const rawBase = import.meta.env.BASE_URL;
@@ -186,7 +187,16 @@ const breadcrumbItems = [
         <aside class="project-facts" aria-label="Project details">
           <section>
             <h2>Technology</h2>
-            <p>{project.technologies.join(' · ')}</p>
+            <ul class="tech-list">
+              {
+                project.technologies.map((tech) => (
+                  <li>
+                    <TechIcon name={tech} class="w-3.5 h-3.5 shrink-0" />
+                    <span>{tech}</span>
+                  </li>
+                ))
+              }
+            </ul>
           </section>
           <section>
             <h2>Project type</h2>
@@ -385,6 +395,24 @@ const breadcrumbItems = [
     .project-facts p,
     .project-actions a {
       margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.9rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tech-list li {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       color: var(--text-secondary);
       font-size: 0.82rem;
       line-height: 1.7;

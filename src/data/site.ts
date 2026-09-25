@@ -10,18 +10,30 @@ import type {
 export const SITE: SiteInfo = {
   name: 'Abhay',
   fullName: 'Abhay Kumar Mandal',
-  title: '.NET Backend Engineer',
-  shortTitle: '.NET Backend Engineer',
+  title: 'Full-Stack Engineer',
+  shortTitle: '.NET Full-Stack Engineer',
   description:
-    '.NET backend engineer working across C#, ASP.NET Core, APIs, data systems, and the modernization of legacy software.',
-  jobTitle: '.NET Backend Engineer',
-  knowsAbout: ['.NET Framework', '.NET 6+', 'ASP.NET Core', 'C#', 'Legacy Migration', 'Debugging'],
+    'Full-stack engineer specializing in .NET and C#—building ASP.NET Core services, REST APIs, and data layers with SQL and Azure, plus modern TypeScript and React applications.',
+  jobTitle: 'Full-Stack Engineer (.NET)',
+  knowsAbout: [
+    'C#',
+    '.NET',
+    'ASP.NET Core',
+    'REST APIs',
+    'Entity Framework',
+    'SQL Server',
+    'Azure',
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Legacy Migration',
+  ],
 };
 
 export const HERO: HeroContent = {
-  greeting: '.NET Backend Engineer',
+  greeting: 'Full-Stack Engineer · .NET',
   description:
-    'I build and modernize backend systems with C#, .NET, ASP.NET Core, SQL, and Azure—working across the move from established software to maintainable modern services.',
+    'I build and modernize full-stack systems with a .NET focus—ASP.NET Core services, REST APIs, and data access in C#—alongside TypeScript and React applications when a product needs the full stack.',
   primaryCta: 'View selected work',
   secondaryCta: 'Get in touch',
 };
@@ -36,7 +48,7 @@ export const SECTIONS: Record<string, SectionHeader> = {
     label: 'About',
     title: 'A little about how I work',
     description:
-      'I work across legacy and modern .NET systems, with a focus on clear APIs, dependable data access, and software that remains understandable as it changes.',
+      'I work as a full-stack engineer with a .NET focus—building APIs, services, and data layers with C# and ASP.NET Core, and shipping TypeScript and React front ends when a product needs them.',
   },
   experience: {
     label: 'Career',
@@ -47,7 +59,7 @@ export const SECTIONS: Record<string, SectionHeader> = {
   projects: {
     label: 'Work',
     title: 'Systems I’ve worked on',
-    description: 'A selection of applications, platforms, and backend work.',
+    description: 'A selection of .NET services, full-stack applications, and backend work.',
   },
   blog: {
     label: 'Writing',
@@ -77,9 +89,9 @@ export const SECTIONS: Record<string, SectionHeader> = {
 
 export const ABOUT: AboutContent = {
   paragraphs: [
-    "I'm a backend engineer focused on .NET, from legacy applications to modern services. I enjoy debugging difficult problems and making systems easier to maintain. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
-    'My work spans backend development, API design, data access, and project delivery. I also have an earlier background in robotics education and technical events.',
-    "Based in Kathmandu, I'm always open to connecting with fellow engineers and exploring opportunities where I can architect, build, and ship. Whether it's debugging a thorny legacy migration or designing a new microservice from scratch, I bring curiosity, persistence, and craftsmanship to every line of code.",
+    "I'm a full-stack engineer with a focus on .NET and C#. Most of my work is backend: services, REST APIs, and data access built with ASP.NET Core, Entity Framework, and SQL Server, including the ongoing modernization of legacy systems.",
+    'I also build full-stack products with TypeScript, React, and Next.js—several of the projects on this site are built that way. Working across both ecosystems helps me make practical decisions about where logic and responsibility belong.',
+    "Based in Kathmandu, Nepal, I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu, with an earlier background in robotics education and technical events. I'm open to backend and full-stack roles where I can design, build, and ship.",
   ],
   blockTitles: {
     skills: 'Skills & Technologies',
@@ -140,4 +152,4 @@ export const RESUME: ResumeContent = {
 };
 
 export const CONTACT_INTRO =
-  "Have a project to build, a system to scale, or a team that needs a strong backend engineer? I'm always open to engineering challenges, freelance work, or a conversation about technology and product development. Let's build something.";
+  "Have a .NET or full-stack project to build, a legacy system to modernize, or a backend that needs to scale? I'm open to full-time roles, freelance work, and conversations about backend and product engineering.";

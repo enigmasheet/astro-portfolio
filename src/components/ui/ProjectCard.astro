@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../../types';
+import TechIcon from './icons/TechIcon.astro';
 export interface Props {
   project: Project;
 }
@@ -72,7 +73,10 @@ const status = getStatus();
         project.technologies
           .slice(0, 4)
           .map((tech) => (
-            <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
+            <span
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary"
+            >
+              <TechIcon name={tech} class="w-3.5 h-3.5 shrink-0" />
               {tech}
             </span>
           ))

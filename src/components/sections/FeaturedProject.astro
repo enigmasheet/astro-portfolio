@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../../types';
+import TechIcon from '../ui/icons/TechIcon.astro';
 
 interface Props {
   project: Project;
@@ -28,7 +29,16 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
 
     <div class="work-meta">
       <span class="work-meta-label">STACK</span>
-      <span>{project.technologies.slice(0, 5).join(' · ')}</span>
+      <ul class="work-meta-list">
+        {
+          project.technologies.slice(0, 5).map((tech) => (
+            <li>
+              <TechIcon name={tech} class="w-3.5 h-3.5 shrink-0" />
+              <span>{tech}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
     <div class="work-links">
@@ -145,12 +155,29 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
   .work-meta {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.5rem 0.75rem;
     margin-top: 1.5rem;
     color: var(--text-secondary);
     font-family: var(--font-mono);
     font-size: 0.72rem;
     line-height: 1.7;
+  }
+
+  .work-meta-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .work-meta-list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .work-meta-label {

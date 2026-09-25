@@ -2,25 +2,118 @@ import type { Project } from '../types';
 
 export const PROJECTS: Project[] = [
   {
-    slug: 'laundry-management-system',
-    title: 'LaundryManager',
+    slug: 'transport-expenditure-tracker',
+    title: 'Transport Expenditure Tracker',
     description:
-      'A multi-tenant laundry management SaaS built for Nepal. Order management, customer database, role-based access, reports & analytics, and SMS notifications — all in one dashboard. Replaces paper-based systems for laundry businesses.',
+      'A .NET web application for recording and tracking transport-related expenses, with reporting and data visualization built on ASP.NET Core, Entity Framework, Blazor, and SQL Server.',
     category: 'Web app',
-    imageUrls: ['images/laundry-management.png'],
-    githubLink: 'https://github.com/enigmasheet/Laundry-Management-System',
-    liveDemo: '',
+    imageUrls: ['images/transport.svg'],
+    githubLink: 'https://github.com/enigmasheet/TransportExpenditureTracker',
+    liveDemo: 'https://transportexpense.azurewebsites.net/',
     liveDemoActive: false,
-    technologies: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Nginx', 'REST API', 'SMS'],
-    tags: ['SaaS', 'Multi-Tenant', 'Web App', 'Operations'],
+    technologies: ['ASP.NET Core', 'C#', 'Entity Framework', 'Blazor', 'SQL Server'],
+    tags: ['Web App', 'Finance', 'Productivity'],
     caseStudy: {
       context:
-        'Laundry businesses needed a digital alternative to paper-based order and customer records.',
+        'Transport expenses were tracked in spreadsheets, which made entries inconsistent and made it hard to see spending across vehicles and routes over time.',
+      solution:
+        'Transport Expenditure Tracker records transport-related expenses and presents them through reports and charts, using ASP.NET Core for the application and Blazor for the interface.',
       capabilities: [
-        'Order and customer management',
-        'Role-based access',
-        'Reports and analytics',
-        'SMS notifications',
+        'Record and categorize transport expenses',
+        'Track spending over time with reports',
+        'Visualize cost patterns with charts',
+        'Manage records through Entity Framework and SQL Server',
+      ],
+      architecture: [
+        'ASP.NET Core provides the application and data services, with Entity Framework handling data access against SQL Server.',
+        'Blazor renders the interface in C#, keeping the UI and backend in the same .NET ecosystem.',
+      ],
+      decisions: [
+        'Keep the interface and backend in the same C# ecosystem so models and logic stay consistent end to end.',
+        'Model expense records in SQL Server through Entity Framework to support the reporting views.',
+      ],
+    },
+  },
+  {
+    slug: 'vat-expense-ledger',
+    title: 'VAT Expense Ledger',
+    description:
+      'A purchase invoice register for Nepali businesses, with Bikram Sambat dates, company-configurable VAT calculations, fiscal-year reporting, and CSV/Excel import. Built as a TypeScript full-stack application with Next.js and PostgreSQL.',
+    category: 'Finance',
+    imageUrls: [],
+    githubLink: 'https://github.com/enigmasheet/VATExpense',
+    liveDemo: 'https://vat.abhaymandal.com.np/',
+    liveDemoActive: true,
+    technologies: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS 4',
+      'PostgreSQL',
+      'Drizzle ORM',
+      'Neon',
+      'NextAuth v5',
+      'Zod 4',
+      'Bikram Sambat dates',
+      'Vercel',
+    ],
+    tags: ['Finance', 'Nepal VAT', 'Fiscal Year', 'Bikram Sambat', 'Business software'],
+    caseStudy: {
+      context:
+        'Nepali businesses need purchase records tied to parties, VAT, and local fiscal years. Invoice dates use Bikram Sambat (BS), so fiscal-year reporting must follow the local calendar rather than assume Gregorian dates.',
+      solution:
+        'VAT Expense Ledger provides a company-scoped purchase register with single-entry and batch-ledger workflows, spreadsheet import, reports, and exports.',
+      capabilities: [
+        'Record purchase invoices in a single form or keyboard-driven ledger grid',
+        'Import CSV and Excel files with a preview, row suggestions, and duplicate warnings',
+        'Calculate VAT using a company-configurable rate (13% default)',
+        'Resolve fiscal years from each invoice’s Miti date',
+        'Review fiscal-year, monthly, and party reports; export CSV or XLSX',
+        'Manage parties, categories, locations, trucks, and truck documents',
+      ],
+      architecture: [
+        'Next.js App Router combines server-rendered dashboards and reports with API routes and server actions for data workflows.',
+        'Drizzle ORM models company-scoped records in PostgreSQL; Neon is used for serverless production connections.',
+        'Domain helpers handle Bikram Sambat date validation, fiscal-year resolution, fixed-point money, VAT calculation, and import-row validation.',
+      ],
+      decisions: [
+        'Parse and validate Miti dates explicitly, then derive the fiscal year using the Nepali fiscal-year start month (Shrawan).',
+        'Use a preview-and-confirm import flow so party/category suggestions and duplicate warnings can be reviewed before invoices are committed.',
+        'Scope ledger and master-data records by company to support multiple businesses in one installation.',
+      ],
+    },
+  },
+  {
+    slug: 'hotel-booking-api',
+    title: 'Hotel Booking API',
+    description:
+      'A .NET RESTful API for hotel booking management with JWT authentication, authorization, request validation, and Swagger documentation for client developers.',
+    category: 'API',
+    imageUrls: ['images/hotel-booking.svg'],
+    githubLink: 'https://github.com/enigmasheet/HotelBookingAPI',
+    liveDemo: '',
+    liveDemoActive: false,
+    technologies: ['ASP.NET Core', 'C#', 'JWT Authentication', 'Swagger', 'REST API'],
+    tags: ['API', 'Backend', 'Authentication'],
+    caseStudy: {
+      context:
+        'Booking systems need a clear, secured API contract that other clients can rely on for hotel and reservation data.',
+      solution:
+        'A RESTful API for hotel booking management that exposes endpoints for booking data with authentication, authorization, and request validation.',
+      capabilities: [
+        'RESTful endpoints for hotel and booking data',
+        'JWT-based authentication and authorization',
+        'Request validation for booking operations',
+        'Interactive API documentation with Swagger',
+      ],
+      architecture: [
+        'ASP.NET Core hosts the API and handles routing, model binding, and validation.',
+        'JWT authentication secures endpoints and separates authenticated access from public operations.',
+        'Swagger documents the available endpoints and request/response shapes for client developers.',
+      ],
+      decisions: [
+        'Use token-based authentication so API clients can authenticate without server-side sessions.',
+        'Document endpoints with Swagger so the API contract stays discoverable as it changes.',
       ],
     },
   },
@@ -79,6 +172,29 @@ export const PROJECTS: Project[] = [
     },
   },
   {
+    slug: 'laundry-management-system',
+    title: 'LaundryManager',
+    description:
+      'A multi-tenant laundry management SaaS built for Nepal. Order management, customer database, role-based access, reports & analytics, and SMS notifications — all in one dashboard. Replaces paper-based systems for laundry businesses.',
+    category: 'Web app',
+    imageUrls: ['images/laundry-management.png'],
+    githubLink: 'https://github.com/enigmasheet/Laundry-Management-System',
+    liveDemo: '',
+    liveDemoActive: false,
+    technologies: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Nginx', 'REST API', 'SMS'],
+    tags: ['SaaS', 'Multi-Tenant', 'Web App', 'Operations'],
+    caseStudy: {
+      context:
+        'Laundry businesses needed a digital alternative to paper-based order and customer records.',
+      capabilities: [
+        'Order and customer management',
+        'Role-based access',
+        'Reports and analytics',
+        'SMS notifications',
+      ],
+    },
+  },
+  {
     slug: 'hmc-nepal-portal',
     title: 'HMC Nepal Multi-App Portal',
     description:
@@ -98,6 +214,34 @@ export const PROJECTS: Project[] = [
         'Unified application dashboard',
         'Role-based access',
         'Real-time analytics',
+      ],
+    },
+  },
+  {
+    slug: 'personal-portfolio',
+    title: 'Personal Portfolio',
+    description:
+      'An earlier version of my personal portfolio, built with Blazor WebAssembly and deployed to Azure Static Web Apps. The current site you are viewing is a separate Astro rebuild.',
+    category: 'Web app',
+    imageUrls: ['images/portfolio.svg'],
+    githubLink: 'https://github.com/enigmasheet/PersonalPortfolio.v1',
+    liveDemo: '',
+    liveDemoActive: false,
+    technologies: ['Blazor', 'C#', 'CSS', 'JavaScript', 'Azure Static Web Apps'],
+    tags: ['Portfolio', 'Web Development'],
+    caseStudy: {
+      context:
+        'I wanted a personal site for projects, experience, and writing, and used it as a chance to build a full application with Blazor WebAssembly.',
+      solution:
+        'A Blazor WebAssembly single-page site with CSS-variable theming and static content, deployed to Azure Static Web Apps.',
+      capabilities: [
+        'Projects, experience, and blog content',
+        'Light and dark theming with CSS variables',
+        'Static deployment to Azure Static Web Apps',
+      ],
+      decisions: [
+        'Kept content static so the site could be hosted without a backend.',
+        'Used Blazor WebAssembly to build the interface in C# rather than JavaScript.',
       ],
     },
   },
@@ -124,81 +268,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    slug: 'vat-expense-ledger',
-    title: 'VAT Expense Ledger',
-    description:
-      'A purchase invoice register for Nepali businesses, with Bikram Sambat dates, company-configurable VAT calculations, fiscal-year reporting, and CSV/Excel import.',
-    category: 'Finance',
-    imageUrls: [],
-    githubLink: 'https://github.com/enigmasheet/VATExpense',
-    liveDemo: 'https://vat.abhaymandal.com.np/',
-    liveDemoActive: true,
-    technologies: [
-      'Next.js 16',
-      'React 19',
-      'TypeScript',
-      'Tailwind CSS 4',
-      'PostgreSQL',
-      'Drizzle ORM',
-      'Neon',
-      'NextAuth v5',
-      'Zod 4',
-      'Bikram Sambat dates',
-      'Vercel',
-    ],
-    tags: ['Finance', 'Nepal VAT', 'Fiscal Year', 'Bikram Sambat', 'Business software'],
-    caseStudy: {
-      context:
-        'Nepali businesses need purchase records tied to parties, VAT, and local fiscal years. Invoice dates use Bikram Sambat (BS), so fiscal-year reporting must follow the local calendar rather than assume Gregorian dates.',
-      solution:
-        'VAT Expense Ledger provides a company-scoped purchase register with single-entry and batch-ledger workflows, spreadsheet import, reports, and exports.',
-      capabilities: [
-        'Record purchase invoices in a single form or keyboard-driven ledger grid',
-        'Import CSV and Excel files with a preview, row suggestions, and duplicate warnings',
-        'Calculate VAT using a company-configurable rate (13% default)',
-        'Resolve fiscal years from each invoice’s Miti date',
-        'Review fiscal-year, monthly, and party reports; export CSV or XLSX',
-        'Manage parties, categories, locations, trucks, and truck documents',
-      ],
-      architecture: [
-        'Next.js App Router combines server-rendered dashboards and reports with API routes and server actions for data workflows.',
-        'Drizzle ORM models company-scoped records in PostgreSQL; Neon is used for serverless production connections.',
-        'Domain helpers handle Bikram Sambat date validation, fiscal-year resolution, fixed-point money, VAT calculation, and import-row validation.',
-      ],
-      decisions: [
-        'Parse and validate Miti dates explicitly, then derive the fiscal year using the Nepali fiscal-year start month (Shrawan).',
-        'Use a preview-and-confirm import flow so party/category suggestions and duplicate warnings can be reviewed before invoices are committed.',
-        'Scope ledger and master-data records by company to support multiple businesses in one installation.',
-      ],
-    },
-  },
-  {
-    slug: 'personal-portfolio',
-    title: 'Personal Portfolio',
-    description:
-      'My personal website showcasing projects, skills, experiences, and blog posts to highlight my professional journey.',
-    category: 'Web app',
-    imageUrls: ['images/portfolio.svg'],
-    githubLink: 'https://github.com/enigmasheet/PersonalPortfolio.v1',
-    liveDemo: 'https://abhaymandal.com.np/',
-    liveDemoActive: true,
-    technologies: ['Blazor', 'CSS', 'JavaScript', 'Azure Static Web Apps'],
-    tags: ['Portfolio', 'Web Development'],
-  },
-  {
-    slug: 'transport-expenditure-tracker',
-    title: 'Transport Expenditure Tracker',
-    description:
-      'A web app to efficiently manage and track transport-related expenses with detailed reports and data visualization.',
-    category: 'Web app',
-    imageUrls: ['images/transport.svg'],
-    githubLink: 'https://github.com/enigmasheet/TransportExpenditureTracker',
-    liveDemo: 'https://transportexpense.azurewebsites.net/',
-    liveDemoActive: false,
-    technologies: ['ASP.NET Core', 'Entity Framework', 'Blazor', 'SQL Server'],
-    tags: ['Web App', 'Finance', 'Productivity'],
-  },
-  {
     slug: 'smart-greenhouse',
     title: 'Local Farm: Smart Greenhouse',
     description:
@@ -210,18 +279,5 @@ export const PROJECTS: Project[] = [
     liveDemoActive: false,
     technologies: ['NodeMCU', 'IoT', 'React', 'JS', 'Arduino'],
     tags: ['IoT', 'Automation', 'Agriculture'],
-  },
-  {
-    slug: 'hotel-booking-api',
-    title: 'Hotel Booking API',
-    description:
-      'RESTful API for hotel booking management with authentication, authorization, and data validation to support scalable booking systems.',
-    category: 'API',
-    imageUrls: ['images/hotel-booking.svg'],
-    githubLink: 'https://github.com/enigmasheet/HotelBookingAPI',
-    liveDemo: '',
-    liveDemoActive: false,
-    technologies: ['ASP.NET Core', 'JWT Authentication', 'Swagger'],
-    tags: ['API', 'Backend', 'Authentication'],
   },
 ];

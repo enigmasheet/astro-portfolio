@@ -1,0 +1,25 @@
+---
+import { getTechIcon } from '../../../data/tech-icons';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = 'w-4 h-4' } = Astro.props;
+const icon = getTechIcon(name);
+---
+
+{
+  icon && (
+    <svg
+      class={className}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={icon.path} />
+    </svg>
+  )
+}

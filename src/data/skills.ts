@@ -2,7 +2,7 @@ import type { SkillCategory } from '../types';
 
 export const SKILLS: SkillCategory[] = [
   {
-    category: 'Backend & APIs',
+    category: 'Backend · .NET',
     skills: [
       'C#',
       '.NET Framework',
@@ -10,20 +10,20 @@ export const SKILLS: SkillCategory[] = [
       'ASP.NET Core',
       'ASP.NET MVC',
       'REST APIs',
-      'Legacy modernization',
       'ADO.NET',
+      'Legacy modernization',
     ],
   },
   {
     category: 'Data',
-    skills: ['SQL Server', 'Entity Framework', 'Dapper', 'SQLite'],
+    skills: ['SQL Server', 'Entity Framework', 'Dapper', 'PostgreSQL', 'MongoDB', 'SQLite'],
+  },
+  {
+    category: 'Frontend · JavaScript / TypeScript',
+    skills: ['TypeScript', 'JavaScript', 'React', 'Next.js', 'Blazor', 'Tailwind CSS'],
   },
   {
     category: 'Cloud & delivery',
-    skills: ['Azure', 'GitHub Actions', 'Azure Static Web Apps', 'CI/CD', 'Git'],
-  },
-  {
-    category: 'Product interfaces',
-    skills: ['Blazor', 'React', 'Next.js', 'JavaScript', 'Tailwind CSS'],
+    skills: ['Azure', 'Vercel', 'GitHub Actions', 'CI/CD', 'Docker', 'Git'],
   },
 ];

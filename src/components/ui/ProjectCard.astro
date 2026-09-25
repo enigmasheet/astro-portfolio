@@ -32,7 +32,7 @@ const status = getStatus();
         <div class="absolute inset-0 bg-border/20 animate-pulse" aria-hidden="true" />
         <Image
           src={image}
-          alt={project.title}
+          alt={project.imageAlts?.[0] ?? project.title}
           class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 blur-sm"
           loading="lazy"
           onload="this.classList.remove('blur-sm')"

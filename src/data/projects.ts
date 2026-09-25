@@ -5,7 +5,10 @@ import hotelBooking from '../assets/images/hotel-booking.svg';
 import inventoryManagement from '../assets/images/inventory-management.png';
 import laundryManagement from '../assets/images/laundry-management.png';
 import portfolio from '../assets/images/portfolio.svg';
+import teachMateLanding from '../assets/images/TeachMate_Landing_Page.png';
 import transport from '../assets/images/transport.svg';
+import vatExpenseDashboard from '../assets/images/vatExpenst_Dashboard.png';
+import vatExpenseLogin from '../assets/images/vatExpenst_Login.png';
 
 export const PROJECTS: Project[] = [
   {
@@ -47,7 +50,11 @@ export const PROJECTS: Project[] = [
     description:
       'A purchase invoice register for Nepali businesses, with Bikram Sambat dates, company-configurable VAT calculations, fiscal-year reporting, and CSV/Excel import. Built as a TypeScript full-stack application with Next.js and PostgreSQL.',
     category: 'Finance',
-    images: [],
+    images: [vatExpenseDashboard, vatExpenseLogin],
+    imageAlts: [
+      'VAT Expense Ledger dashboard with purchase summaries and expense navigation',
+      'VAT Expense Ledger sign-in screen',
+    ],
     githubLink: 'https://github.com/enigmasheet/VATExpense',
     liveDemo: 'https://vat.abhaymandal.com.np/',
     liveDemoActive: true,
@@ -130,7 +137,7 @@ export const PROJECTS: Project[] = [
     description:
       'An interactive learning platform for bachelor students, combining structured C++ and OOP notes with teacher-led quizzes, QR-code session joining, and class progress tracking.',
     category: 'Education',
-    images: [],
+    images: [teachMateLanding],
     githubLink: '',
     liveDemo: 'https://teachmate.abhaymandal.com.np/',
     liveDemoActive: true,

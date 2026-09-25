@@ -58,6 +58,7 @@ export interface Project {
   description: string;
   category: 'Web app' | 'API' | 'Education' | 'Finance' | 'IoT';
   images: ImageMetadata[];
+  imageAlts?: string[];
   githubLink: string;
   liveDemo: string;
   liveDemoActive: boolean;

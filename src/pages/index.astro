@@ -24,8 +24,16 @@ const blogPosts = (await getCollection('blog'))
     summary: p.data.summary,
     tags: p.data.tags,
   }));
-const featuredProjects = PROJECTS.slice(0, 3);
-const additionalProjects = PROJECTS.slice(3);
+const featuredProjectSlugs = [
+  'laundry-management-system',
+  'teachmate-learning-platform',
+  'hmc-nepal-portal',
+];
+const featuredProjects = featuredProjectSlugs.flatMap((slug) =>
+  PROJECTS.filter((project) => project.slug === slug),
+);
+const featuredProjectSlugSet = new Set(featuredProjectSlugs);
+const additionalProjects = PROJECTS.filter((project) => !featuredProjectSlugSet.has(project.slug));
 ---
 
 <PageLayout title={SITE.fullName} description={SITE.description}>

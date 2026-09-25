@@ -66,7 +66,11 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
   {
     image ? (
       <a class="work-image" href={projectHref} aria-label={`View ${project.title} project details`}>
-        <Image src={image} alt={`${project.title} interface`} loading={featured ? 'eager' : 'lazy'} />
+        <Image
+          src={image}
+          alt={project.imageAlts?.[0] ?? `${project.title} interface`}
+          loading={featured ? 'eager' : 'lazy'}
+        />
         <span class="work-image-caption">{project.tags.slice(0, 2).join(' / ')}</span>
       </a>
     ) : (

@@ -1,18 +1,53 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import ProjectFilters from '../components/sections/ProjectFilters.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import ProjectCard from '../components/ui/ProjectCard.astro';
 import { PROJECTS } from '../data/projects';
 import { SECTIONS } from '../data/site';
+
+const allTechnologies = [...new Set(PROJECTS.flatMap((p) => p.technologies))].sort();
+const allCategories = [...new Set(PROJECTS.map((project) => project.category))].sort();
 ---
 
 <PageLayout title="Projects" description={SECTIONS.projects.description}>
   <section class="page-section">
     <div class="max-w-6xl mx-auto px-4">
-      <SectionHeading label={SECTIONS.projects.label} title={SECTIONS.projects.title} description={SECTIONS.projects.description} centered />
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PROJECTS.map((p) => <ProjectCard project={p} />)}
+      <SectionHeading
+        as="h1"
+        label={SECTIONS.projects.label}
+        title={SECTIONS.projects.title}
+        description={SECTIONS.projects.description}
+        centered
+      />
+
+      <ProjectFilters
+        categories={allCategories}
+        technologies={allTechnologies}
+        total={PROJECTS.length}
+      />
+
+      <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          PROJECTS.map((p) => (
+            <div
+              class="project-item"
+              data-category={p.category.toLowerCase()}
+              data-technologies={p.technologies.map((tech) => tech.toLowerCase()).join('|')}
+              data-search={`${p.title} ${p.description} ${p.category} ${p.technologies.join(' ')} ${p.tags.join(' ')}`.toLowerCase()}
+            >
+              <ProjectCard project={p} />
+            </div>
+          ))
+        }
+      </div>
+
+      <div id="no-results" class="text-center py-16 hidden" aria-live="polite">
+        <p class="text-text-secondary text-lg">
+          No matching projects. Try another search or clear the filters.
+        </p>
       </div>
     </div>
   </section>
+
 </PageLayout>

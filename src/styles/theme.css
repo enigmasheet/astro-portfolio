@@ -1,0 +1,85 @@
+/* =========================================================
+   EDITORIAL ENGINEERING THEME
+   Semantic tokens shared by both intentional color schemes.
+   ========================================================= */
+:root {
+  --bg-page: #f8f8f5;
+  --bg-surface: #f0f1ed;
+  --bg-surface-2: #ffffff;
+  --bg-code: #e8eae5;
+
+  --text-primary: #171a17;
+  --text-secondary: #535a54;
+  --text-muted: #68716a;
+  --text-on-accent: #f8f8f5;
+
+  --border: #dfe2dc;
+  --border-strong: #a9b0a8;
+
+  --accent: #536b58;
+  --accent-hover: #3e5543;
+  --accent-soft: #e5ebe5;
+
+  --success: #42764d;
+  --warning: #9a6a24;
+  --danger: #a84f4f;
+  --info: #4c6d78;
+}
+
+[data-theme='dark'] {
+  --bg-page: #111411;
+  --bg-surface: #191d19;
+  --bg-surface-2: #222722;
+  --bg-code: #202520;
+
+  --text-primary: #eff1eb;
+  --text-secondary: #bbc1b9;
+  --text-muted: #909990;
+  --text-on-accent: #111411;
+
+  --border: #303830;
+  --border-strong: #535d53;
+
+  --accent: #a9c1ab;
+  --accent-hover: #c2d5c3;
+  --accent-soft: #273229;
+
+  --success: #88b891;
+  --warning: #d5ad6d;
+  --danger: #d17d7d;
+  --info: #9dbfc9;
+}
+
+@theme {
+  --color-bg: var(--bg-page);
+  --color-surface: var(--bg-surface);
+  --color-surface-2: var(--bg-surface-2);
+  --color-code: var(--bg-code);
+  --color-text: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-on-accent: var(--text-on-accent);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--accent);
+  --color-primary-dark: var(--accent-hover);
+  --color-primary-soft: var(--accent-soft);
+  --color-secondary: #78867b;
+  --color-tertiary: var(--success);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-error: var(--danger);
+  --color-info: var(--info);
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}

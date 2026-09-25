@@ -3,6 +3,7 @@ export interface SiteInfo {
   fullName: string;
   title: string;
   shortTitle: string;
+  description: string;
   jobTitle: string;
   knowsAbout: string[];
 }
@@ -21,12 +22,6 @@ export interface SectionHeader {
   cta?: string;
 }
 
-export interface Achievement {
-  year: string;
-  title: string;
-  description: string;
-}
-
 export interface StatItem {
   label: string;
   target: number;
@@ -38,12 +33,10 @@ export interface AboutContent {
   blockTitles: {
     skills: string;
     certifications: string;
-    achievements: string;
     testimonials: string;
   };
-  achievements: Achievement[];
   stats: StatItem[];
-  quote: string;
+  quotes: string[];
 }
 
 export interface EducationItem {
@@ -61,12 +54,24 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
+  category: 'Web app' | 'API' | 'Education' | 'Finance' | 'IoT';
   imageUrls: string[];
   githubLink: string;
   liveDemo: string;
   liveDemoActive: boolean;
   technologies: string[];
   tags: string[];
+  caseStudy?: {
+    context: string;
+    capabilities: string[];
+    solution?: string;
+    architecture?: string[];
+    decisions?: string[];
+    scale?: {
+      value: string;
+      label: string;
+    }[];
+  };
 }
 
 export interface Experience {
@@ -81,7 +86,6 @@ export interface Experience {
 export interface SkillCategory {
   category: string;
   skills: string[];
-  level: number;
 }
 
 export interface BlogPostMeta {
@@ -90,19 +94,23 @@ export interface BlogPostMeta {
   date: string;
   summary: string;
   tags: string[];
-  fileName: string;
 }
 
 export interface Certification {
   title: string;
   issuer: string;
   link: string;
+  imageUrl?: string;
+  date?: string;
 }
 
 export interface Testimonial {
   name: string;
   role: string;
   text: string;
+  link?: string;
+  date?: string;
+  relationship?: string;
 }
 
 export interface NavLink {

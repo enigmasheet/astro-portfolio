@@ -1,0 +1,141 @@
+---
+title: 'ASP.NET Core REST API Best Practices: 10 Production Patterns'
+date: 2026-07-15
+summary: 'ASP.NET Core REST API best practices for production: stable HTTP contracts, request validation, efficient EF Core queries, security, caching, and observability.'
+tags:
+  - ASP.NET Core
+  - REST API
+  - API Design
+  - EF Core
+  - C#
+---
+
+A REST API can return the right JSON and still be difficult to operate. Slow database queries, inconsistent errors, unbounded requests, and breaking response changes often become visible only after clients and real data depend on the service.
+
+These ASP.NET Core REST API best practices focus on the parts that make an API easier to evolve and operate: clear HTTP contracts, validation, database access, security, and production visibility. They apply to controller-based APIs and Minimal APIs; the examples use a controller and EF Core.
+
+## 1. Design stable HTTP contracts
+
+Model endpoints around resources and use HTTP methods and status codes consistently. For example, `GET /api/orders/42` reads an order, `POST /api/orders` creates one, and `DELETE /api/orders/42` requests its removal. Return a meaningful status such as `201 Created` after creating a resource, including a location clients can use to retrieve it.
+
+Treat request and response shapes as public contracts. Use API DTOs rather than exposing EF Core entities directly. Entity models tend to change with persistence needs; response DTOs let the database model evolve without unexpectedly changing what clients receive. Add API versioning when you need to make an incompatible contract change, rather than versioning every endpoint by default.
+
+## 2. Validate requests at the API boundary
+
+Reject malformed or incomplete input before it reaches business operations. With controller-based APIs, `[ApiController]` enables automatic HTTP 400 responses when model binding or model validation fails. Use data annotations for straightforward property rules and application-level validation for rules that depend on other fields or existing data.
+
+If you use FluentValidation, invoke validators explicitly and asynchronously where needed. Its documentation no longer recommends the older ASP.NET validation-pipeline auto-validation approach for new projects; that pipeline is synchronous and limited to MVC controllers and Razor Pages. See the [FluentValidation ASP.NET Core integration guidance](https://docs.fluentvalidation.net/en/latest/aspnet.html).
+
+## 3. Return consistent, useful errors
+
+Clients need a predictable error shape so they can distinguish invalid input, missing resources, and unexpected server failures. ASP.NET Core supports [Problem Details for API errors](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling-api?view=aspnetcore-10.0), including validation responses for controller APIs.
+
+Return enough detail for a client to correct a request, but do not expose stack traces, SQL, secrets, or internal exception messages in production. Log diagnostic details on the server and return a safe error response to the caller.
+
+## 4. Keep architecture proportional to the service
+
+A small API does not automatically need a large Clean Architecture solution. Begin with clear boundaries between HTTP handling, application rules, and persistence. As the service grows, move business rules into application or domain code so controllers and route handlers remain focused on translating HTTP requests and responses.
+
+The dependency direction should keep business rules independent of ASP.NET Core and database implementation details. A modular monolith can provide those boundaries without introducing distributed services, message brokers, or deployment complexity before there is a concrete need.
+
+## 5. Make EF Core queries return only what the endpoint needs
+
+Database performance depends on the generated SQL, indexes, data volume, and query plan—not on a single EF Core switch. For read endpoints, project directly into the response shape instead of loading full entities and mapping them after the query. Use `AsNoTracking()` when you are reading entities that will not be updated in the same unit of work.
+
+```csharp
+[ApiController]
+[Route("api/orders")]
+public sealed class OrdersController(AppDbContext db) : ControllerBase
+{
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<OrderResponse>> GetById(
+        int id,
+        CancellationToken cancellationToken)
+    {
+        var order = await db.Orders
+            .AsNoTracking()
+            .Where(order => order.Id == id)
+            .Select(order => new OrderResponse(
+                order.Id,
+                order.Status,
+                order.Total))
+            .SingleOrDefaultAsync(cancellationToken);
+
+        return order is null ? NotFound() : Ok(order);
+    }
+}
+
+public sealed record OrderResponse(int Id, string Status, decimal Total);
+```
+
+For collection endpoints, set a maximum page size and use a stable sort. For large result sets that clients read sequentially, keyset pagination can avoid the increasing cost of large offsets. Add indexes that support real filter and sort patterns, then inspect the database query plan to confirm they are being used.
+
+`ToQueryString()` is useful for inspecting SQL generated by EF Core; it is not a query-duration measurement. Diagnose slow queries with timings, database command logs, and the database's query-plan tools. Microsoft's [EF Core efficient querying guide](https://learn.microsoft.com/en-us/ef/core/performance/efficient-querying) covers projection, pagination, indexes, and common query pitfalls.
+
+## 6. Use asynchronous I/O and propagate cancellation
+
+Use asynchronous database and network APIs for I/O-bound work so request threads are not blocked while waiting for external resources. Accept a `CancellationToken` in endpoint methods and pass it through to EF Core and downstream calls. A client disconnect or server timeout can then cancel work that no longer needs to continue.
+
+Async is not a performance decoration for every method: CPU-bound work still consumes CPU. Avoid mixing synchronous and asynchronous database calls in the same request path, and measure before optimizing code that is not on a hot path.
+
+## 7. Secure both the endpoint and the requested resource
+
+Authentication answers who is making a request; authorization decides what that identity may do. Protect endpoints with policies or roles where appropriate, and enforce resource-level access when a user requests a particular record. A valid token alone does not prove that its owner may read every `orderId` in a route.
+
+Use HTTPS, store credentials outside source control, validate input, and avoid logging access tokens or sensitive request bodies. Choose an authentication approach based on the clients and trust boundaries involved; JWT bearer tokens are useful for some API scenarios, but are not a universal requirement.
+
+## 8. Cache only responses that are safe to reuse
+
+Caching can reduce repeated work, but caching the wrong response can expose one user's data to another. Start with idempotent `GET` endpoints whose output is stable and not personalized. Define expiration, invalidation, and cache-key variation deliberately, especially when responses vary by query string, language, tenant, or identity.
+
+ASP.NET Core's [output caching middleware](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output?view=aspnetcore-10.0) supports endpoint policies. Its default policy excludes authenticated requests and responses that set cookies, but custom policies can change those rules—review them carefully before enabling caching broadly.
+
+## 9. Apply rate limits based on endpoint cost
+
+Rate limiting can help prevent an expensive or public endpoint from consuming more capacity than intended. Choose a policy that reflects the operation and client model, and return `429 Too Many Requests` with a useful retry hint when appropriate. ASP.NET Core includes fixed-window, sliding-window, token-bucket, and concurrency limiters in its [rate-limiting middleware](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-10.0).
+
+Rate limiting is not a complete DDoS defense. Test policies under realistic load, and avoid partition keys based on unbounded, attacker-controlled values. Pair application-level limits with the protections provided by your hosting platform or edge network.
+
+## 10. Add observability and test with realistic data
+
+Use structured logs to record what happened and include a request or trace identifier to connect related events. Track request duration, error rates, and dependency latency. ASP.NET Core provides built-in metrics that can be collected with tools such as OpenTelemetry; Microsoft's [ASP.NET Core metrics guide](https://learn.microsoft.com/en-us/aspnet/core/metrics/overview?view=aspnetcore-10.0) explains instrumentation and collection.
+
+Keep liveness checks simple and use readiness checks for dependencies that must be available before the service receives traffic. Test API behavior at multiple levels: unit tests for business rules, integration tests for HTTP and persistence behavior, and load tests for endpoints that may become bottlenecks.
+
+Small development databases rarely reveal pagination, indexing, or concurrency problems. Use representative data and measure a baseline before applying caching, split queries, or other optimizations.
+
+## A practical production-readiness checklist
+
+- Are routes, status codes, and DTOs consistent and documented?
+- Does invalid input return a useful validation response?
+- Are EF Core queries bounded, projected, and measured with realistic data?
+- Do authorization rules check access to the requested resource?
+- Are cache policies safe for the response's user and tenant context?
+- Are expensive endpoints rate-limited and load-tested?
+- Can you diagnose slow requests and dependency failures from production telemetry?
+
+For a concrete .NET example, see my [ASP.NET Core Hotel Booking API project](/projects/hotel-booking-api/). You can also browse [all selected projects](/projects/) for more of my application and backend work.
+
+## Frequently asked questions
+
+### What makes an ASP.NET Core REST API scalable?
+
+Scalability comes from the whole system: efficient I/O and database queries, bounded work, appropriate resource limits, and an architecture that can be operated and changed. Async methods alone do not make a service scalable.
+
+### Should I use controllers or Minimal APIs?
+
+Both are supported by ASP.NET Core. Choose the style that fits the API's needs and your team's conventions. Controllers provide MVC features such as filters and conventions; Minimal APIs offer concise endpoint definitions. Keep HTTP contracts and business rules clear with either approach.
+
+### Should every API use Clean Architecture?
+
+No. Create boundaries that help the codebase change safely, but avoid adding layers that have no purpose yet. A small API can start with a modular structure and introduce stronger separation as its business rules and team needs grow.
+
+## Further reading
+
+- [Create a controller-based web API with ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-10.0)
+- [Handle errors in ASP.NET Core APIs](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling-api?view=aspnetcore-10.0)
+- [Efficient querying with EF Core](https://learn.microsoft.com/en-us/ef/core/performance/efficient-querying)
+- [Output caching middleware](https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output?view=aspnetcore-10.0)
+- [Rate limiting middleware](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-10.0)

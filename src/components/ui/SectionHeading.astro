@@ -4,22 +4,35 @@ export interface Props {
   title: string;
   description?: string;
   centered?: boolean;
+  as?: 'h1' | 'h2' | 'h3';
 }
-const { label, title, description, centered } = Astro.props;
+const { label, title, description, centered, as = 'h2' } = Astro.props;
+const Tag = as;
 ---
 
-<div class={`mb-12 ${centered ? 'text-center' : ''}`} data-reveal>
-  {label && (
-    <span class="inline-block text-xs font-semibold tracking-widest uppercase text-(--color-primary) mb-3">
-      {label}
-    </span>
-  )}
-  <h2 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4">
+<div class={`mb-10 md:mb-12 ${centered ? 'text-center' : ''}`} data-reveal>
+  {
+    label && (
+      <span class="inline-block text-xs font-bold tracking-[0.15em] uppercase text-primary mb-4">
+        {label}
+      </span>
+    )
+  }
+  <Tag
+    class="max-w-4xl text-3xl md:text-4xl font-semibold text-text mb-3 leading-tight tracking-[-0.035em]"
+  >
     {title}
-  </h2>
-  {description && (
-    <p class="text-(--color-text-secondary) max-w-2xl text-lg leading-relaxed mx-auto">
-      {description}
-    </p>
-  )}
+  </Tag>
+  {
+    description && (
+      <p
+        class:list={[
+          'text-text-secondary max-w-2xl text-base md:text-lg leading-relaxed',
+          centered && 'mx-auto',
+        ]}
+      >
+        {description}
+      </p>
+    )
+  }
 </div>

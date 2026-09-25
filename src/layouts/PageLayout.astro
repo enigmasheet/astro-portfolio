@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -9,13 +10,53 @@ export interface Props {
   ogType?: string;
   canonical?: string;
 }
+
 const props = Astro.props;
 ---
 
 <BaseLayout {...props}>
   <Navbar />
-  <main id="page-content" class="pt-16 min-h-screen">
+
+  <main
+    id="main-content"
+    tabindex="-1"
+    class="pt-16 min-h-screen outline-none transition-opacity duration-300"
+  >
     <slot />
   </main>
+
   <Footer />
+
+  <button
+    id="back-to-top"
+    class="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 translate-y-5 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:bg-primary-dark cursor-pointer"
+    aria-label="Back to top"
+  >
+    <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48" aria-hidden="true">
+      <circle
+        cx="24"
+        cy="24"
+        r="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        opacity="0.2"></circle>
+      <circle
+        id="progress-ring"
+        cx="24"
+        cy="24"
+        r="20"
+        fill="none"
+        stroke="white"
+        stroke-width="3"
+        stroke-dasharray="125.6"
+        stroke-dashoffset="125.6"
+        stroke-linecap="round"></circle>
+    </svg>
+    <span class="material-symbols-outlined text-xl relative z-10">arrow_upward</span>
+  </button>
+
+  <script>
+    import '../scripts/back-to-top';
+  </script>
 </BaseLayout>

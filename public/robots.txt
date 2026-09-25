@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /data/
 Sitemap: https://abhaymandal.com.np/sitemap.xml

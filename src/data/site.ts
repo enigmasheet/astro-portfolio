@@ -1,113 +1,129 @@
-import type { SiteInfo, HeroContent, SectionHeader, AboutContent, ResumeContent, StatItem } from '../types';
+import type {
+  SiteInfo,
+  HeroContent,
+  SectionHeader,
+  AboutContent,
+  ResumeContent,
+  StatItem,
+} from '../types';
 
 export const SITE: SiteInfo = {
   name: 'Abhay',
   fullName: 'Abhay Kumar Mandal',
-  title: 'Backend Software Developer & Product-Oriented Technologist',
-  shortTitle: 'Backend Software Developer',
-  jobTitle: 'Web Developer',
-  knowsAbout: ['JavaScript', 'Next.js', 'React', 'Node.js', '.NET', 'Azure'],
+  title: '.NET Backend Engineer',
+  shortTitle: '.NET Backend Engineer',
+  description:
+    '.NET backend engineer working across C#, ASP.NET Core, APIs, data systems, and the modernization of legacy software.',
+  jobTitle: '.NET Backend Engineer',
+  knowsAbout: ['.NET Framework', '.NET 6+', 'ASP.NET Core', 'C#', 'Legacy Migration', 'Debugging'],
 };
 
 export const HERO: HeroContent = {
-  greeting: 'Hi, my name is',
+  greeting: '.NET Backend Engineer',
   description:
-    'I build scalable backend systems, RESTful APIs, and modern full-stack web applications — blending clean architecture with thoughtful product design and a strong focus on developer experience.',
-  primaryCta: 'View Projects',
-  secondaryCta: 'Get In Touch',
+    'I build and modernize backend systems with C#, .NET, ASP.NET Core, SQL, and Azure—working across the move from established software to maintainable modern services.',
+  primaryCta: 'View selected work',
+  secondaryCta: 'Get in touch',
 };
 
 export const SECTIONS: Record<string, SectionHeader> = {
   overview: {
-    label: 'Overview',
-    title: 'What I Do',
-    description:
-      'Modern backend development with a product mindset. I design and build scalable server-side applications, RESTful APIs, and full-stack web solutions using JavaScript, Next.js, .NET, and Azure cloud services.',
+    label: 'Approach',
+    title: 'Engineering stack',
+    description: 'The platforms, data tools, and delivery practices I work with.',
   },
   about: {
     label: 'About',
-    title: 'About Me',
+    title: 'A little about how I work',
     description:
-      'A dedicated backend developer with a passion for clean architecture, thoughtful product design, and building software that solves real-world problems.',
+      'I work across legacy and modern .NET systems, with a focus on clear APIs, dependable data access, and software that remains understandable as it changes.',
   },
   experience: {
     label: 'Career',
-    title: 'My Experience',
+    title: 'Experience',
     description:
-      "Places I've worked, teams I've collaborated with, and production-grade systems I've built from the ground up.",
+      'Software development, project delivery, and earlier robotics education and leadership work.',
   },
   projects: {
     label: 'Work',
-    title: "Projects I've Built",
-    description:
-      'A selection of applications, platforms, and tools I\'ve designed, built, and shipped — from concept to production deployment.',
+    title: 'Systems I’ve worked on',
+    description: 'A selection of applications, platforms, and backend work.',
   },
   blog: {
-    label: 'Blog',
-    title: 'Articles & Thoughts',
-    description:
-      'Writing about backend development, modern web technologies like Blazor and Next.js, cloud architecture on Azure, and building things that matter.',
+    label: 'Writing',
+    title: 'Engineering Notes',
+    description: 'Practical notes on building with .NET and modern web platforms.',
   },
   contact: {
     label: 'Contact',
-    title: 'Get In Touch',
+    title: 'Have something to build?',
     description:
-      "Have a question, a project idea, or just want to say hello? I'm always open to discussing new opportunities and collaborations.",
+      "Have a backend challenge, a system to build, or an idea worth engineering? Let's talk.",
   },
   github: {
     label: 'GitHub',
     title: 'Open Source Activity',
     description:
-      "Stats, contribution graphs, and pinned repositories from my GitHub profile — showcasing my work in open source.",
+      'Stats, contribution graphs, and pinned repositories from my GitHub profile — showcasing my work in open source.',
     cta: 'View GitHub Profile',
   },
   testimonials: {
     label: 'Kind Words',
     title: 'What People Say',
     description:
-      "Feedback and recommendations from colleagues, managers, and collaborators I've had the pleasure of working with.",
+      'What colleagues, managers, and collaborators say about working with me — the problems we solved and the systems we built together.',
   },
 };
 
 export const ABOUT: AboutContent = {
   paragraphs: [
-    'I am a dedicated Backend Software Developer with a strong foundation in modern application development using JavaScript, Next.js, and cloud technologies. I hold a Bachelor\'s degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.',
-    'My journey into software development stems from a deep-rooted interest in technology and a passion for solving meaningful, real-world problems. Over the years, I have developed and contributed to applications that are scalable, maintainable, and user-centric.',
-    'In addition to my technical background, I bring experience in software product management, where I collaborate with cross-functional teams to lead the planning, development, and delivery of software products. This dual perspective strengthens my ability to align technical implementation with strategic business goals.',
-    'Outside of work, I enjoy activities that challenge my creativity and focus — including sight seeing, casual gaming, and swimming. These hobbies contribute to my problem-solving mindset and help me stay balanced and motivated.',
-    'My technical toolkit spans the JavaScript and .NET ecosystems. I work extensively with Next.js and React for front-end development, Node.js and ASP.NET Core for building robust APIs and backend services, and Azure for cloud infrastructure, deployment, and CI/CD. I also have hands-on experience with Blazor WebAssembly, TypeScript, and PostgreSQL.',
-    'I believe that great software is built at the intersection of technical excellence and clear communication. Whether I\'m architecting a microservice, reviewing a pull request, or planning a sprint with stakeholders, I strive to bring clarity, collaboration, and craftsmanship to every stage of the development lifecycle.',
+    "I'm a backend engineer focused on .NET, from legacy applications to modern services. I enjoy debugging difficult problems and making systems easier to maintain. I hold a Bachelor's degree in Information Technology from Texas College of Management and IT, Sifal, Kathmandu.",
+    'My work spans backend development, API design, data access, and project delivery. I also have an earlier background in robotics education and technical events.',
+    "Based in Kathmandu, I'm always open to connecting with fellow engineers and exploring opportunities where I can architect, build, and ship. Whether it's debugging a thorny legacy migration or designing a new microservice from scratch, I bring curiosity, persistence, and craftsmanship to every line of code.",
   ],
   blockTitles: {
     skills: 'Skills & Technologies',
     certifications: 'Certifications',
-    achievements: 'Achievements',
     testimonials: 'Testimonials',
   },
-  achievements: [
-    {
-      year: '2025',
-      title: 'AZ-900 Certified',
-      description: 'Microsoft Azure Fundamentals certification — foundational knowledge of cloud services.',
-    },
-    {
-      year: '2025',
-      title: 'Hackathon Finalist',
-      description: 'Finalist in a national-level hackathon, building a real-time logistics tracking solution.',
-    },
-    {
-      year: '2024',
-      title: 'Product Launch',
-      description: 'Led the development and launch of a production-grade logistics platform serving 50+ users.',
-    },
-  ],
   stats: [
-    { label: 'Projects Built', target: 5, suffix: '+' },
+    { label: 'Projects Built', target: 7, suffix: '+' },
     { label: 'Years of Experience', target: 3, suffix: '+' },
     { label: 'Blog Posts', target: 2, suffix: '+' },
-    { label: 'Certification', target: 1, suffix: '' },
+    { label: 'Certifications', target: 6, suffix: '+' },
   ],
-  quote: 'Code should not only work — it should inspire.',
+  quotes: [
+    "The best code is the code you don't have to write — but when you do, make it count.",
+    "Debugging is not about finding what's broken. It's about understanding what's working.",
+    "Legacy code isn't a burden. It's a history lesson written in a language you understand.",
+    'Great software is built at the intersection of technical excellence and clear communication.',
+    "A robust system isn't one that never fails — it's one that fails gracefully.",
+    "Learning never exhausts the mind. In software, it's the only way to keep up.",
+    "Bridging legacy and modern isn't just about code — it's about understanding how systems evolve.",
+    'Every bug you fix teaches you more about the system than any feature you build.',
+    "Clean architecture isn't about perfection. It's about making future you grateful.",
+    "The .NET ecosystem is vast — mastery comes from knowing both where the framework has been and where it's going.",
+    'Software development is a continuous loop of learning, building, debugging, and improving.',
+    'Your code should tell a story — one that the next developer can actually follow.',
+    "Refactoring isn't rewriting history. It's making the future easier to navigate.",
+    "The most valuable skill in tech isn't a programming language — it's the ability to learn the next one.",
+    'A well-architected system is like a well-designed building: invisible infrastructure that just works.',
+    "Courage is not knowing when to write code. It's knowing when to refactor it.",
+    "Every great developer you know got there by solving problems they didn't understand at first.",
+    'The difference between a good system and a great one is how it handles the unexpected.',
+    'Code should not only work — it should inspire.',
+    'The best way to predict the future of software is to build it, one clean commit at a time.',
+    "Great problem solvers don't just fix bugs — they understand why they existed in the first place.",
+    'Technology changes, but the principles of clean, maintainable code are timeless.',
+    "Mastering both legacy and modern frameworks isn't a contradiction. It's a superpower.",
+    'The best investment you can make in your career is the time you spend learning something new.',
+    "There's no such thing as done in software. There's only deployed and improving.",
+    'A debugger is the closest thing to a time machine that software developers have.',
+    'Building robust systems requires patience, persistence, and a willingness to question your own assumptions.',
+    'Your reputation is built on the problems you solve, not the technologies you use.',
+    'The gap between a working solution and an elegant one is where craftsmanship lives.',
+    'Stay curious. The moment you stop learning is the moment your code starts aging.',
+  ],
 };
 
 export const STATS: StatItem[] = ABOUT.stats;
@@ -124,4 +140,4 @@ export const RESUME: ResumeContent = {
 };
 
 export const CONTACT_INTRO =
-  "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Whether you have a freelance gig, a full-time role, or just want to connect and talk about technology and product development, feel free to reach out!";
+  "Have a project to build, a system to scale, or a team that needs a strong backend engineer? I'm always open to engineering challenges, freelance work, or a conversation about technology and product development. Let's build something.";

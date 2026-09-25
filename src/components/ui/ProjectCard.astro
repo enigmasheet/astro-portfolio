@@ -4,66 +4,121 @@ export interface Props {
   project: Project;
 }
 const { project } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const projectHref = base + 'projects/' + project.slug + '/';
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
-const imgSrc = hasImage ? `/${project.imageUrls[0]}` : '';
+const imgSrc = hasImage ? base + project.imageUrls[0] : '';
+
+function getStatus(): { label: string; color: string } | undefined {
+  if (project.liveDemoActive && project.liveDemo)
+    return { label: 'Live', color: 'text-[var(--success)] bg-[var(--success)]/10' };
+  if (!project.liveDemoActive && project.liveDemo)
+    return { label: 'Offline', color: 'text-[var(--danger)] bg-[var(--danger)]/10' };
+  return undefined;
+}
+const status = getStatus();
 ---
 
-<article class="project-card group bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300" data-reveal data-theme-aware>
-  {imgSrc && (
-    <div class="relative aspect-video overflow-hidden bg-(--color-bg)">
-      <img
-        src={imgSrc}
-        alt={project.title}
-        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        loading="lazy"
-      />
-    </div>
-  )}
+<article
+  class="project-card group card-hover relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100"
+  data-reveal
+>
+  {
+    imgSrc ? (
+      <div class="relative aspect-video overflow-hidden bg-bg">
+        <div class="absolute inset-0 bg-linear-to-t from-(--accent)/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
+        <div class="absolute inset-0 bg-border/20 animate-pulse" aria-hidden="true" />
+        <img
+          src={imgSrc}
+          alt={project.title}
+          class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 blur-sm"
+          loading="lazy"
+          onload="this.classList.remove('blur-sm')"
+          onerror="this.style.display='none'"
+          style="transition: filter 0.5s ease"
+        />
+        {status && (
+          <span
+            class:list={[
+              'absolute top-2 right-2 z-10 px-2 py-0.5 text-xs font-semibold rounded-sm backdrop-blur-sm',
+              status.color,
+            ]}
+          >
+            {status.label}
+          </span>
+        )}
+      </div>
+    ) : (
+      <div class="relative aspect-video overflow-hidden border-b border-border bg-linear-to-br from-surface to-bg p-5 flex flex-col justify-between">
+        <p class="font-mono text-[0.65rem] tracking-wide uppercase text-primary">
+          {project.category} <span class="text-text-muted">/ Project</span>
+        </p>
+        <p class="max-w-[18ch] text-2xl md:text-3xl font-semibold leading-tight tracking-tight text-text">
+          {project.title}
+        </p>
+        <p class="font-mono text-[0.65rem] text-text-secondary line-clamp-1">
+          {project.technologies.slice(0, 3).join(' · ')}
+        </p>
+      </div>
+    )
+  }
   <div class="p-6">
-    <h3 class="text-lg font-semibold text-(--color-text) mb-2">{project.title}</h3>
-    <p class="text-sm text-(--color-text-secondary) mb-4 line-clamp-2">{project.description}</p>
+    <p class="font-mono text-[0.65rem] tracking-wide uppercase text-primary mb-2">{project.category}</p>
+    <h3 class="text-lg font-semibold text-text mb-2">{project.title}</h3>
+    <p class="text-sm text-text-secondary mb-4 line-clamp-2">{project.description}</p>
     <div class="flex flex-wrap gap-2 mb-4">
-      {project.technologies.slice(0, 4).map((tech) => (
-        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-(--color-primary)/10 text-(--color-primary)">
-          {tech}
-        </span>
-      ))}
-      {project.technologies.length > 4 && (
-        <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-(--color-border) text-(--color-text-secondary)">
-          +{project.technologies.length - 4}
-        </span>
-      )}
+      {
+        project.technologies
+          .slice(0, 4)
+          .map((tech) => (
+            <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary">
+              {tech}
+            </span>
+          ))
+      }
+      {
+        project.technologies.length > 4 && (
+          <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-border text-text-secondary">
+            +{project.technologies.length - 4}
+          </span>
+        )
+      }
     </div>
-    <div class="flex items-center gap-3">
+    <div class="flex flex-wrap items-center gap-3">
       <a
-        href={`/projects/${project.slug}`}
-        class="text-sm font-medium text-(--color-primary) hover:underline"
+        href={projectHref}
+        class="text-sm font-medium text-primary hover:underline py-2"
+        aria-label={`View ${project.title} details`}
       >
         Details →
       </a>
-      {project.githubLink && (
-        <a
-          href={project.githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors"
-        >
-          Source
-        </a>
-      )}
-      {project.liveDemoActive && project.liveDemo && (
-        <a
-          href={project.liveDemo}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors"
-        >
-          Live Demo
-        </a>
-      )}
-      {!project.liveDemoActive && (
-        <span class="text-sm text-(--color-text-secondary) opacity-50">Offline</span>
-      )}
+      {
+        project.githubLink && (
+          <a
+            href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-text-secondary hover:text-primary transition-colors py-2"
+            aria-label={`${project.title} source code on GitHub`}
+          >
+            Source
+          </a>
+        )
+      }
+      {
+        project.liveDemoActive && project.liveDemo && (
+          <a
+            href={project.liveDemo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-text-secondary hover:text-primary transition-colors py-2"
+            aria-label={`${project.title} live demo`}
+          >
+            Live Demo
+          </a>
+        )
+      }
     </div>
   </div>
 </article>

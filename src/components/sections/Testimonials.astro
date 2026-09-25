@@ -1,20 +1,226 @@
 ---
 import { TESTIMONIALS } from '../../data/testimonials';
+
+function getInitials(name: string): string {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function getAvatarColor(name: string): string {
+  const colors = ['#5e81ac', '#bf616a', '#a3be8c', '#b48ead', '#88c0d0', '#ebcb8b', '#d08770'];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return colors[Math.abs(hash) % colors.length];
+}
 ---
 
-<div class="grid md:grid-cols-2 gap-6" data-reveal>
-  {
-    TESTIMONIALS.map((t) => (
-      <blockquote class="bg-(--color-surface) border border-(--color-border) rounded-xl p-6 relative" data-theme-aware>
-        <div class="text-4xl text-(--color-primary)/20 absolute top-4 left-4 leading-none select-none" aria-hidden="true">"</div>
-        <p class="text-sm text-(--color-text-secondary) leading-relaxed relative z-10 mb-4 italic">
-          "{t.text}"
-        </p>
-        <footer>
-          <p class="text-sm font-semibold text-(--color-text)">{t.name}</p>
-          <p class="text-xs text-(--color-text-secondary)">{t.role}</p>
-        </footer>
-      </blockquote>
-    ))
-  }
+<div
+  class="relative overflow-hidden"
+  data-testimonials-carousel
+  role="region"
+  aria-label="Testimonials carousel"
+  aria-roledescription="carousel"
+>
+  <div
+    class="flex transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+    data-track
+  >
+    {
+      TESTIMONIALS.map((t, i) => (
+        <div
+          class="shrink-0 w-full"
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`Testimonial ${i + 1} of ${TESTIMONIALS.length}`}
+        >
+          <blockquote class="bg-surface border border-border rounded-xl p-6 md:p-8 relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary">
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
+                style={`background-color: ${getAvatarColor(t.name)}`}
+                aria-hidden="true"
+              >
+                {getInitials(t.name)}
+              </div>
+              <div class="min-w-0">
+                {t.link ? (
+                  <a
+                    href={t.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-sm font-semibold text-text hover:text-primary no-underline transition-colors truncate block"
+                  >
+                    {t.name}
+                  </a>
+                ) : (
+                  <p class="text-sm font-semibold text-text truncate">{t.name}</p>
+                )}
+                <p class="text-xs text-text-secondary truncate">{t.role}</p>
+              </div>
+            </div>
+
+            <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-4 italic">
+              &ldquo;{t.text}&rdquo;
+            </p>
+
+            {t.date && t.relationship && (
+              <p class="text-xs text-text-secondary/60">
+                {t.date} &middot; {t.relationship}
+              </p>
+            )}
+          </blockquote>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="flex justify-center gap-2 mt-6" role="tablist" aria-label="Select testimonial">
+    {
+      TESTIMONIALS.map((_, i) => (
+        <button
+          data-dot={i}
+          role="tab"
+          aria-selected={i === 0}
+          aria-label={`Testimonial ${i + 1}`}
+          class="w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          class:list={{
+            'bg-primary w-6': i === 0,
+            'bg-border hover:bg-primary/50': i !== 0,
+          }}
+        />
+      ))
+    }
+  </div>
 </div>
+
+<script>
+  (function () {
+    const container = document.querySelector<HTMLElement>('[data-testimonials-carousel]');
+    if (!container) return;
+
+    const track = container.querySelector<HTMLElement>('[data-track]');
+    const slides = track?.children;
+    const dots = container.querySelectorAll<HTMLElement>('[data-dot]');
+    if (!track || !slides || !slides.length) return;
+
+    const trackElement = track;
+    const slideCount = slides.length;
+
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+    let isPaused = false;
+    const interval = 5000;
+
+    function show(index: number) {
+      trackElement.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, i) => {
+        const active = i === index;
+        d.classList.toggle('bg-primary', active);
+        d.classList.toggle('w-6', active);
+        d.classList.toggle('bg-border', !active);
+        d.classList.toggle('hover:bg-primary/50', !active);
+        d.setAttribute('aria-selected', String(active));
+      });
+      current = index;
+    }
+
+    function next() {
+      show((current + 1) % slideCount);
+    }
+
+    function prev() {
+      show((current - 1 + slideCount) % slideCount);
+    }
+
+    function startTimer() {
+      stopTimer();
+      if (!isPaused) {
+        timer = setInterval(next, interval);
+      }
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    function pause() {
+      isPaused = true;
+      stopTimer();
+    }
+
+    function resume() {
+      isPaused = false;
+      startTimer();
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', function () {
+        const idx = Number(this.getAttribute('data-dot'));
+        if (idx !== current) {
+          show(idx);
+          resume();
+        }
+      });
+    });
+
+    container.addEventListener('mouseenter', pause);
+    container.addEventListener('mouseleave', resume);
+
+    container.addEventListener('focusin', pause);
+    container.addEventListener('focusout', function (e) {
+      if (!container.contains(e.relatedTarget as Node)) resume();
+    });
+
+    container.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') {
+        prev();
+        resume();
+        e.preventDefault();
+      }
+      if (e.key === 'ArrowRight') {
+        next();
+        resume();
+        e.preventDefault();
+      }
+    });
+
+    let touchStartX = 0;
+    container.addEventListener(
+      'touchstart',
+      function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true },
+    );
+    container.addEventListener(
+      'touchend',
+      function (e) {
+        const delta = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(delta) > 50) {
+          if (delta > 0) {
+            next();
+          } else {
+            prev();
+          }
+          resume();
+        }
+      },
+      { passive: true },
+    );
+
+    const style = document.createElement('style');
+    style.textContent = `
+      [data-testimonials-carousel] .bg-primary\\/50 { background-color: color-mix(in srgb, var(--color-primary) 50%, transparent); }
+    `;
+    document.head.appendChild(style);
+
+    show(0);
+    startTimer();
+  })();
+</script>

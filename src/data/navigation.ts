@@ -1,11 +1,11 @@
 import type { NavLink } from '../types';
 
+const rawBase = typeof import.meta !== 'undefined' ? import.meta.env.BASE_URL : '/';
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Experience', href: '/experience' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Resume', href: '/resume' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Work', href: `${base}#projects` },
+  { label: 'Experience', href: `${base}#experience` },
+  { label: 'Writing', href: `${base}#blog` },
+  { label: 'About', href: `${base}#about` },
 ];

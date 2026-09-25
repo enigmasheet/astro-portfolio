@@ -1,0 +1,325 @@
+---
+import type { Project } from '../../types';
+
+interface Props {
+  project: Project;
+  index: number;
+  featured?: boolean;
+}
+
+const { project, index, featured = false } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const projectHref = base + 'projects/' + project.slug + '/';
+const image = project.imageUrls[0] ? base + project.imageUrls[0] : undefined;
+const coverMetrics = project.caseStudy?.scale?.slice(0, 3) ?? [];
+const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
+---
+
+<article class:list={['work-entry', featured && 'work-entry-featured']} data-reveal>
+  <div class="work-copy">
+    <p class="work-index">
+      {String(index).padStart(2, '0')}
+      <span aria-hidden="true">/</span>
+      {project.category}
+    </p>
+    <h3 class="work-title"><a href={projectHref}>{project.title}</a></h3>
+    <p class="work-description">{project.description}</p>
+
+    <div class="work-meta">
+      <span class="work-meta-label">STACK</span>
+      <span>{project.technologies.slice(0, 5).join(' · ')}</span>
+    </div>
+
+    <div class="work-links">
+      <a class="work-link work-link-primary" href={projectHref}>
+        Project details <span aria-hidden="true">↗</span>
+      </a>
+      {
+        project.githubLink && (
+          <a class="work-link" href={project.githubLink} target="_blank" rel="noopener noreferrer">
+            Source <span aria-hidden="true">↗</span>
+          </a>
+        )
+      }
+      {
+        hasLiveDemo && (
+          <a class="work-link" href={project.liveDemo} target="_blank" rel="noopener noreferrer">
+            Live <span aria-hidden="true">↗</span>
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  {
+    image ? (
+      <a class="work-image" href={projectHref} aria-label={`View ${project.title} project details`}>
+        <img src={image} alt={`${project.title} interface`} loading={featured ? 'eager' : 'lazy'} />
+        <span class="work-image-caption">{project.tags.slice(0, 2).join(' / ')}</span>
+      </a>
+    ) : (
+      <a
+        class="work-image work-image-placeholder"
+        href={projectHref}
+        aria-label={`View ${project.title} project details`}
+      >
+        <div class="cover-content" aria-hidden="true">
+          <p class="cover-label">{project.category} <span>/</span> Project overview</p>
+          <p class="cover-title">{project.title}</p>
+          {
+            coverMetrics.length > 0 && (
+              <div class="cover-metrics">
+                {coverMetrics.map((metric) => (
+                  <div>
+                    <span>{metric.value}</span>
+                    <small>{metric.label}</small>
+                  </div>
+                ))}
+              </div>
+            )
+          }
+          <p class="cover-topics">Lessons <span>→</span> Live quizzes <span>→</span> Class progress</p>
+        </div>
+      </a>
+    )
+  }
+</article>
+
+<style>
+  .work-entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.25rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .work-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .work-index,
+  .work-meta-label {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .work-index span {
+    padding: 0 0.25rem;
+    color: var(--accent);
+  }
+
+  .work-title {
+    margin: 0.75rem 0;
+    color: var(--text-primary);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+  }
+
+  .work-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .work-title a:hover {
+    color: var(--accent);
+  }
+
+  .work-description {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .work-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    margin-top: 1.5rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.7;
+  }
+
+  .work-meta-label {
+    color: var(--accent);
+  }
+
+  .work-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    margin-top: 1.35rem;
+  }
+
+  .work-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .work-link:hover,
+  .work-link-primary {
+    color: var(--accent);
+  }
+
+  .work-image {
+    position: relative;
+    display: block;
+    min-height: 13rem;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    background: var(--bg-surface);
+  }
+
+  .work-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 350ms ease;
+  }
+
+  .work-image:hover img {
+    transform: scale(1.025);
+  }
+
+  .work-image-caption {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.35rem 0.55rem;
+    border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+    border-radius: 0.2rem;
+    background: color-mix(in srgb, var(--bg-page) 90%, transparent);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .work-image-placeholder {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    color: var(--text-secondary);
+    text-decoration: none;
+    background-image: linear-gradient(135deg, var(--bg-surface-2), var(--bg-surface));
+  }
+
+  .cover-content {
+    width: 100%;
+  }
+
+  .cover-label {
+    margin: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cover-label span,
+  .cover-topics span {
+    color: var(--text-muted);
+    padding: 0 0.25rem;
+  }
+
+  .cover-title {
+    margin: 0.75rem 0 1.25rem;
+    color: var(--text-primary);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+  }
+
+  .cover-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cover-metrics div {
+    min-width: 0;
+    padding: 0.8rem 0.5rem 0.8rem 0;
+  }
+
+  .cover-metrics div + div {
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .cover-metrics span,
+  .cover-metrics small {
+    display: block;
+  }
+
+  .cover-metrics span {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+  }
+
+  .cover-metrics small {
+    margin-top: 0.15rem;
+    color: var(--text-muted);
+    font-size: 0.62rem;
+  }
+
+  .cover-topics {
+    margin: 0.85rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.68rem;
+  }
+
+  @media (min-width: 768px) {
+    .work-entry {
+      grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 1.1fr);
+      align-items: center;
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: 2rem 0;
+    }
+
+    .work-entry-featured {
+      grid-template-columns: minmax(0, 0.8fr) minmax(24rem, 1.2fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      padding: 2rem 0 3rem;
+    }
+
+    .work-entry-featured .work-title {
+      font-size: clamp(2.1rem, 4vw, 3.25rem);
+    }
+
+    .work-entry-featured .work-image {
+      aspect-ratio: 16 / 11;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-image img {
+      transition: none;
+    }
+  }
+</style>

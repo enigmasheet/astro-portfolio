@@ -1,29 +1,88 @@
 ---
 import type { BlogPostMeta } from '../../types';
+
 export interface Props {
   post: BlogPostMeta;
 }
+
 const { post } = Astro.props;
-const postDate = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-const readingTime = Math.ceil(post.summary.split(' ').length / 200) || 1;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const postDate = new Date(post.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+});
 ---
 
-<article class="blog-card bg-(--color-surface) border border-(--color-border) rounded-xl overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 duration-300 relative before:absolute before:top-0 before:left-0 before:w-1 before:h-full before:bg-(--color-primary) before:opacity-0 before:transition-opacity hover:before:opacity-100" data-reveal data-theme-aware>
-  <a href={`/blog/${post.slug}`} class="block p-6 no-underline">
-    <div class="flex items-center gap-3 text-xs text-(--color-text-secondary) mb-3">
-      <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-(--color-primary)/10 text-(--color-primary) font-medium">
-        {readingTime} min read
-      </span>
-      <span>{postDate}</span>
+<article class="note-entry" data-reveal>
+  <a href={base + 'blog/' + post.slug} class="note-link">
+    <div class="note-meta">
+      <time datetime={post.date}>{postDate}</time>
+      <span aria-hidden="true">/</span>
+      <span>{post.tags.slice(0, 2).join(' · ')}</span>
     </div>
-    <h3 class="text-lg font-semibold text-(--color-text) mb-2">{post.title}</h3>
-    <p class="text-sm text-(--color-text-secondary) line-clamp-2">{post.summary}</p>
-    <div class="flex flex-wrap gap-2 mt-4">
-      {post.tags.map((tag) => (
-        <span class="px-2 py-0.5 text-xs rounded-md bg-(--color-bg) text-(--color-text-secondary)" data-theme-aware>
-          #{tag}
-        </span>
-      ))}
-    </div>
+    <h3 class="note-title">{post.title}</h3>
+    <p class="note-summary">{post.summary}</p>
+    <span class="note-arrow" aria-hidden="true">↗</span>
   </a>
 </article>
+
+<style>
+  .note-entry {
+    position: relative;
+    border-top: 1px solid var(--border);
+  }
+
+  .note-link {
+    min-height: 11rem;
+    display: block;
+    padding: 1.25rem 2rem 1.5rem 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .note-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+  }
+
+  .note-title {
+    margin: 0.8rem 0 0.5rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .note-summary {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .note-arrow {
+    position: absolute;
+    top: 1.15rem;
+    right: 0;
+    color: var(--text-muted);
+    transition:
+      color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .note-link:hover .note-title,
+  .note-link:hover .note-arrow {
+    color: var(--accent);
+  }
+
+  .note-link:hover .note-arrow {
+    transform: translate(2px, -2px);
+  }
+</style>

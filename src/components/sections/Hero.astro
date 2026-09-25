@@ -1,54 +1,134 @@
 ---
-import { HERO, SITE } from '../../data/site';
-import SocialLinks from '../ui/SocialLinks.astro';
-const phrases = 'Backend Software Developer|Product-Oriented Technologist|Full-Stack Web Developer|Problem Solver';
-const firstPhrase = 'Backend Software Developer';
+import { HERO, SITE, ABOUT } from '../../data/site';
+import { RESUME_PATH } from '../../data/social';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const heroStats = [ABOUT.stats[0], ABOUT.stats[1], ABOUT.stats[3]];
 ---
 
-<section class="relative min-h-[calc(100vh-64px)] flex items-center overflow-hidden">
-  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <div class="absolute -top-40 -right-40 w-96 h-96 bg-(--color-primary)/10 rounded-full blur-[100px]"></div>
-    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-(--color-secondary)/10 rounded-full blur-[100px]"></div>
-    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 40px 40px;"></div>
-  </div>
-  <div class="max-w-6xl mx-auto px-4 py-24 relative z-10 w-full">
-    <div class="max-w-3xl">
-      <p class="text-sm font-semibold tracking-widest uppercase text-(--color-primary) mb-4" style="animation: heroFadeIn 0.6s ease 0.1s forwards; opacity:0;">
-        {HERO.greeting}
+<section class="hero-section relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-4 w-full py-20 md:py-28 lg:py-32">
+    <div class="max-w-4xl">
+      <p class="eyebrow mb-6">
+        .NET Backend Engineer <span aria-hidden="true">/</span> Kathmandu, Nepal
       </p>
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-(--color-text) mb-4 leading-tight" style="animation: heroFadeIn 0.6s ease 0.2s forwards; opacity:0;">
-        {SITE.fullName}
+      <h1
+        class="hero-title text-4xl sm:text-5xl md:text-7xl font-semibold tracking-[-0.055em] leading-[1.04] text-text mb-7"
+      >
+        {SITE.fullName}<span
+          class="block mt-4 text-3xl sm:text-4xl md:text-6xl text-text-secondary font-normal tracking-[-0.045em]"
+          >I build systems that hold up in production.</span
+        >
       </h1>
-      <div class="text-xl md:text-2xl text-(--color-text-secondary) mb-6 min-h-[2rem]" style="animation: heroFadeIn 0.6s ease 0.3s forwards; opacity:0;">
-        <span
-          data-typing
-          data-phrases={phrases}
-          data-speed="80"
-          data-delete-speed="40"
-          data-pause="2500"
-          data-delay="1200"
-        >{firstPhrase}</span>
-      </div>
-      <p class="text-lg text-(--color-text-secondary) max-w-xl leading-relaxed mb-8" style="animation: heroFadeIn 0.6s ease 0.4s forwards; opacity:0;">
+      <p class="max-w-2xl text-base md:text-lg text-text-secondary leading-relaxed mb-7">
         {HERO.description}
       </p>
-      <div class="flex flex-wrap gap-4" style="animation: heroFadeIn 0.6s ease 0.5s forwards; opacity:0;">
-        <a
-          href="/projects"
-          class="inline-flex items-center px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors no-underline"
-        >
-          {HERO.primaryCta}
+
+      <p class="font-mono text-xs sm:text-sm leading-7 text-text-secondary mb-8">
+        C# <span class="text-text-muted">·</span> .NET <span class="text-text-muted">·</span> ASP.NET
+        Core
+        <span class="text-text-muted">·</span> SQL <span class="text-text-muted">·</span> Azure
+      </p>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <a href={base + '#projects'} class="button-primary">
+          View selected work <span aria-hidden="true">↗</span>
         </a>
+        <a href={base + '#contact'} class="button-secondary">Get in touch</a>
         <a
-          href="/contact"
-          class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-(--color-primary) text-(--color-primary) font-medium hover:bg-(--color-primary)/5 transition-colors no-underline"
+          href={RESUME_PATH}
+          class="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-3 py-3 no-underline"
         >
-          {HERO.secondaryCta}
+          Resume <span aria-hidden="true">↗</span>
         </a>
       </div>
-      <div class="mt-12" style="animation: heroFadeIn 0.6s ease 0.6s forwards; opacity:0;">
-        <SocialLinks />
+
+      <div
+        class="mt-16 md:mt-20 pt-6 border-t border-border grid grid-cols-3 max-w-2xl"
+        aria-label="Career highlights"
+      >
+        {
+          heroStats.map((stat, index) => (
+            <div class:list={['pr-4', index > 0 && 'pl-4 border-l border-border']}>
+              <p class="font-mono text-2xl md:text-3xl tracking-tight text-text">
+                {stat.target}
+                {stat.suffix}
+              </p>
+              <p class="mt-1 text-xs md:text-sm text-text-secondary">{stat.label}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
+
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-border" aria-hidden="true"></div>
 </section>
+
+<style>
+  .hero-section {
+    min-height: min(780px, calc(100svh - 64px));
+    display: flex;
+    align-items: center;
+  }
+
+  .eyebrow {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    max-width: 58rem;
+  }
+
+  .button-primary,
+  .button-secondary {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--accent);
+    border-radius: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .button-primary {
+    background: var(--accent);
+    color: var(--text-on-accent);
+  }
+
+  .button-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .button-secondary {
+    color: var(--text-primary);
+    background: transparent;
+    border-color: var(--border-strong);
+  }
+
+  .button-secondary:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  @media (max-width: 640px) {
+    .hero-section {
+      min-height: auto;
+    }
+  }
+</style>

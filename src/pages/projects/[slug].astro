@@ -1,77 +1,429 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import { PROJECTS } from '../../data/projects';
+import { SITE_URL } from '../../data/social';
+import type { Project } from '../../types';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+
 export async function getStaticPaths() {
   return PROJECTS.map((p) => ({
     params: { slug: p.slug },
     props: { project: p },
   }));
 }
-const { project } = Astro.props;
+const { project } = Astro.props as { project: Project };
 if (!project) {
-  return Astro.redirect('/404');
+  Astro.redirect(base + '404');
 }
 const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
+const projectNumber = String(PROJECTS.findIndex((item) => item.slug === project.slug) + 1).padStart(
+  2,
+  '0',
+);
+const projectContext = project.caseStudy?.context || project.description;
+const projectCapabilities = project.caseStudy?.capabilities || project.tags;
+const projectScale = project.caseStudy?.scale ?? [];
+const breadcrumbItems = [
+  { name: 'Home', url: SITE_URL + '/' },
+  { name: 'Projects', url: `${SITE_URL}/projects/` },
+  { name: project.title, url: `${SITE_URL}/projects/${project.slug}/` },
+];
 ---
 
-<PageLayout title={project.title} description={project.description}>
+<PageLayout
+  title={project.title}
+  description={project.description}
+  canonical={`${SITE_URL}/projects/${project.slug}/`}
+  ogImage={hasImage ? `${SITE_URL}/${project.imageUrls[0]}` : `${SITE_URL}/og-image.png`}
+>
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    })}
+  />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: project.title,
+      description: project.description,
+      url: `${SITE_URL}/projects/${project.slug}/`,
+      applicationCategory: 'WebApplication',
+      operatingSystem: 'Web',
+    })}
+  />
+
   <section class="page-section">
-    <div class="max-w-4xl mx-auto px-4">
-      <a href="/projects" class="inline-flex items-center text-sm text-(--color-text-secondary) hover:text-(--color-primary) transition-colors mb-8 no-underline">
-        ← Back to Projects
-      </a>
-      {hasImage && (
-        <div class="aspect-video rounded-xl overflow-hidden mb-8 bg-(--color-bg)" data-reveal>
-          <img src={`/${project.imageUrls[0]}`} alt={project.title} class="w-full h-full object-cover" />
+    <div class="max-w-6xl mx-auto px-4">
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex flex-wrap items-center gap-2 text-xs text-text-secondary">
+          {
+            breadcrumbItems.map((item, i) => (
+              <li class="flex items-center gap-2">
+                {i > 0 && (
+                  <span class="text-text-muted" aria-hidden="true">
+                    /
+                  </span>
+                )}
+                {i < breadcrumbItems.length - 1 ? (
+                  <a href={item.url} class="hover:text-primary transition-colors no-underline">
+                    {item.name}
+                  </a>
+                ) : (
+                  <span class="text-text font-medium">{item.name}</span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <a href={base + 'projects/'} class="back-link">← All projects</a>
+
+      <header class="project-header" data-reveal>
+        <p class="project-eyebrow">
+          {projectNumber}
+          <span aria-hidden="true">/</span>
+          {project.tags[0]}
+        </p>
+        <h1>{project.title}</h1>
+        <p class="project-summary">{project.description}</p>
+      </header>
+
+      {
+        hasImage && (
+          <div class="project-visual" data-reveal>
+            <img
+              src={base + project.imageUrls[0]}
+              alt={`${project.title} interface`}
+              loading="eager"
+              data-lightbox
+            />
+          </div>
+        )
+      }
+
+      {
+        projectScale.length > 0 && (
+          <section class="case-study-scale" aria-label="Documented content scope" data-reveal>
+            <p class="project-eyebrow">Documented content scope</p>
+            <div class="scale-grid">
+              {projectScale.map((metric) => (
+                <div class="scale-item">
+                  <span class="scale-value">{metric.value}</span>
+                  <span class="scale-label">{metric.label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <div class="case-study-grid" data-reveal>
+        <div class="case-study-content">
+          <section class="case-study-section">
+            <p class="project-eyebrow">Context</p>
+            <h2>The problem</h2>
+            <p>{projectContext}</p>
+          </section>
+
+          {
+            project.caseStudy?.solution && (
+              <section class="case-study-section">
+                <p class="project-eyebrow">Solution</p>
+                <h2>How TeachMate works</h2>
+                <p>{project.caseStudy.solution}</p>
+              </section>
+            )
+          }
+
+          <section class="case-study-section">
+            <p class="project-eyebrow">Capabilities</p>
+            <h2>What it includes</h2>
+            <ul class="capability-list">
+              {projectCapabilities.map((capability) => <li>{capability}</li>)}
+            </ul>
+          </section>
+
+          {
+            project.caseStudy?.architecture && (
+              <section class="case-study-section">
+                <p class="project-eyebrow">System design</p>
+                <h2>Architecture</h2>
+                <ul class="capability-list">
+                  {project.caseStudy.architecture.map((detail) => <li>{detail}</li>)}
+                </ul>
+              </section>
+            )
+          }
+
+          {
+            project.caseStudy?.decisions && (
+              <section class="case-study-section">
+                <p class="project-eyebrow">Trade-offs</p>
+                <h2>Engineering decisions</h2>
+                <ul class="capability-list">
+                  {project.caseStudy.decisions.map((decision) => <li>{decision}</li>)}
+                </ul>
+              </section>
+            )
+          }
         </div>
-      )}
-      <h1 class="text-3xl md:text-4xl font-bold text-(--color-text) mb-4" data-reveal>{project.title}</h1>
-      <p class="text-lg text-(--color-text-secondary) mb-8 leading-relaxed" data-reveal>{project.description}</p>
-      <div class="grid md:grid-cols-2 gap-8" data-reveal>
-        {project.technologies.length > 0 && (
-          <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wider text-(--color-text-secondary) mb-3">Technologies</h2>
-            <div class="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <span class="px-3 py-1.5 text-sm font-medium rounded-lg bg-(--color-primary)/10 text-(--color-primary)">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-        {project.tags.length > 0 && (
-          <div>
-            <h2 class="text-sm font-semibold uppercase tracking-wider text-(--color-text-secondary) mb-3">Tags</h2>
-            <div class="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span class="px-3 py-1.5 text-sm rounded-lg bg-(--color-border) text-(--color-text-secondary)">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-      <div class="flex flex-wrap gap-4 mt-8" data-reveal>
-        {project.githubLink && (
-          <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-(--color-primary) text-(--color-primary) font-medium hover:bg-(--color-primary)/5 transition-colors no-underline">
-            View Source
-          </a>
-        )}
-        {project.liveDemoActive && project.liveDemo && (
-          <a href={project.liveDemo} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-(--color-primary) text-white font-medium hover:bg-(--color-primary-dark) transition-colors no-underline">
-            Live Demo
-          </a>
-        )}
-        {!project.liveDemoActive && (
-          <span class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-(--color-border) text-(--color-text-secondary) opacity-50">
-            Offline
-          </span>
-        )}
+
+        <aside class="project-facts" aria-label="Project details">
+          <section>
+            <h2>Technology</h2>
+            <p>{project.technologies.join(' · ')}</p>
+          </section>
+          <section>
+            <h2>Project type</h2>
+            <p>{project.category} · {project.tags.join(' · ')}</p>
+          </section>
+          <section class="project-actions">
+            <h2>Links</h2>
+            {
+              project.githubLink && (
+                <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                  Source code <span aria-hidden="true">↗</span>
+                </a>
+              )
+            }
+            {
+              project.liveDemoActive && project.liveDemo && (
+                <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                  Live project <span aria-hidden="true">↗</span>
+                </a>
+              )
+            }
+          </section>
+        </aside>
       </div>
     </div>
   </section>
+
+  <style>
+    .back-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .project-header {
+      max-width: 52rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .project-eyebrow {
+      margin: 0 0 0.8rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-eyebrow span {
+      padding: 0 0.3rem;
+      color: var(--text-muted);
+    }
+
+    .project-header h1 {
+      margin: 0;
+      color: var(--text-primary);
+      font-size: clamp(2.5rem, 6vw, 4.75rem);
+      font-weight: 600;
+      letter-spacing: -0.055em;
+      line-height: 1.05;
+    }
+
+    .project-summary {
+      max-width: 43rem;
+      margin: 1.25rem 0 0;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.7;
+    }
+
+    .project-visual {
+      aspect-ratio: 16 / 8.5;
+      overflow: hidden;
+      margin-bottom: clamp(3rem, 7vw, 6rem);
+      border: 1px solid var(--border);
+      border-radius: 0.4rem;
+      background: var(--bg-surface);
+    }
+
+    .project-visual img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      cursor: zoom-in;
+    }
+
+    .case-study-scale {
+      margin: 0 0 clamp(3rem, 7vw, 6rem);
+      padding: 1rem 0 1.25rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-study-scale .project-eyebrow {
+      margin-bottom: 0.75rem;
+    }
+
+    .scale-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .scale-item + .scale-item {
+      padding-left: 1rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .scale-value,
+    .scale-label {
+      display: block;
+    }
+
+    .scale-value {
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      line-height: 1.2;
+    }
+
+    .scale-label {
+      margin-top: 0.3rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.42fr);
+      gap: clamp(2rem, 7vw, 7rem);
+    }
+
+    .case-study-section + .case-study-section {
+      margin-top: 2.75rem;
+    }
+
+    .case-study-section h2 {
+      margin: 0 0 0.75rem;
+      color: var(--text-primary);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .case-study-section > p:last-child {
+      max-width: 42rem;
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .capability-list {
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--border);
+      list-style: none;
+    }
+
+    .capability-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .project-facts {
+      align-self: start;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-facts section {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-facts h2 {
+      margin: 0 0 0.55rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-facts p,
+    .project-actions a {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+
+    .project-actions a {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-actions a:hover {
+      color: var(--accent-hover);
+    }
+
+    @media (max-width: 768px) {
+      .project-visual {
+        aspect-ratio: 4 / 3;
+      }
+
+      .case-study-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .scale-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .scale-item:nth-child(3) {
+        padding-left: 0;
+        border-left: 0;
+      }
+    }
+  </style>
+
+  <script>
+    import '../../scripts/lightbox';
+  </script>
 </PageLayout>

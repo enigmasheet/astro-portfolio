@@ -1,0 +1,106 @@
+---
+interface Props {
+  categories: string[];
+  technologies: string[];
+  total: number;
+}
+
+const { categories, technologies, total } = Astro.props;
+---
+
+<div class="project-controls mb-8" data-project-filters data-reveal>
+  <div class="grid gap-3 sm:grid-cols-[minmax(0,1fr)_15rem_auto]">
+    <div class="relative">
+      <label for="project-search" class="sr-only">Search projects</label>
+      <span
+        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary text-xl pointer-events-none"
+        aria-hidden="true">search</span
+      >
+      <input
+        id="project-search"
+        type="search"
+        placeholder="Search name, stack, or topic"
+        autocomplete="off"
+        class="w-full min-h-12 pl-10 pr-4 py-3 rounded-md border border-border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+      />
+    </div>
+
+    <div>
+      <label for="project-technology" class="sr-only">Filter projects by technology</label>
+      <select
+        id="project-technology"
+        class="w-full min-h-12 px-3 py-3 rounded-md border border-border bg-surface text-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent cursor-pointer"
+      >
+        <option value="all">All technologies</option>
+        {technologies.map((technology) => (
+          <option value={technology.toLowerCase()}>{technology}</option>
+        ))}
+      </select>
+    </div>
+
+    <button
+      id="clear-project-filters"
+      type="button"
+      class="min-h-12 px-4 rounded-md text-sm font-medium text-primary hover:bg-primary/5 transition-colors cursor-pointer hidden"
+    >
+      Clear filters
+    </button>
+  </div>
+
+  <div class="category-filters mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by project type">
+    <button
+      type="button"
+      class="category-filter"
+      data-project-category="all"
+      aria-pressed="true"
+    >
+      All projects
+    </button>
+    {
+      categories.map((category) => (
+        <button
+          type="button"
+          class="category-filter"
+          data-project-category={category.toLowerCase()}
+          aria-pressed="false"
+        >
+          {category}
+        </button>
+      ))
+    }
+  </div>
+
+  <p id="project-results" class="mt-3 text-sm text-text-secondary" role="status" aria-live="polite">
+    {total} projects
+  </p>
+</div>
+
+<script>
+  import '../../scripts/project-filter';
+</script>
+
+<style>
+  .category-filter {
+    min-height: 42px;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease;
+  }
+
+  .category-filter:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .category-filter[aria-pressed='true'] {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--text-on-accent);
+  }
+</style>

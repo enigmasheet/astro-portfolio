@@ -1,7 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
-import Timeline from '../components/sections/Timeline.astro';
+import ResumeExperienceList from '../components/sections/ResumeExperienceList.astro';
 import Skills from '../components/sections/Skills.astro';
 import { SITE, RESUME } from '../data/site';
 import { EXPERIENCES } from '../data/experience';
@@ -9,22 +9,31 @@ import { CERTIFICATIONS } from '../data/certifications';
 import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
 ---
 
-<PageLayout title="Resume" description={`Resume — ${SITE.fullName}`}>
+<PageLayout
+  title="Resume"
+  description={`Resume of ${SITE.fullName} — .NET Backend Developer with expertise in ASP.NET Core, C#, and clean architecture. Download PDF or print.`}
+>
   <section class="page-section">
     <div class="max-w-5xl mx-auto px-4">
       <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8" data-reveal>
         <div>
-          <h1 class="text-3xl md:text-4xl font-bold text-(--color-text)">{SITE.fullName}</h1>
-          <p class="text-(--color-primary) font-medium">{SITE.title}</p>
-          <p class="text-sm text-(--color-text-secondary)">{RESUME.location}</p>
+          <h1 class="text-3xl md:text-4xl font-bold text-text">{SITE.fullName}</h1>
+          <p class="text-primary font-medium">{SITE.title}</p>
+          <p class="text-sm text-text-secondary">{RESUME.location}</p>
         </div>
         <div class="flex gap-3">
-          <a href={RESUME_PATH} target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--color-primary) text-white text-sm font-medium hover:bg-(--color-primary-dark) transition-colors no-underline">
+          <a
+            href={RESUME_PATH}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary-dark hover:text-white no-underline"
+          >
             Download PDF
           </a>
-          <button onclick="window.print()"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-(--color-primary) text-(--color-primary) text-sm font-medium hover:bg-(--color-primary)/5 transition-colors cursor-pointer">
+          <button
+            onclick="window.print()"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary text-primary text-sm font-medium hover:bg-primary/5 transition-colors cursor-pointer"
+          >
             Print
           </button>
         </div>
@@ -33,44 +42,71 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
         <div class="space-y-8">
           <div data-reveal>
             <SectionHeading title="Experience" />
-            <Timeline items={EXPERIENCES} />
+            <ResumeExperienceList items={EXPERIENCES} />
           </div>
           <div data-reveal>
             <SectionHeading title="Education" />
-            <div class="bg-(--color-surface) border border-(--color-border) rounded-xl p-6" data-theme-aware>
-              {RESUME.education.map((edu) => (
-                <div>
-                  <h3 class="text-base font-semibold text-(--color-text)">{edu.degree}</h3>
-                  <p class="text-sm text-(--color-primary)">{edu.school}</p>
-                  <p class="text-xs text-(--color-text-secondary)">{edu.dates}</p>
-                </div>
-              ))}
+            <div class="bg-surface border border-border rounded-xl p-6">
+              {
+                RESUME.education.map((edu) => (
+                  <div>
+                    <h3 class="text-base font-semibold text-text">{edu.degree}</h3>
+                    <p class="text-sm text-primary">{edu.school}</p>
+                    <p class="text-xs text-text-secondary">{edu.dates}</p>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
-        <aside class="space-y-8">
+        <aside class="space-y-8 lg:sticky lg:top-24">
           <div data-reveal>
             <SectionHeading title="Contact" />
             <div class="space-y-3 text-sm">
-              <a href={`mailto:${EMAIL}`} class="flex items-center gap-2 text-(--color-text-secondary) hover:text-(--color-primary) no-underline">{EMAIL}</a>
-              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-(--color-text-secondary) hover:text-(--color-primary) no-underline">GitHub</a>
-              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-(--color-text-secondary) hover:text-(--color-primary) no-underline">LinkedIn</a>
+              <a
+                href={`mailto:${EMAIL}`}
+                class="flex items-center gap-2 text-text-secondary hover:text-primary no-underline"
+                >{EMAIL}</a
+              >
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 text-text-secondary hover:text-primary no-underline"
+                >GitHub</a
+              >
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-2 text-text-secondary hover:text-primary no-underline"
+                >LinkedIn</a
+              >
             </div>
           </div>
           <div data-reveal>
             <SectionHeading title="Skills" />
             <Skills />
           </div>
-          {CERTIFICATIONS.length > 0 && (
-            <div data-reveal>
-              <SectionHeading title="Certifications" />
-              <div class="space-y-3">
-                {CERTIFICATIONS.map((cert) => (
-                  <a href={cert.link} target="_blank" rel="noopener noreferrer" class="block text-sm text-(--color-text-secondary) hover:text-(--color-primary) no-underline">{cert.title}</a>
-                ))}
+          {
+            CERTIFICATIONS.length > 0 && (
+              <div data-reveal>
+                <SectionHeading title="Certifications" />
+                <div class="space-y-3">
+                  {CERTIFICATIONS.map((cert) => (
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="block text-sm text-text-secondary hover:text-primary no-underline"
+                    >
+                      {cert.title}
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )
+          }
         </aside>
       </div>
     </div>
@@ -79,7 +115,32 @@ import { RESUME_PATH, EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/social';
 
 <style is:global>
   @media print {
-    nav, footer, #theme-toggle { display: none !important; }
-    .page-section { padding: 0 !important; }
+    nav,
+    footer,
+    #back-to-top,
+    .skip-to-content,
+    .theme-toggle,
+    #nav-toggle,
+    #drawer-backdrop,
+    #mobile-drawer {
+      display: none !important;
+    }
+    .page-section {
+      padding: 0 !important;
+    }
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    .bg-surface,
+    [class*='bg-surface'] {
+      background: white !important;
+    }
+    a {
+      text-decoration: none !important;
+    }
+    .grid {
+      display: block !important;
+    }
   }
 </style>

@@ -1,0 +1,33 @@
+---
+title: Building with Blazor WebAssembly
+date: 2026-07-01
+summary: Lessons learned building a SPA with Blazor WebAssembly — architecture, theming, and deployment to Azure Static Web Apps.
+tags:
+  - Blazor
+  - WebAssembly
+  - Frontend
+---
+
+Blazor WebAssembly lets you build rich, interactive web UIs using C# instead of JavaScript. Here's what I learned building this very portfolio site.
+
+## Why Blazor?
+
+As a .NET developer, Blazor lets me share code, libraries, and expertise between frontend and backend. The component model is familiar to anyone who's worked with Razor Pages or MVC.
+
+## Architecture Decisions
+
+I chose a single-page layout with CSS custom properties for theming. Data is stored in static JSON files loaded via `HttpClient` — perfect for a portfolio that doesn't need a backend.
+
+### CSS Variables for Theming
+
+Dark mode is handled entirely via CSS custom properties. A small JavaScript function toggles a `.dark` class on `<html>`, and every color updates instantly.
+
+## Deployment
+
+Azure Static Web Apps provides free hosting with automatic CI/CD from GitHub. The pipeline compiles with AOT and trimming for optimal performance.
+
+## Key Takeaways
+
+- Blazor WASM initial load is larger than JS frameworks, but subsequent interactions are instant.
+- AOT compilation improves runtime performance significantly.
+- Static JSON files are sufficient for content-driven sites without a CMS.

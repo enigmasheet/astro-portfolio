@@ -54,7 +54,7 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
-  category: 'Web app' | 'API' | 'Education' | 'IoT';
+  category: 'Web app' | 'API' | 'Education' | 'Finance' | 'IoT';
   imageUrls: string[];
   githubLink: string;
   liveDemo: string;

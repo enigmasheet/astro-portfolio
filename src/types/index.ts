@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 export interface SiteInfo {
   name: string;
   fullName: string;
@@ -55,7 +57,7 @@ export interface Project {
   title: string;
   description: string;
   category: 'Web app' | 'API' | 'Education' | 'Finance' | 'IoT';
-  imageUrls: string[];
+  images: ImageMetadata[];
   githubLink: string;
   liveDemo: string;
   liveDemoActive: boolean;
@@ -100,7 +102,7 @@ export interface Certification {
   title: string;
   issuer: string;
   link: string;
-  imageUrl?: string;
+  image?: ImageMetadata;
   date?: string;
 }
 

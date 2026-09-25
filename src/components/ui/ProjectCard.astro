@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../../types';
+import { Image } from 'astro:assets';
 import TechIcon from './icons/TechIcon.astro';
 export interface Props {
   project: Project;
@@ -8,8 +9,7 @@ const { project } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const projectHref = base + 'projects/' + project.slug + '/';
-const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
-const imgSrc = hasImage ? base + project.imageUrls[0] : '';
+const image = project.images[0];
 
 function getStatus(): { label: string; color: string } | undefined {
   if (project.liveDemoActive && project.liveDemo)
@@ -26,12 +26,12 @@ const status = getStatus();
   data-reveal
 >
   {
-    imgSrc ? (
+    image ? (
       <div class="relative aspect-video overflow-hidden bg-bg">
         <div class="absolute inset-0 bg-linear-to-t from-(--accent)/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
         <div class="absolute inset-0 bg-border/20 animate-pulse" aria-hidden="true" />
-        <img
-          src={imgSrc}
+        <Image
+          src={image}
           alt={project.title}
           class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 blur-sm"
           loading="lazy"

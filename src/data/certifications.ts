@@ -1,11 +1,13 @@
 import type { Certification } from '../types';
+import gybImage from '../assets/images/certifications/1737692632346.jpg';
+import hackathonImage from '../assets/images/certifications/software-hackathon-dataset25.jpg';
 
 export const CERTIFICATIONS: Certification[] = [
   {
     title: 'GYB/SYB Workshop — Grow Your Business, Start Your Business',
     issuer: 'National Youth Council',
     link: 'https://www.linkedin.com/in/abhaykumarmandal/overlay/Certifications/378796925/treasury?profileId=ACoAADvWG0oBAf-88xJTqAJYEXj04RimWv9pEPk',
-    imageUrl: '/images/certifications/1737692632346.JPG',
+    image: gybImage,
     date: 'Issued Jan 2025',
   },
   {
@@ -33,7 +35,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     title: 'Software Hackathon Certificate',
     issuer: 'Data Set 25',
-    link: '/images/certifications/software-hackathon-dataset25.jpg',
-    imageUrl: '/images/certifications/software-hackathon-dataset25.jpg',
+    link: hackathonImage.src,
+    image: hackathonImage,
   },
 ];

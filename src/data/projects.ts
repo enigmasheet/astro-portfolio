@@ -1,4 +1,11 @@
 import type { Project } from '../types';
+import greenhouse from '../assets/images/greenhouse.svg';
+import hmcNepal from '../assets/images/hmc-nepal.png';
+import hotelBooking from '../assets/images/hotel-booking.svg';
+import inventoryManagement from '../assets/images/inventory-management.png';
+import laundryManagement from '../assets/images/laundry-management.png';
+import portfolio from '../assets/images/portfolio.svg';
+import transport from '../assets/images/transport.svg';
 
 export const PROJECTS: Project[] = [
   {
@@ -7,7 +14,7 @@ export const PROJECTS: Project[] = [
     description:
       'A .NET web application for recording and tracking transport-related expenses, with reporting and data visualization built on ASP.NET Core, Entity Framework, Blazor, and SQL Server.',
     category: 'Web app',
-    imageUrls: ['images/transport.svg'],
+    images: [transport],
     githubLink: 'https://github.com/enigmasheet/TransportExpenditureTracker',
     liveDemo: 'https://transportexpense.azurewebsites.net/',
     liveDemoActive: false,
@@ -40,7 +47,7 @@ export const PROJECTS: Project[] = [
     description:
       'A purchase invoice register for Nepali businesses, with Bikram Sambat dates, company-configurable VAT calculations, fiscal-year reporting, and CSV/Excel import. Built as a TypeScript full-stack application with Next.js and PostgreSQL.',
     category: 'Finance',
-    imageUrls: [],
+    images: [],
     githubLink: 'https://github.com/enigmasheet/VATExpense',
     liveDemo: 'https://vat.abhaymandal.com.np/',
     liveDemoActive: true,
@@ -89,7 +96,7 @@ export const PROJECTS: Project[] = [
     description:
       'A .NET RESTful API for hotel booking management with JWT authentication, authorization, request validation, and Swagger documentation for client developers.',
     category: 'API',
-    imageUrls: ['images/hotel-booking.svg'],
+    images: [hotelBooking],
     githubLink: 'https://github.com/enigmasheet/HotelBookingAPI',
     liveDemo: '',
     liveDemoActive: false,
@@ -123,7 +130,7 @@ export const PROJECTS: Project[] = [
     description:
       'An interactive learning platform for bachelor students, combining structured C++ and OOP notes with teacher-led quizzes, QR-code session joining, and class progress tracking.',
     category: 'Education',
-    imageUrls: [],
+    images: [],
     githubLink: '',
     liveDemo: 'https://teachmate.abhaymandal.com.np/',
     liveDemoActive: true,
@@ -177,7 +184,7 @@ export const PROJECTS: Project[] = [
     description:
       'A multi-tenant laundry management SaaS built for Nepal. Order management, customer database, role-based access, reports & analytics, and SMS notifications — all in one dashboard. Replaces paper-based systems for laundry businesses.',
     category: 'Web app',
-    imageUrls: ['images/laundry-management.png'],
+    images: [laundryManagement],
     githubLink: 'https://github.com/enigmasheet/Laundry-Management-System',
     liveDemo: '',
     liveDemoActive: false,
@@ -200,7 +207,7 @@ export const PROJECTS: Project[] = [
     description:
       'A centralized multi-application portal for HMC Nepal, integrating multiple business services — including claims management, member services, and administrative tools — into a unified dashboard with role-based access and real-time analytics.',
     category: 'Web app',
-    imageUrls: ['images/hmc-nepal.png'],
+    images: [hmcNepal],
     githubLink: '',
     liveDemo: 'https://www.hmcnepal.com.np/',
     liveDemoActive: true,
@@ -223,7 +230,7 @@ export const PROJECTS: Project[] = [
     description:
       'An earlier version of my personal portfolio, built with Blazor WebAssembly and deployed to Azure Static Web Apps. The current site you are viewing is a separate Astro rebuild.',
     category: 'Web app',
-    imageUrls: ['images/portfolio.svg'],
+    images: [portfolio],
     githubLink: 'https://github.com/enigmasheet/PersonalPortfolio.v1',
     liveDemo: '',
     liveDemoActive: false,
@@ -251,7 +258,7 @@ export const PROJECTS: Project[] = [
     description:
       'A multitenant inventory management system for small shops. Track stock movements, define custom product attributes, get low-stock alerts, and manage everything from one dashboard with data isolation across shops.',
     category: 'Web app',
-    imageUrls: ['images/inventory-management.png'],
+    images: [inventoryManagement],
     githubLink: 'https://github.com/enigmasheet/inventoryMangement',
     liveDemo: 'https://inventory-mangement-pearl.vercel.app/',
     liveDemoActive: true,
@@ -273,7 +280,7 @@ export const PROJECTS: Project[] = [
     description:
       'IoT-enabled system for real-time monitoring and automated control of greenhouse environments using Blazor and sensor data.',
     category: 'IoT',
-    imageUrls: ['images/greenhouse.svg'],
+    images: [greenhouse],
     githubLink: 'https://github.com/enigmasheet/LocalFarm',
     liveDemo: 'https://zealous-glacier-0fddea800.4.azurestaticapps.net/',
     liveDemoActive: false,

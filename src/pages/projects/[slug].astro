@@ -4,6 +4,7 @@ import { PROJECTS } from '../../data/projects';
 import { SITE_URL } from '../../data/social';
 import TechIcon from '../../components/ui/icons/TechIcon.astro';
 import type { Project } from '../../types';
+import { Image } from 'astro:assets';
 
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
@@ -18,7 +19,7 @@ const { project } = Astro.props as { project: Project };
 if (!project) {
   Astro.redirect(base + '404');
 }
-const hasImage = project.imageUrls.length > 0 && project.imageUrls[0];
+const projectImage = project.images[0];
 const projectNumber = String(PROJECTS.findIndex((item) => item.slug === project.slug) + 1).padStart(
   2,
   '0',
@@ -37,7 +38,7 @@ const breadcrumbItems = [
   title={project.title}
   description={project.description}
   canonical={`${SITE_URL}/projects/${project.slug}/`}
-  ogImage={hasImage ? `${SITE_URL}/${project.imageUrls[0]}` : `${SITE_URL}/og-image.png`}
+  ogImage={projectImage ? `${SITE_URL}${projectImage.src}` : `${SITE_URL}/og-image.png`}
 >
   <script
     is:inline
@@ -105,10 +106,10 @@ const breadcrumbItems = [
       </header>
 
       {
-        hasImage && (
+        projectImage && (
           <div class="project-visual" data-reveal>
-            <img
-              src={base + project.imageUrls[0]}
+            <Image
+              src={projectImage}
               alt={`${project.title} interface`}
               loading="eager"
               data-lightbox

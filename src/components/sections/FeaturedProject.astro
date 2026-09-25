@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../../types';
+import { Image } from 'astro:assets';
 import TechIcon from '../ui/icons/TechIcon.astro';
 
 interface Props {
@@ -12,7 +13,7 @@ const { project, index, featured = false } = Astro.props;
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
 const projectHref = base + 'projects/' + project.slug + '/';
-const image = project.imageUrls[0] ? base + project.imageUrls[0] : undefined;
+const image = project.images[0];
 const coverMetrics = project.caseStudy?.scale?.slice(0, 3) ?? [];
 const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
 ---
@@ -65,7 +66,7 @@ const hasLiveDemo = project.liveDemoActive && Boolean(project.liveDemo);
   {
     image ? (
       <a class="work-image" href={projectHref} aria-label={`View ${project.title} project details`}>
-        <img src={image} alt={`${project.title} interface`} loading={featured ? 'eager' : 'lazy'} />
+        <Image src={image} alt={`${project.title} interface`} loading={featured ? 'eager' : 'lazy'} />
         <span class="work-image-caption">{project.tags.slice(0, 2).join(' / ')}</span>
       </a>
     ) : (

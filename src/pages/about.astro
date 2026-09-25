@@ -6,6 +6,7 @@ import Stats from '../components/sections/Stats.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import { ABOUT, SECTIONS } from '../data/site';
 import { CERTIFICATIONS } from '../data/certifications';
+import { Image } from 'astro:assets';
 ---
 
 <PageLayout title="About" description={SECTIONS.about.description}>
@@ -43,9 +44,9 @@ import { CERTIFICATIONS } from '../data/certifications';
                       rel="noopener noreferrer"
                       class="flex items-center gap-3 p-4 rounded-xl bg-bg border border-border hover:border-primary transition-colors no-underline relative overflow-hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.75 before:bg-primary before:opacity-0 before:transition-opacity hover:before:opacity-100"
                     >
-                      {cert.imageUrl ? (
-                        <img
-                          src={cert.imageUrl}
+                      {cert.image ? (
+                        <Image
+                          src={cert.image}
                           alt={cert.title}
                           class="w-10 h-10 rounded object-cover"
                           loading="lazy"
